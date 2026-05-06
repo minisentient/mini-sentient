@@ -1653,99 +1653,67 @@ function listenUsers() {
   listeningUsers = true;
 
   onSnapshot(collection(db, "users"), snap => {
+    try {
+      let list = [];
+      snap.forEach(d => list.push(d.data()));
 
-    let list = [];
-    snap.forEach(d => list.push(d.data()));
+      usersData = list;
 
-    usersData = list;
+      list.sort((a, b) =>
+        Number(b.reputation || 0) - Number(a.reputation || 0)
+      );
 
-    list.sort((a, b) =>
-      Number(b.reputation || 0) - Number(a.reputation || 0)
-    );
+      let html = "";
 
-    let html = "";
+      list.slice(0, 8).forEach(u => {
+        const rep = Number(u.reputation || 0);
+        const badges = u.badges || [];
+        const skillsList = u.skillsList || [];
 
-    list.slice(0, 8).forEach(u => {
+        html += `
+          <div class="card">
+            <div onclick="openPublicProfile('${u.email}')" style="cursor:pointer;">
+              ${u.photoURL ? `<img src="${u.photoURL}" style="width:60px;height:60px;border-radius:50%;object-fit:cover;">` : ""}
+              <br>
+              <b>${maskEmail(u.email)}</b><br>
+            </div>
 
-      const rep = Number(u.reputation || 0);
-      const badges = u.badges || [];
-      const skillsList = u.skillsList || [];
+            ${u.bio ? `<p>${escapeHtml(u.bio)}</p>` : ""}
+            ${skillsList.map(s => `<span class="tag">${escapeHtml(s)}</span>`).join("")}
 
-      html += `
-        <div class="card">
+            <div class="rep">⭐ ${rep} reputazione</div>
+            <span class="tag">${repLabel(rep)}</span>
+            ${badges.map(b => `<span class="tag">${b}</span>`).join("")}
 
-          <div onclick="openPublicProfile('${u.email}')" style="cursor:pointer;">
-
-            ${
-              u.photoURL
-                ? `<img src="${u.photoURL}"
-                    style="
-                      width:60px;
-                      height:60px;
-                      border-radius:50%;
-                      object-fit:cover;
-                    ">`
-                : ""
-            }
-
-            <br>
-
-            <b>${maskEmail(u.email)}</b><br>
-
+            <br><br>
+            Nodi creati: ${u.nodes || 0}<br>
+            Connessioni create: ${u.created || 0}<br>
+            Accettate: ${u.accepted || 0}<br>
+            Completate: ${u.completed || 0}<br>
+            Messaggi: ${u.messages || 0}<br>
+            Rating medio: ${Number(u.avgRating || 0).toFixed(1)}
           </div>
+        `;
+      });
 
-          ${
-            u.bio
-              ? `<p>${escapeHtml(u.bio)}</p>`
-              : ""
-          }
+      document.getElementById("users").innerHTML =
+        html || `<div class="card">Nessun utente ancora.</div>`;
 
-          ${
-            skillsList
-              .map(s =>
-                `<span class="tag">${escapeHtml(s)}</span>`
-              )
-              .join("")
-          }
+      if (typeof renderRankingByCategory === "function") {
+        renderRankingByCategory();
+      }
 
-          <div class="rep">
-            ⭐ ${rep} reputazione
-          </div>
+      if (typeof renderMatches === "function") {
+        renderMatches(nodes);
+      }
 
-          <span class="tag">
-            ${repLabel(rep)}
-          </span>
-
-          ${
-            badges
-              .map(b =>
-                `<span class="tag">${b}</span>`
-              )
-              .join("")
-          }
-
-          <br><br>
-
-          Nodi creati: ${u.nodes || 0}<br>
-          Connessioni create: ${u.created || 0}<br>
-          Accettate: ${u.accepted || 0}<br>
-          Completate: ${u.completed || 0}<br>
-          Messaggi: ${u.messages || 0}<br>
-
-          Rating medio:
-          ${Number(u.avgRating || 0).toFixed(1)}
-
-        </div>
-      `;
-    });
-
+    } catch (error) {
+      document.getElementById("users").innerHTML =
+        `<div class="card red">Errore Top utenti: ${error.message}</div>`;
+    }
+  }, error => {
     document.getElementById("users").innerHTML =
-      html ||
-      `<div class="card">Nessun utente ancora.</div>`;
-
-    renderRankingByCategory();
-    renderMatches(nodes);
-
+      `<div class="card red">Errore lettura users: ${error.message}</div>`;
   });
 }
 
