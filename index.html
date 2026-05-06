@@ -872,8 +872,6 @@ if (method === "paypal") {
 
     if (method === "wallet") {
   await updateWallet(currentUser.email, -value);
-  await updateWallet(pendingDonation.helperUser, net);
-  await updateWallet("platform", fee);
 }
 
     showWow(`❤️ Hai riconosciuto valore reale`);
