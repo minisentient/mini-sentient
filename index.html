@@ -1532,21 +1532,20 @@ function listenConnections() {
   if (listeningConnections) return;
   listeningConnections = true;
 
-  onSnapshot(collection(db, "connections"), snap => {
+  const q = query(
+    collection(db, "connections"),
+    where("participants", "array-contains", currentUser.email)
+  );
+
+  onSnapshot(q, snap => {
     let html = "";
     let list = [];
 
     snap.forEach(d => {
-      const c = d.data();
-
-      const isMine =
-        c.from === currentUser.email ||
-        c.to === currentUser.email ||
-        (c.participants && c.participants.includes(currentUser.email));
-
-      if (isMine) {
-        list.push({ id: d.id, ...c });
-      }
+      list.push({
+        id: d.id,
+        ...d.data()
+      });
     });
 
     list.sort((a, b) => (b.lastMessageAt || 0) - (a.lastMessageAt || 0));
@@ -1562,13 +1561,21 @@ function listenConnections() {
           : 0;
 
       if (c.status === "suggested") {
-        actions = `<button class="orange" onclick="acceptConnection('${id}')">Accetta</button>`;
+        actions = `
+          <button class="orange" onclick="acceptConnection('${id}')">
+            Accetta
+          </button>
+        `;
       }
 
       if (c.status === "accepted") {
         actions = `
-          <button class="green" onclick="completeConnection('${id}')">Completa + Feedback</button>
-          <button class="red" onclick="failConnection('${id}')">Fallita</button>
+          <button class="green" onclick="completeConnection('${id}')">
+            Completa + Feedback
+          </button>
+          <button class="red" onclick="failConnection('${id}')">
+            Fallita
+          </button>
         `;
       }
 
@@ -1580,14 +1587,27 @@ function listenConnections() {
         actions = `<span class="tag">Fallita</span>`;
       }
 
+      const isActive = id === currentChatConnectionId;
+
       html += `
-        <div class="card">
+        <div class="card ${isActive ? "connection-active" : ""}">
           <b>${maskEmail(c.from)}</b> ↔ <b>${maskEmail(c.to)}</b>
+
           ${unreadCount > 0 ? `<span class="badge">${unreadCount}</span>` : ""}
+
+          <span class="time">
+            ${c.lastMessageAt
+              ? new Date(c.lastMessageAt).toLocaleTimeString([], {hour:'2-digit', minute:'2-digit'})
+              : ""}
+          </span>
+
+          <div class="preview">
+            ${c.lastMessage ? escapeHtml(c.lastMessage).slice(0, 40) : "Nessun messaggio"}
+          </div>
+
           <br>
           Stato: <b>${c.status}</b><br>
           Categoria: ${c.category || ""}<br>
-          Ultimo messaggio: ${c.lastMessage || ""}<br><br>
 
           ${actions}
 
@@ -1653,99 +1673,47 @@ function listenUsers() {
   listeningUsers = true;
 
   onSnapshot(collection(db, "users"), snap => {
-
     let list = [];
     snap.forEach(d => list.push(d.data()));
 
     usersData = list;
 
-    list.sort((a, b) =>
-      Number(b.reputation || 0) - Number(a.reputation || 0)
-    );
+    list.sort((a, b) => Number(b.reputation || 0) - Number(a.reputation || 0));
 
     let html = "";
 
     list.slice(0, 8).forEach(u => {
-
       const rep = Number(u.reputation || 0);
       const badges = u.badges || [];
-      const skillsList = u.skillsList || [];
 
       html += `
         <div class="card">
-
-          <div onclick="openPublicProfile('${u.email}')" style="cursor:pointer;">
-
-            ${
-              u.photoURL
-                ? `<img src="${u.photoURL}"
-                    style="
-                      width:60px;
-                      height:60px;
-                      border-radius:50%;
-                      object-fit:cover;
-                    ">`
-                : ""
-            }
-
-            <br>
-
-            <b>${maskEmail(u.email)}</b><br>
-
-          </div>
-
-          ${
-            u.bio
-              ? `<p>${escapeHtml(u.bio)}</p>`
-              : ""
-          }
-
-          ${
-            skillsList
-              .map(s =>
-                `<span class="tag">${escapeHtml(s)}</span>`
-              )
-              .join("")
-          }
-
-          <div class="rep">
-            ⭐ ${rep} reputazione
-          </div>
-
-          <span class="tag">
-            ${repLabel(rep)}
-          </span>
-
-          ${
-            badges
-              .map(b =>
-                `<span class="tag">${b}</span>`
-              )
-              .join("")
-          }
-
+          ${u.photoURL ? `<img src="${u.photoURL}" style="width:60px;height:60px;border-radius:50%;object-fit:cover;">` : ""}
+<br>
+<b>${u.nickname || maskEmail(u.email)}</b><br>
+<span class="small">${maskEmail(u.email)}</span><br>
+${u.bio ? `<p>${escapeHtml(u.bio)}</p>` : ""}
+${u.skillsList ? u.skillsList.map(s => `<span class="tag">${escapeHtml(s)}</span>`).join("") : ""}
+<br><br>
+          <div class="rep">⭐ ${rep} reputazione</div>
+          <span class="tag">${repLabel(rep)}</span>
+          ${badges.map(b => `<span class="tag">${b}</span>`).join("")}
           <br><br>
-
           Nodi creati: ${u.nodes || 0}<br>
           Connessioni create: ${u.created || 0}<br>
           Accettate: ${u.accepted || 0}<br>
           Completate: ${u.completed || 0}<br>
           Messaggi: ${u.messages || 0}<br>
-
-          Rating medio:
-          ${Number(u.avgRating || 0).toFixed(1)}
-
+          Rating medio: ${Number(u.avgRating || 0).toFixed(1)}
         </div>
       `;
     });
 
     document.getElementById("users").innerHTML =
-      html ||
-      `<div class="card">Nessun utente ancora.</div>`;
+      html || `<div class="card">Nessun utente ancora.</div>`;
 
     renderRankingByCategory();
     renderMatches(nodes);
-
   });
 }
 
