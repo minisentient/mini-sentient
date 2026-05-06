@@ -969,7 +969,7 @@ function listenDonations() {
     list.slice(0, 10).forEach(d => {
       html += `
         <div class="card">
-          <b>${d.from}</b> → <b>${d.to}</b><br>
+          <b>${maskEmail(d.from)}</b> → <b>${maskEmail(d.to)}</b><br>
           Importo: ${d.amount}€<br>
           A helper: ${d.net}€<br>
           Piattaforma: ${d.fee}€<br>
@@ -1498,7 +1498,7 @@ function listenConnections() {
 
       html += `
         <div class="card ${isActive ? "connection-active" : ""}">
-          <b>${c.from}</b> ↔ <b>${c.to}</b>
+          <b>${maskEmail(c.from)}</b> ↔ <b>${maskEmail(c.to)}</b>
 
           ${unreadCount > 0 ? `<span class="badge">${unreadCount}</span>` : ""}
 
@@ -1632,7 +1632,7 @@ function renderLearning() {
     .forEach(l => {
       html += `
         <div class="card">
-          ${l.from} → ${l.to}<br>
+          ${maskEmail(l.from)} → ${maskEmail(l.to)}<br>
           Categoria: ${l.category || ""}<br>
           Score: ${Number(l.score || 0).toFixed(1)}<br>
           Esito: ${l.success ? "Successo" : "Fallito"}<br>
@@ -1662,12 +1662,12 @@ function listenFeedback() {
       .forEach(f => {
         html += `
           <div class="card">
-            ${f.from} → ${f.to}<br>
+            ${maskEmail(f.from)} → ${maskEmail(f.to)}<br>
             Categoria: ${f.category || ""}<br>
             Rating: ⭐ ${f.rating || ""}<br>
             Esito: ${f.success ? "positivo" : "negativo"}<br>
             Commento: ${escapeHtml(f.comment || "")}<br>
-            Da: ${f.givenBy || ""}
+            Da: ${maskEmail(f.givenBy)}
           </div>
         `;
       });
@@ -1709,8 +1709,8 @@ function listenEmpathicFeed() {
     list.slice(0, 12).forEach(d => {
       html += `
   <div class="card">
-    💰 <b>${d.to}</b> ha ricevuto <b>${d.net}€</b><br>
-    grazie a <b>${d.from}</b><br><br>
+    💰 <b>${maskEmail(d.to)}</b> ha ricevuto <b>${d.net}€</b><br>
+    grazie a <b>${maskEmail(d.from)}</b><br><br>
 
     <span class="tag">Valore reale</span>
   </div>
@@ -1828,7 +1828,7 @@ function listenReferrals() {
     list.slice(0, 10).forEach(r => {
       html += `
         <div class="card">
-          <b>${r.referrer}</b> ha invitato <b>${r.invited}</b><br>
+          <b>${maskEmail(r.referrer)}</b> ha invitato <b>${maskEmail(r.invited)}</b><br>
           Codice: ${r.code}<br>
           Stato: ${r.status}<br>
         </div>
