@@ -1598,7 +1598,7 @@ function renderRankingByCategory() {
       ranked.forEach((u, index) => {
         html += `
           <div>
-            <b>#${index + 1} ${u.email}</b><br>
+            <b>#${index + 1} ${maskEmail(u.email)}</b><br>
             Skill ${cat}: ${u.skills[cat]}<br>
             Reputazione: ${u.reputation || 0}<br>
             Rating: ${Number(u.avgRating || 0).toFixed(1)}<br>
@@ -1766,7 +1766,7 @@ function listenEconomyRanking() {
 
       html += `
         <div class="card">
-          <b>#${index + 1} ${u.email}</b><br>
+          <b>#${index + 1} ${maskEmail(u.email)}</b><br>
           ${badge}<br>
           Guadagno settimana: <b>${u.amount.toFixed(2)}€</b>
         </div>
