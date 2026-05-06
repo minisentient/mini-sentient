@@ -168,6 +168,18 @@
 <button onclick="login()">Login Google</button>
 <p id="user"></p>
 
+<h2>Il mio profilo</h2>
+<div class="card" id="profileBox">
+  <img id="profilePhoto" src="" style="width:80px;height:80px;border-radius:50%;object-fit:cover;display:none;">
+  <p id="profileName"></p>
+
+  <input id="nickname" placeholder="Nickname pubblico">
+  <textarea id="bio" placeholder="Bio breve"></textarea>
+  <input id="skillsText" placeholder="Competenze, es: organizzazione, tecnico, ascolto">
+
+  <button class="green" onclick="saveProfile()">Salva profilo</button>
+</div>
+
 <div id="onboarding" class="onboarding">
   <h2>Benvenuto in Mini Sentient</h2>
   <p>Inserisci un nodo, trova connessioni utili, chatta e fai crescere reputazione, skill e fiducia.</p>
@@ -382,6 +394,15 @@ window.login = async function () {
     "Connesso come: " + currentUser.email;
 
   await ensureUser(currentUser.email);
+  
+  document.getElementById("profileName").innerText =
+  currentUser.displayName || currentUser.email;
+
+if (currentUser.photoURL) {
+  document.getElementById("profilePhoto").src = currentUser.photoURL;
+  document.getElementById("profilePhoto").style.display = "block";
+}
+
   await updateLastActive();
 
   listenNodes();
@@ -429,6 +450,37 @@ async function ensureUser(email) {
     });
   }
 }
+
+window.saveProfile = async function () {
+  if (!currentUser) return alert("Login prima");
+
+  const nickname = document.getElementById("nickname").value.trim();
+  const bio = document.getElementById("bio").value.trim();
+  const skillsText = document.getElementById("skillsText").value.trim();
+
+  const skillsList = skillsText
+    .split(",")
+    .map(s => s.trim().toLowerCase())
+    .filter(s => s.length > 0);
+
+  await updateDoc(doc(db, "users", currentUser.email), {
+    nickname,
+    bio,
+    skillsList,
+    photoURL: currentUser.photoURL || "",
+    profileUpdatedAt: Date.now()
+  });
+
+  document.getElementById("profileName").innerText =
+    nickname || currentUser.email;
+
+  if (currentUser.photoURL) {
+    document.getElementById("profilePhoto").src = currentUser.photoURL;
+    document.getElementById("profilePhoto").style.display = "block";
+  }
+
+  alert("Profilo salvato");
+};
 
 async function updateUser(email, deltaRep = 0, created = 0, accepted = 0, completed = 0, nodesCount = 0, messages = 0) {
   const ref = doc(db, "users", email);
@@ -1557,7 +1609,13 @@ function listenUsers() {
 
       html += `
         <div class="card">
-          <b>${maskEmail(u.email)}</b><br>
+          ${u.photoURL ? `<img src="${u.photoURL}" style="width:60px;height:60px;border-radius:50%;object-fit:cover;">` : ""}
+<br>
+<b>${u.nickname || maskEmail(u.email)}</b><br>
+<span class="small">${maskEmail(u.email)}</span><br>
+${u.bio ? `<p>${escapeHtml(u.bio)}</p>` : ""}
+${u.skillsList ? u.skillsList.map(s => `<span class="tag">${escapeHtml(s)}</span>`).join("") : ""}
+<br><br>
           <div class="rep">⭐ ${rep} reputazione</div>
           <span class="tag">${repLabel(rep)}</span>
           ${badges.map(b => `<span class="tag">${b}</span>`).join("")}
