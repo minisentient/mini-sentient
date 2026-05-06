@@ -1317,13 +1317,13 @@ function renderMatches(nodes) {
       if (aSkillOnB > 0) {
         const boost = Math.min(20, aSkillOnB * 5);
         skillBoost += boost;
-        skillReason += `${a.user} ha esperienza in ${b.category} (+${boost}). `;
+        skillReason += `${maskEmail(a.user)} ha esperienza in ${b.category} (+${boost}). `;
       }
 
       if (bSkillOnA > 0) {
         const boost = Math.min(20, bSkillOnA * 5);
         skillBoost += boost;
-        skillReason += `${b.user} ha esperienza in ${a.category} (+${boost}). `;
+        skillReason += `${maskEmail(b.user)} ha esperienza in ${a.category} (+${boost}). `;
       }
 
       let activeBoost = 0;
@@ -1332,12 +1332,12 @@ function renderMatches(nodes) {
 
       if (userA?.lastActive && now - userA.lastActive < 5 * 60 * 1000) {
         activeBoost += 5;
-        activeReason += `${a.user} attivo ora (+5). `;
+        activeReason += `${maskEmail(a.user)} attivo ora (+5). `;
       }
 
       if (userB?.lastActive && now - userB.lastActive < 5 * 60 * 1000) {
         activeBoost += 5;
-        activeReason += `${b.user} attivo ora (+5). `;
+        activeReason += `${maskEmail(b.user)} attivo ora (+5). `;
       }
 
       let learningBoost = 0;
@@ -1380,8 +1380,8 @@ function renderMatches(nodes) {
         reason += learningReason;
 
         if (categoryBoost > 0) reason += `Stessa categoria: ${a.category}. `;
-        if (needToResourceA > 0) reason += `${b.user} può aiutare ${a.user}. `;
-        if (needToResourceB > 0) reason += `${a.user} può aiutare ${b.user}. `;
+        if (needToResourceA > 0) reason += `${maskEmail(b.user)} può aiutare ${maskEmail(a.user)}. `;
+        if (needToResourceB > 0) reason += `${maskEmail(a.user)} può aiutare ${maskEmail(b.user)}. `;
 
         if (!reason) {
           reason = "Connessione possibile per compatibilità emotiva o parole simili.";
@@ -1391,7 +1391,7 @@ function renderMatches(nodes) {
 
         html += `
           <div class="card">
-            <b>${a.user}</b> ↔ <b>${b.user}</b><br>
+            <b>${maskEmail(a.user)}</b> ↔ <b>${maskEmail(b.user)}</b><br>
             <span class="tag">${a.category || "senza categoria"}</span><br>
             Score: ${score.toFixed(1)}<br>
             Motivo: ${reason}<br>
