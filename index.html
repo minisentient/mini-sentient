@@ -1078,6 +1078,15 @@ window.sendMessage = async function () {
 
   if (!text) return;
 
+  const lastMsgKey = "lastMessageAt_" + currentUser.email;
+const lastMsgAt = Number(localStorage.getItem(lastMsgKey) || 0);
+
+if (Date.now() - lastMsgAt < 3000) {
+  return alert("Aspetta qualche secondo prima di inviare un altro messaggio");
+}
+
+localStorage.setItem(lastMsgKey, Date.now());
+
   input.value = "";
 
   await addDoc(collection(db, "messages"), {
