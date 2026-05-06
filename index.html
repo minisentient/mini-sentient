@@ -438,27 +438,9 @@ if (currentUser.photoURL) {
 async function updateLastActive() {
   if (!currentUser) return;
 
-let customPhotoURL = "";
-
-const file = document.getElementById("avatarUpload").files[0];
-
-if (file) {
-  const storageRef = ref(
-    storage,
-    "avatars/" + currentUser.email
-  );
-
-  await uploadBytes(storageRef, file);
-
-  customPhotoURL = await getDownloadURL(storageRef);
-}
-
   await updateDoc(doc(db, "users", currentUser.email), {
-  nickname,
-  bio,
-  skillsList,
-  photoURL: customPhotoURL || currentUser.photoURL || ""
-});
+    lastActive: Date.now()
+  });
 }
 
 async function ensureUser(email) {
@@ -491,25 +473,34 @@ window.saveProfile = async function () {
   const nickname = document.getElementById("nickname").value.trim();
   const bio = document.getElementById("bio").value.trim();
   const skillsText = document.getElementById("skillsText").value.trim();
+  const file = document.getElementById("avatarUpload").files[0];
 
   const skillsList = skillsText
     .split(",")
     .map(s => s.trim().toLowerCase())
     .filter(s => s.length > 0);
 
+  let photoURL = currentUser.photoURL || "";
+
+  if (file) {
+    const storageRef = ref(storage, "avatars/" + currentUser.email);
+    await uploadBytes(storageRef, file);
+    photoURL = await getDownloadURL(storageRef);
+  }
+
   await updateDoc(doc(db, "users", currentUser.email), {
     nickname,
     bio,
     skillsList,
-    photoURL: currentUser.photoURL || "",
+    photoURL,
     profileUpdatedAt: Date.now()
   });
 
   document.getElementById("profileName").innerText =
     nickname || currentUser.email;
 
-  if (currentUser.photoURL) {
-    document.getElementById("profilePhoto").src = currentUser.photoURL;
+  if (photoURL) {
+    document.getElementById("profilePhoto").src = photoURL;
     document.getElementById("profilePhoto").style.display = "block";
   }
 
