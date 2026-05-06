@@ -170,6 +170,9 @@
 
 <h2>Il mio profilo</h2>
 <div class="card" id="profileBox">
+
+<input type="file" id="avatarUpload" accept="image/*">
+
   <img id="profilePhoto" src="" style="width:80px;height:80px;border-radius:50%;object-fit:cover;display:none;">
   <p id="profileName"></p>
 
@@ -213,6 +216,11 @@
 
 <h2>Top utenti</h2>
 <div id="users"></div>
+
+<h2>Profilo pubblico</h2>
+<div id="publicProfileBox" class="card">
+  Seleziona un utente per vedere il profilo.
+</div>
 
 <h2>Ranking intelligente per categoria</h2>
 <div id="ranking"></div>
@@ -340,6 +348,13 @@ import {
   GoogleAuthProvider
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
+import {
+  getStorage,
+  ref,
+  uploadBytes,
+  getDownloadURL
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-storage.js";
+
 const firebaseConfig = {
   apiKey: "AIzaSyBCOxt2xbck4SMQ-wA9qIsFswZo-yholsI",
   authDomain: "mini-sentient.firebaseapp.com",
@@ -352,6 +367,7 @@ const firebaseConfig = {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const auth = getAuth(app);
+const storage = getStorage(app);
 
 let currentUser = null;
 let nodes = [];
@@ -422,9 +438,27 @@ if (currentUser.photoURL) {
 async function updateLastActive() {
   if (!currentUser) return;
 
+let customPhotoURL = "";
+
+const file = document.getElementById("avatarUpload").files[0];
+
+if (file) {
+  const storageRef = ref(
+    storage,
+    "avatars/" + currentUser.email
+  );
+
+  await uploadBytes(storageRef, file);
+
+  customPhotoURL = await getDownloadURL(storageRef);
+}
+
   await updateDoc(doc(db, "users", currentUser.email), {
-    lastActive: Date.now()
-  });
+  nickname,
+  bio,
+  skillsList,
+  photoURL: customPhotoURL || currentUser.photoURL || ""
+});
 }
 
 async function ensureUser(email) {
@@ -1588,6 +1622,51 @@ function listenConnections() {
       html || `<div class="card">Nessuna connessione per questo utente.</div>`;
   });
 }
+
+window.openPublicProfile = function (email) {
+  const u = usersData.find(x => x.email === email);
+
+  if (!u) {
+    document.getElementById("publicProfileBox").innerHTML =
+      "Profilo non trovato.";
+    return;
+  }
+
+  const badges = u.badges || [];
+  const skillsList = u.skillsList || [];
+
+  document.getElementById("publicProfileBox").innerHTML = `
+    ${u.photoURL ? `<img src="${u.photoURL}" style="width:90px;height:90px;border-radius:50%;object-fit:cover;">` : ""}
+    <h2>${u.nickname || maskEmail(u.email)}</h2>
+    <p class="small">${maskEmail(u.email)}</p>
+
+    ${u.bio ? `<p>${escapeHtml(u.bio)}</p>` : ""}
+
+    <h3>Competenze</h3>
+    ${skillsList.length
+      ? skillsList.map(s => `<span class="tag">${escapeHtml(s)}</span>`).join("")
+      : "<p>Nessuna competenza inserita.</p>"
+    }
+
+    <h3>Reputazione</h3>
+    <div class="rep">⭐ ${u.reputation || 0}</div>
+    <span class="tag">${repLabel(Number(u.reputation || 0))}</span>
+
+    <h3>Badge</h3>
+    ${badges.length
+      ? badges.map(b => `<span class="tag">${b}</span>`).join("")
+      : "<p>Nessun badge ancora.</p>"
+    }
+
+    <h3>Statistiche</h3>
+    Nodi creati: ${u.nodes || 0}<br>
+    Connessioni create: ${u.created || 0}<br>
+    Accettate: ${u.accepted || 0}<br>
+    Completate: ${u.completed || 0}<br>
+    Messaggi: ${u.messages || 0}<br>
+    Rating medio: ${Number(u.avgRating || 0).toFixed(1)}
+  `;
+};
 
 function listenUsers() {
   if (listeningUsers) return;
