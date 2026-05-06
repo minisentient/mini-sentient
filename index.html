@@ -1165,6 +1165,23 @@ function escapeHtml(text) {
     .replaceAll("'", "&#039;");
 }
 
+function maskEmail(email) {
+  if (!email) return "";
+
+  const parts = email.split("@");
+  const name = parts[0];
+
+  if (name.length <= 3) {
+    return name[0] + "***@" + parts[1];
+  }
+
+  return (
+    name.substring(0, 3) +
+    "***@" +
+    parts[1]
+  );
+}
+
 function normalize(text) {
   return (text || "")
     .toLowerCase()
@@ -1249,7 +1266,7 @@ function analyze(nodes) {
   let criticalHtml = "";
 
   critical.forEach(n => {
-    criticalHtml += `<span class="tag">${n.user} · ${n.emotionValue}</span> `;
+    criticalHtml += `<span class="tag">${maskEmail(n.user)} · ${n.emotionValue}</span>`;
   });
 
   document.getElementById("field").innerHTML = `
@@ -1412,7 +1429,7 @@ function listenNodes() {
       .forEach(n => {
         html += `
           <div class="card ${getClass(Number(n.emotionValue))}">
-            <b>${n.user}</b><br>
+            <b>${maskEmail(n.user)}</b><br>
             Emozione: ${n.emotionValue}<br>
             Categoria: ${n.category || ""}<br>
             Bisogno: ${n.need}<br>
@@ -1541,7 +1558,7 @@ function listenUsers() {
 
       html += `
         <div class="card">
-          <b>${u.email}</b><br>
+          <b>${maskEmail(u.email)}</b><br>
           <div class="rep">⭐ ${rep} reputazione</div>
           <span class="tag">${repLabel(rep)}</span>
           ${badges.map(b => `<span class="tag">${b}</span>`).join("")}
