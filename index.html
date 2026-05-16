@@ -842,7 +842,84 @@ body.dark-mode .auth-social-tabs button {
   .auth-grid { grid-template-columns:1fr; }
 }
 
-  </style>
+  
+/* ==========================================================
+   AUTH GATE VISIBILE - BOTTONI CHIARI LOGIN / REGISTRAZIONE
+   ========================================================== */
+.auth-entry {
+  background:linear-gradient(135deg,#ffffff,#eef2ff);
+  border:1px solid var(--ms-border, #d9dee8);
+  border-radius:24px;
+  padding:20px;
+  margin:18px 0;
+  box-shadow:0 12px 34px rgba(37,99,235,.12);
+}
+.auth-entry h2 {
+  margin:0 0 6px;
+  font-size:28px;
+  color:#111827;
+}
+.auth-entry p {
+  margin:0 0 14px;
+  color:#475569;
+  line-height:1.45;
+}
+.auth-entry-actions {
+  display:grid;
+  grid-template-columns:1fr 1fr 1fr;
+  gap:10px;
+}
+.auth-entry-actions button {
+  margin:0;
+  min-height:52px;
+  font-weight:900;
+  border-radius:16px;
+}
+.auth-entry .google-btn {
+  background:#ffffff;
+  color:#111827;
+  border:1px solid #d1d5db;
+}
+.auth-entry .register-btn {
+  background:#16a34a;
+}
+.auth-entry .email-btn {
+  background:#2563eb;
+}
+.auth-entry-extra {
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-top:12px;
+}
+.auth-entry-extra button {
+  background:#f1f5f9;
+  color:#111827;
+  margin:0;
+  padding:8px 10px;
+  font-size:13px;
+}
+body.dark-mode .auth-entry {
+  background:linear-gradient(135deg,#111827,#0f172a);
+  border-color:#334155;
+}
+body.dark-mode .auth-entry h2,
+body.dark-mode .auth-entry p {
+  color:#e5e7eb;
+}
+body.dark-mode .auth-entry .google-btn,
+body.dark-mode .auth-entry-extra button {
+  background:#1f2937;
+  color:#e5e7eb;
+  border-color:#334155;
+}
+@media (max-width:860px) {
+  .auth-entry-actions {
+    grid-template-columns:1fr;
+  }
+}
+
+</style>
 </head>
 
 <body>
@@ -853,7 +930,8 @@ body.dark-mode .auth-social-tabs button {
   <div class="social-top-actions">
     <button class="dark" onclick="showMiniSection('feed')">Home</button>
     <button class="purple" onclick="showMiniSection('chat')">Chat</button>
-    <button class="green" onclick="login()">Login</button>
+    <button class="green" onclick="openAuth('google')">Accedi</button>
+    <button class="orange" onclick="openAuth('register')">Registrati</button>
   </div>
 </div>
 
@@ -925,7 +1003,21 @@ body.dark-mode .auth-social-tabs button {
 
 <h1>Mini Sentient</h1>
 
-<button onclick="login()">Login Google</button>
+<div id="authEntry" class="auth-entry">
+  <h2>Accedi o registrati</h2>
+  <p>Entra con Google oppure crea un account Mini Sentient con qualsiasi email e password, come in un social network.</p>
+  <div class="auth-entry-actions">
+    <button class="google-btn" onclick="openAuth('google')">🔵 Continua con Google</button>
+    <button class="register-btn" onclick="openAuth('register')">🟢 Crea account</button>
+    <button class="email-btn" onclick="openAuth('email')">✉️ Accedi con email</button>
+  </div>
+  <div class="auth-entry-extra">
+    <button onclick="openAuth('reset')">Password dimenticata</button>
+    <button onclick="resendVerificationEmail()">Reinvia verifica email</button>
+    <button onclick="logout()">Logout</button>
+  </div>
+</div>
+
 <p id="user"></p>
 
 <div id="authSocialCard" class="auth-social-card">
@@ -1494,6 +1586,11 @@ async function completeLogin(user) {
     authCard.style.display = "none";
   }
 
+  const authEntry = document.getElementById("authEntry");
+  if (authEntry) {
+    authEntry.style.display = "none";
+  }
+
   await ensureUser(currentUser.email);
 
   const profileName = document.getElementById("profileName");
@@ -1545,6 +1642,35 @@ function setAuthStatus(message, isError = false) {
   box.classList.toggle("error", !!isError);
   box.classList.add("show");
 }
+
+
+window.openAuth = function (panel = "google") {
+  const authCard = document.getElementById("authSocialCard");
+  const authEntry = document.getElementById("authEntry");
+
+  if (authCard) {
+    authCard.style.display = "block";
+  }
+
+  if (typeof showAuthPanel === "function") {
+    showAuthPanel(panel);
+  }
+
+  const target = authCard || authEntry;
+  if (target && typeof target.scrollIntoView === "function") {
+    target.scrollIntoView({ behavior: "smooth", block: "center" });
+  }
+
+  if (panel === "google") {
+    setAuthStatus("Scegli se continuare con Google oppure usare email e password.", false);
+  } else if (panel === "register") {
+    setAuthStatus("Compila nome pubblico, email e password per creare il tuo account.", false);
+  } else if (panel === "email") {
+    setAuthStatus("Inserisci email e password per accedere.", false);
+  } else {
+    setAuthStatus("Inserisci la tua email per ricevere il link di reset password.", false);
+  }
+};
 
 window.showAuthPanel = function (panel) {
   ["Google", "Register", "Email", "Reset"].forEach(name => {
@@ -1713,6 +1839,8 @@ window.logout = async function () {
   if (userBox) userBox.innerText = "";
   const authCard = document.getElementById("authSocialCard");
   if (authCard) authCard.style.display = "block";
+  const authEntry = document.getElementById("authEntry");
+  if (authEntry) authEntry.style.display = "block";
   setAuthStatus("Logout effettuato.", false);
 };
 
