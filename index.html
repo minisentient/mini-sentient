@@ -157,10 +157,281 @@
 #donationModal input {
   margin-top: 8px;
 }
+  
+
+/* ==========================================================
+   MINI SENTIENT SOCIAL SHELL - INNESTO CONSERVATIVO
+   Queste regole NON sostituiscono il codice originale.
+   Aggiungono una struttura tipo social network mantenendo ID,
+   funzioni Firebase, listeners, PayPal, chat, wallet e sezioni.
+   ========================================================== */
+
+:root {
+  --ms-blue:#2563eb;
+  --ms-dark:#111827;
+  --ms-bg:#f0f2f5;
+  --ms-card:#ffffff;
+  --ms-border:#d9dee8;
+  --ms-muted:#64748b;
+  --ms-green:#16a34a;
+  --ms-purple:#7c3aed;
+}
+
+html { scroll-behavior:smooth; }
+body {
+  background:var(--ms-bg);
+  padding-top:74px;
+}
+
+.social-topbar {
+  position:fixed;
+  top:0;
+  left:0;
+  right:0;
+  height:64px;
+  background:#ffffff;
+  border-bottom:1px solid var(--ms-border);
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:0 18px;
+  z-index:999999;
+  box-shadow:0 1px 8px rgba(15,23,42,.08);
+}
+
+.social-brand {
+  display:flex;
+  align-items:center;
+  gap:10px;
+  font-weight:800;
+  font-size:20px;
+  color:var(--ms-blue);
+  white-space:nowrap;
+}
+
+.social-logo {
+  width:38px;
+  height:38px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:linear-gradient(135deg,#2563eb,#7c3aed);
+  color:#fff;
+  font-weight:900;
+}
+
+.social-search {
+  max-width:440px;
+  width:36vw;
+  margin:0 12px;
+}
+
+.social-search input {
+  background:#f1f5f9;
+  border:none;
+  border-radius:999px;
+  margin:0;
+  padding:11px 16px;
+}
+
+.social-top-actions {
+  display:flex;
+  gap:8px;
+  align-items:center;
+}
+
+.social-top-actions button,
+.social-nav button,
+.social-right button {
+  cursor:pointer;
+}
+
+.social-layout {
+  display:grid;
+  grid-template-columns:260px minmax(0, 780px) 290px;
+  gap:18px;
+  align-items:start;
+  max-width:1400px;
+  margin:0 auto;
+}
+
+.social-left,
+.social-right {
+  position:sticky;
+  top:82px;
+  align-self:start;
+}
+
+.social-panel {
+  background:#fff;
+  border:1px solid var(--ms-border);
+  border-radius:18px;
+  padding:14px;
+  box-shadow:0 2px 10px rgba(15,23,42,.06);
+  margin-bottom:14px;
+}
+
+.social-panel-title {
+  font-size:13px;
+  text-transform:uppercase;
+  color:var(--ms-muted);
+  font-weight:800;
+  letter-spacing:.04em;
+  margin-bottom:10px;
+}
+
+.social-nav button {
+  width:100%;
+  text-align:left;
+  background:transparent;
+  color:#111827;
+  border:none;
+  margin:2px 0;
+  padding:11px 12px;
+  border-radius:12px;
+  font-weight:700;
+}
+
+.social-nav button:hover,
+.social-nav button.active {
+  background:#e8f0ff;
+  color:#1d4ed8;
+}
+
+.social-stat {
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:8px;
+  padding:8px 0;
+  border-bottom:1px solid #eef2f7;
+  font-size:14px;
+}
+
+.social-stat:last-child { border-bottom:none; }
+.social-stat b { color:#111827; }
+.social-stat span { color:var(--ms-muted); }
+
+.container {
+  max-width:780px;
+  margin:0 auto;
+}
+
+.container > h1 {
+  display:none;
+}
+
+.social-section-label {
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  padding:8px 12px;
+  border-radius:999px;
+  background:#e8f0ff;
+  color:#1d4ed8;
+  font-size:13px;
+  font-weight:800;
+  margin:8px 0;
+}
+
+body.social-focus .mini-section {
+  display:none;
+}
+
+body.social-focus .mini-section.active-section {
+  display:block;
+}
+
+.mini-section {
+  scroll-margin-top:90px;
+}
+
+.card {
+  border:1px solid rgba(15,23,42,.06);
+}
+
+.card:hover {
+  box-shadow:0 6px 20px rgba(15,23,42,.10);
+}
+
+.social-mobile-nav {
+  display:none;
+  position:fixed;
+  left:0;
+  right:0;
+  bottom:0;
+  background:#fff;
+  border-top:1px solid var(--ms-border);
+  z-index:999999;
+  padding:6px;
+  box-shadow:0 -2px 10px rgba(15,23,42,.08);
+}
+
+.social-mobile-nav button {
+  flex:1;
+  margin:0;
+  padding:8px 4px;
+  background:transparent;
+  color:#111827;
+  font-size:12px;
+}
+
+@media (max-width:1180px) {
+  .social-layout { grid-template-columns:220px minmax(0, 780px); }
+  .social-right { display:none; }
+}
+
+@media (max-width:860px) {
+  body { padding:72px 10px 72px; }
+  .social-layout { display:block; }
+  .social-left { display:none; }
+  .social-mobile-nav { display:flex; }
+  .social-search { display:none; }
+  .social-brand span { font-size:16px; }
+  .social-top-actions button { padding:8px 10px; font-size:13px; }
+  .container { max-width:100%; }
+}
+
   </style>
 </head>
 
 <body>
+
+<div class="social-topbar">
+  <div class="social-brand"><div class="social-logo">MS</div><span>Mini Sentient</span></div>
+  <div class="social-search"><input id="socialSearch" placeholder="Cerca nel campo, utenti, bisogni, risorse..." oninput="miniSocialSearch(this.value)"></div>
+  <div class="social-top-actions">
+    <button class="dark" onclick="showMiniSection('feed')">Home</button>
+    <button class="purple" onclick="showMiniSection('chat')">Chat</button>
+    <button class="green" onclick="login()">Login</button>
+  </div>
+</div>
+
+<div class="social-layout">
+  <aside class="social-left">
+    <div class="social-panel social-nav">
+      <div class="social-panel-title">Navigazione</div>
+      <button onclick="showMiniSection('feed')">🏠 Feed Empathic</button>
+      <button onclick="showMiniSection('profile')">👤 Profilo</button>
+      <button onclick="showMiniSection('field')">🌐 Campo</button>
+      <button onclick="showMiniSection('matches')">🤝 Connessioni</button>
+      <button onclick="showMiniSection('chat')">💬 Chat PRO</button>
+      <button onclick="showMiniSection('learning')">🧠 Learning</button>
+      <button onclick="showMiniSection('wallet')">💰 Wallet</button>
+      <button onclick="showMiniSection('ranking')">🏆 Ranking</button>
+      <button onclick="showMiniSection('legal')">⚖️ Privacy & Termini</button>
+      <button onclick="showMiniSection('all')">📜 Tutto</button>
+    </div>
+    <div class="social-panel">
+      <div class="social-panel-title">Mini Sentient</div>
+      <div class="social-stat"><span>Matching</span><b>Realtime</b></div>
+      <div class="social-stat"><span>Chat</span><b>Live</b></div>
+      <div class="social-stat"><span>Wallet</span><b>Empathic</b></div>
+      <div class="social-stat"><span>Donazioni</span><b>90/10</b></div>
+    </div>
+  </aside>
+
+  <main class="social-main">
 <div class="container">
 
 <h1>Mini Sentient</h1>
@@ -320,6 +591,29 @@
 
 </div>
 
+</div>
+  </main>
+
+  <aside class="social-right">
+    <div class="social-panel">
+      <div class="social-panel-title">Azioni rapide</div>
+      <button class="green" onclick="showMiniSection('field')">➕ Nuovo nodo</button>
+      <button class="purple" onclick="showMiniSection('matches')">🤝 Trova connessioni</button>
+      <button class="dark" onclick="showMiniSection('wallet')">💰 Apri wallet</button>
+    </div>
+    <div class="social-panel">
+      <div class="social-panel-title">Visione</div>
+      <p class="small">Struttura social aggiunta senza rimuovere il motore originale: Firebase, chat, wallet, referral, ranking e donazioni restano nello stesso file.</p>
+    </div>
+  </aside>
+</div>
+
+<div class="social-mobile-nav">
+  <button onclick="showMiniSection('feed')">🏠<br>Home</button>
+  <button onclick="showMiniSection('field')">🌐<br>Campo</button>
+  <button onclick="showMiniSection('matches')">🤝<br>Match</button>
+  <button onclick="showMiniSection('chat')">💬<br>Chat</button>
+  <button onclick="showMiniSection('wallet')">💰<br>Wallet</button>
 </div>
 
 <script type="module">
@@ -2150,6 +2444,90 @@ window.closeLegal = function () {
 </div>
 
 <div id="legalBox" class="card hidden" style="font-size:14px; line-height:1.5;"></div>
+
+
+
+<script>
+/* ==========================================================
+   MINI SENTIENT SOCIAL ROUTER - INNESTO CONSERVATIVO
+   Non altera le funzioni Firebase già dichiarate nel module script.
+   Crea solo una navigazione interna tipo social network.
+   ========================================================== */
+(function(){
+  const sectionMap = {
+    profile: ["profileBox", "users", "publicProfileBox"],
+    field: ["onboarding", "wowBox", "field", "results"],
+    matches: ["ranking", "matches", "connections"],
+    chat: ["connections", "chatBox", "typingIndicator", "chatMessage"],
+    learning: ["learningBox", "feedbackBox"],
+    wallet: ["myEarningsBox", "walletBox", "donationsBox", "feedBox", "referralCode", "referralBox"],
+    ranking: ["ranking", "economyRankingBox", "users"],
+    legal: ["legalBox"],
+    feed: ["wowBox", "field", "feedBox", "results", "matches"],
+    all: []
+  };
+
+  function labelize(el){
+    if (!el || el.dataset.miniWrapped === "1") return;
+    el.dataset.miniWrapped = "1";
+    el.classList.add("mini-section");
+  }
+
+  window.showMiniSection = function(name){
+    const all = document.querySelectorAll(".mini-section");
+    document.body.classList.remove("social-focus");
+    all.forEach(el => el.classList.remove("active-section"));
+
+    if (name === "all") {
+      document.body.classList.remove("social-focus");
+      window.scrollTo({top:0, behavior:"smooth"});
+      return;
+    }
+
+    const ids = sectionMap[name] || [];
+    let first = null;
+
+    ids.forEach(id => {
+      const el = document.getElementById(id);
+      if (el) {
+        labelize(el);
+        el.classList.add("active-section");
+        if (!first) first = el;
+      }
+    });
+
+    if (first) {
+      document.body.classList.add("social-focus");
+      first.scrollIntoView({behavior:"smooth", block:"start"});
+    }
+
+    document.querySelectorAll(".social-nav button").forEach(btn => btn.classList.remove("active"));
+    document.querySelectorAll(".social-nav button").forEach(btn => {
+      if ((btn.getAttribute("onclick") || "").includes("'" + name + "'")) btn.classList.add("active");
+    });
+  };
+
+  window.miniSocialSearch = function(value){
+    const q = String(value || "").toLowerCase().trim();
+    const cards = document.querySelectorAll(".card");
+    if (!q) {
+      cards.forEach(c => c.style.outline = "");
+      return;
+    }
+    cards.forEach(c => {
+      const hit = c.innerText.toLowerCase().includes(q);
+      c.style.outline = hit ? "3px solid rgba(37,99,235,.35)" : "";
+    });
+  };
+
+  document.addEventListener("DOMContentLoaded", function(){
+    ["profileBox","onboarding","wowBox","field","users","publicProfileBox","ranking","matches","connections","chatBox","typingIndicator","results","learningBox","feedbackBox","myEarningsBox","walletBox","donationsBox","feedBox","referralBox","economyRankingBox","legalBox"].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) labelize(el);
+    });
+  });
+})();
+</script>
 
 </body>
 </html>
