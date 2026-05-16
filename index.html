@@ -1736,6 +1736,192 @@ body.ms15-active #ms15Root{display:block!important;}
 body.dark-mode.ms15-active,#ms15Root.dark{--ms15-bg:#0f172a;--ms15-card:#111827;--ms15-text:#e5e7eb;--ms15-muted:#94a3b8;--ms15-line:#334155;--ms15-soft:#1f2937;background:#0f172a!important;color:#e5e7eb!important;}
 body.dark-mode .ms15-top,body.dark-mode .ms15-bottom,body.dark-mode .ms15-card,body.dark-mode .ms15-sheet,body.dark-mode .ms15-logo-card,body.dark-mode .ms15-line{background:#111827;color:#e5e7eb;border-color:#334155}body.dark-mode .ms15-tabs{background:rgba(15,23,42,.94)}body.dark-mode .ms15-tabs button,body.dark-mode .ms15-actions button,body.dark-mode .ms15-panel,body.dark-mode .ms15-composer textarea,body.dark-mode .ms15-row select,body.dark-mode .ms15-row input,body.dark-mode .ms15-inputline input,body.dark-mode .ms15-settings input,body.dark-mode .ms15-settings select{background:#1f2937;color:#e5e7eb;border-color:#334155}body.dark-mode .ms15-bubble small,body.dark-mode .ms15-logo-card span{color:#cbd5e1}
 
+
+/* ==========================================================
+   PATCH ACCESSO CENTRALE - FACEBOOK STYLE
+   Corregge il pulsante Accedi e mostra un ingresso grande.
+   ========================================================== */
+.ms-login-gate{
+  position:fixed;
+  inset:0;
+  z-index:2147483646;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:18px;
+  background:
+    radial-gradient(circle at 18% 10%, rgba(37,99,235,.20), transparent 32%),
+    radial-gradient(circle at 90% 5%, rgba(22,163,74,.18), transparent 28%),
+    rgba(238,243,248,.96);
+  backdrop-filter:blur(14px);
+}
+.ms-login-gate.open{display:flex;}
+.ms-login-card{
+  width:min(980px,100%);
+  display:grid;
+  grid-template-columns:1.1fr .9fr;
+  gap:28px;
+  align-items:center;
+}
+.ms-login-brand{
+  padding:18px;
+}
+.ms-login-brand .logo{
+  width:76px;
+  height:76px;
+  border-radius:28px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:linear-gradient(135deg,#2563eb,#7c3aed);
+  color:white;
+  font-weight:950;
+  font-size:28px;
+  box-shadow:0 18px 44px rgba(37,99,235,.30);
+  margin-bottom:18px;
+}
+.ms-login-brand h1{
+  margin:0 0 12px;
+  font-size:54px;
+  line-height:.98;
+  letter-spacing:-2px;
+  color:#0f172a;
+}
+.ms-login-brand p{
+  margin:0;
+  font-size:20px;
+  line-height:1.35;
+  color:#475569;
+  max-width:540px;
+}
+.ms-login-box{
+  background:white;
+  border:1px solid #d9e2ef;
+  border-radius:28px;
+  box-shadow:0 22px 70px rgba(15,23,42,.18);
+  padding:22px;
+}
+.ms-login-box h2{
+  margin:0 0 8px;
+  font-size:28px;
+  color:#0f172a;
+}
+.ms-login-box .hint{
+  margin:0 0 16px;
+  color:#64748b;
+  line-height:1.4;
+  font-size:14px;
+}
+.ms-login-main-btn{
+  width:100%;
+  min-height:56px;
+  border-radius:16px;
+  margin:0 0 10px;
+  border:0;
+  font-size:17px;
+  font-weight:950;
+  background:#2563eb;
+  color:white;
+  cursor:pointer;
+}
+.ms-login-main-btn.green{background:#16a34a;}
+.ms-login-main-btn.dark{background:#111827;}
+.ms-login-main-btn.light{
+  background:#f8fafc;
+  color:#111827;
+  border:1px solid #d9e2ef;
+}
+.ms-login-tabs{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+  margin:14px 0;
+}
+.ms-login-tabs button{
+  margin:0;
+  border-radius:999px;
+  background:#f1f5f9;
+  color:#111827;
+  border:1px solid #e2e8f0;
+  font-weight:900;
+}
+.ms-login-tabs button.active{
+  background:#2563eb;
+  color:white;
+}
+.ms-login-panel{display:none;}
+.ms-login-panel.active{display:block;}
+.ms-login-box input{
+  width:100%;
+  box-sizing:border-box;
+  border:1px solid #d9e2ef;
+  border-radius:14px;
+  padding:13px 14px;
+  margin:7px 0;
+  font-size:15px;
+  background:#f8fafc;
+}
+.ms-login-status{
+  display:none;
+  border-radius:14px;
+  padding:10px 12px;
+  margin:10px 0 0;
+  background:#eff6ff;
+  color:#1d4ed8;
+  font-size:13px;
+  line-height:1.35;
+}
+.ms-login-status.show{display:block;}
+.ms-login-status.error{background:#fef2f2;color:#991b1b;}
+.ms-login-close{
+  position:absolute;
+  right:18px;
+  top:18px;
+  width:42px;
+  height:42px;
+  border-radius:50%;
+  border:0;
+  background:white;
+  color:#111827;
+  box-shadow:0 8px 24px rgba(15,23,42,.15);
+  font-weight:950;
+  cursor:pointer;
+}
+.ms-login-inline-entry{
+  margin:12px 0;
+  padding:22px;
+  border-radius:28px;
+  background:linear-gradient(135deg,#ffffff,#eef2ff);
+  border:1px solid #d9e2ef;
+  box-shadow:0 12px 36px rgba(37,99,235,.12);
+  text-align:center;
+}
+.ms-login-inline-entry h2{
+  margin:0 0 8px;
+  font-size:32px;
+  color:#0f172a;
+}
+.ms-login-inline-entry p{
+  margin:0 0 14px;
+  color:#64748b;
+  font-size:16px;
+}
+.ms-login-inline-entry button{
+  min-height:52px;
+  min-width:220px;
+  border-radius:999px;
+  font-size:17px;
+  font-weight:950;
+}
+@media(max-width:760px){
+  .ms-login-card{grid-template-columns:1fr;gap:10px;}
+  .ms-login-brand{text-align:center;padding:4px;}
+  .ms-login-brand .logo{margin:0 auto 12px;width:62px;height:62px;border-radius:22px;font-size:24px;}
+  .ms-login-brand h1{font-size:38px;letter-spacing:-1px;}
+  .ms-login-brand p{font-size:16px;}
+  .ms-login-box{border-radius:24px;padding:18px;}
+}
+
 </style>
 </head>
 
@@ -7459,6 +7645,147 @@ document.addEventListener("DOMContentLoaded", function(){ ms9AddNav(); ms9PatchR
   const oldRenderMatches=(typeof renderMatches==="function")?renderMatches:null;
   if(oldRenderMatches&&!window.__ms15RenderMatchesPatched){window.__ms15RenderMatchesPatched=true;renderMatches=function(nodesArg){if(!document.body.classList.contains("ms15-active"))oldRenderMatches(nodesArg); if(["home","help","tribe","me"].includes(view))render()}}
   document.addEventListener("DOMContentLoaded",()=>{document.body.classList.add("ms15-active");listenPosts();setTimeout(()=>{listenConnections();render()},350);render();setInterval(()=>{if(["home","messages","help","tribe","me"].includes(view))render()},6000)});
+})();
+</script>
+
+
+<div id="msLoginGate" class="ms-login-gate" aria-label="Accesso Mini Sentient">
+  <button class="ms-login-close" onclick="msLoginClose()">×</button>
+  <div class="ms-login-card">
+    <div class="ms-login-brand">
+      <div class="logo">MS</div>
+      <h1>Mini Sentient</h1>
+      <p>Entra nel social empatico: condividi bisogni, risorse, ascolto e aiuto reale. Semplice come Facebook, più umano.</p>
+    </div>
+    <div class="ms-login-box">
+      <h2>Accedi a Mini Sentient</h2>
+      <p class="hint">Usa Google per entrare subito, oppure email e password. Se apri il file direttamente dal telefono, usa la modalità demo o pubblicalo su hosting per il login reale Firebase.</p>
+      <button class="ms-login-main-btn" onclick="msLoginGoogle()">Continua con Google</button>
+      <button class="ms-login-main-btn green" onclick="msLoginDemo()">Entra in modalità demo</button>
+
+      <div class="ms-login-tabs">
+        <button id="msLoginTabEmail" class="active" onclick="msLoginPanel('email')">Accedi</button>
+        <button id="msLoginTabRegister" onclick="msLoginPanel('register')">Registrati</button>
+      </div>
+
+      <div id="msLoginPanelEmail" class="ms-login-panel active">
+        <input id="msLoginEmail" type="email" placeholder="Email">
+        <input id="msLoginPassword" type="password" placeholder="Password">
+        <button class="ms-login-main-btn dark" onclick="msLoginEmailSubmit()">Accedi con email</button>
+      </div>
+
+      <div id="msLoginPanelRegister" class="ms-login-panel">
+        <input id="msRegisterName" placeholder="Nome pubblico">
+        <input id="msRegisterEmail" type="email" placeholder="Email">
+        <input id="msRegisterPassword" type="password" placeholder="Password">
+        <button class="ms-login-main-btn dark" onclick="msRegisterSubmit()">Crea account</button>
+      </div>
+
+      <button class="ms-login-main-btn light" onclick="msLoginClose()">Continua senza accedere</button>
+      <div id="msLoginStatus" class="ms-login-status"></div>
+    </div>
+  </div>
+</div>
+
+
+<script>
+/* PATCH ACCESSO: rende il tasto Accedi realmente visibile e centrale */
+(function(){
+  function byId(id){return document.getElementById(id)}
+  function status(msg,isError){
+    const box=byId("msLoginStatus");
+    if(!box){ if(isError) alert(msg); return; }
+    box.textContent=msg;
+    box.classList.add("show");
+    box.classList.toggle("error",!!isError);
+  }
+  function copyValue(fromId,toId){
+    const from=byId(fromId), to=byId(toId);
+    if(from && to) to.value=from.value;
+  }
+  window.msLoginOpen=function(panel){
+    const gate=byId("msLoginGate");
+    if(gate) gate.classList.add("open");
+    msLoginPanel(panel||"email");
+    status("Accesso pronto. Per il login reale non aprire il file come file locale: usa Firebase Hosting o localhost.", false);
+  };
+  window.msLoginClose=function(){
+    const gate=byId("msLoginGate");
+    if(gate) gate.classList.remove("open");
+  };
+  window.msLoginPanel=function(panel){
+    const email=panel!=="register";
+    byId("msLoginPanelEmail")?.classList.toggle("active",email);
+    byId("msLoginPanelRegister")?.classList.toggle("active",!email);
+    byId("msLoginTabEmail")?.classList.toggle("active",email);
+    byId("msLoginTabRegister")?.classList.toggle("active",!email);
+  };
+  window.msLoginGoogle=function(){
+    if(location.protocol==="file:"){
+      status("Il login Google Firebase non può funzionare aprendo il file direttamente. Pubblicalo su Firebase Hosting oppure aprilo da localhost. Intanto puoi usare la modalità demo.", true);
+      return;
+    }
+    if(typeof window.login==="function") window.login();
+    else if(typeof window.openAuth==="function") window.openAuth("google");
+    else status("Funzione login non trovata.", true);
+  };
+  window.msLoginEmailSubmit=function(){
+    copyValue("msLoginEmail","loginEmail");
+    copyValue("msLoginPassword","loginPassword");
+    if(location.protocol==="file:"){
+      status("Il login email Firebase non funziona da file locale. Usa localhost/Firebase Hosting oppure modalità demo.", true);
+      return;
+    }
+    if(typeof window.loginWithEmail==="function") window.loginWithEmail();
+    else if(typeof window.openAuth==="function") window.openAuth("email");
+    else status("Funzione login email non trovata.", true);
+  };
+  window.msRegisterSubmit=function(){
+    copyValue("msRegisterName","registerName");
+    copyValue("msRegisterEmail","registerEmail");
+    copyValue("msRegisterPassword","registerPassword");
+    if(location.protocol==="file:"){
+      status("La registrazione Firebase non funziona da file locale. Usa localhost/Firebase Hosting oppure modalità demo.", true);
+      return;
+    }
+    if(typeof window.registerWithEmail==="function") window.registerWithEmail();
+    else if(typeof window.openAuth==="function") window.openAuth("register");
+    else status("Funzione registrazione non trovata.", true);
+  };
+  window.msLoginDemo=function(){
+    localStorage.setItem("miniSentientDemoUser","demo@mini-sentient.local");
+    msLoginClose();
+    const subtitle=byId("ms15Subtitle");
+    if(subtitle) subtitle.textContent="Modalità demo · interfaccia attiva";
+    const userBox=byId("user");
+    if(userBox) userBox.textContent="Connesso come: demo@mini-sentient.local";
+    if(typeof window.ms15SetView==="function") window.ms15SetView("home");
+    setTimeout(function(){
+      const view=byId("ms15View");
+      if(view && !byId("msDemoBanner")){
+        view.insertAdjacentHTML("afterbegin", '<div id="msDemoBanner" class="ms-login-inline-entry"><h2>Sei entrato in modalità demo</h2><p>Per salvare davvero post, chat e profilo serve accesso Firebase da dominio autorizzato.</p><button onclick="msLoginOpen(\\'email\\')">Accedi davvero</button></div>');
+      }
+    },100);
+  };
+
+  const oldQuick=window.ms15QuickAccess;
+  window.ms15QuickAccess=function(){
+    msLoginOpen("email");
+  };
+
+  document.addEventListener("DOMContentLoaded",function(){
+    document.querySelectorAll('[onclick="ms15QuickAccess()"]').forEach(function(btn){
+      btn.textContent="Accedi / Registrati";
+      btn.onclick=function(e){e.preventDefault();msLoginOpen("email");};
+    });
+    setTimeout(function(){
+      const view=byId("ms15View");
+      const alreadyLogged=(byId("user")?.textContent||"").includes("Connesso come:");
+      if(view && !alreadyLogged && !localStorage.getItem("miniSentientDemoUser") && !byId("msLoginInlineEntry")){
+        view.insertAdjacentHTML("afterbegin", '<div id="msLoginInlineEntry" class="ms-login-inline-entry"><h2>Connettiti a Mini Sentient</h2><p>Entra per pubblicare, parlare, aiutare e ricevere supporto.</p><button onclick="msLoginOpen(\\'email\\')">Accedi o registrati</button></div>');
+      }
+    },700);
+  });
 })();
 </script>
 
