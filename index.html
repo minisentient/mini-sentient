@@ -8051,5 +8051,175 @@ body:not(.ms-app-unlocked) #ms15Root{
 }
 </style>
 
+
+<!-- ==========================================================
+     LOGIN GOOGLE MOBILE REDIRECT + SBLOCCO AUTHSTATE
+     Fix: su mobile il popup Google torna alla schermata iniziale.
+     Questo modulo usa redirect diretto e sblocca la UI quando Firebase
+     riconosce l'utente autenticato.
+     ========================================================== -->
+<script type="module">
+import { initializeApp, getApps, getApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+import {
+  getAuth,
+  GoogleAuthProvider,
+  signInWithRedirect,
+  getRedirectResult,
+  onAuthStateChanged,
+  setPersistence,
+  browserLocalPersistence
+} from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+const msFixFirebaseConfig = {
+  apiKey: "AIzaSyBCOxt2xbck4SMQ-wA9qIsFswZo-yholsI",
+  authDomain: "mini-sentient.firebaseapp.com",
+  projectId: "mini-sentient",
+  storageBucket: "mini-sentient.appspot.com",
+  messagingSenderId: "657299686683",
+  appId: "1:657299686683:web:210eb8ce38c2c52a823fbe"
+};
+
+const msFixApp = getApps().length ? getApp() : initializeApp(msFixFirebaseConfig);
+const msFixAuth = getAuth(msFixApp);
+
+function msFixById(id){ return document.getElementById(id); }
+
+function msFixStatus(message, isError=false){
+  const box = msFixById("msLoginStatus");
+  if(box){
+    box.textContent = message;
+    box.classList.add("show");
+    box.classList.toggle("error", !!isError);
+  } else if(isError) {
+    alert(message);
+  }
+}
+
+function msFixUnlock(user){
+  if(!user) return;
+
+  localStorage.setItem("miniSentientAuthUser", user.email || user.uid || "google-user");
+
+  document.body.classList.add("ms-app-unlocked");
+  document.body.classList.add("ms15-active");
+
+  const gate = msFixById("msLoginGate");
+  if(gate) gate.classList.remove("open");
+
+  const root = msFixById("ms15Root");
+  if(root) root.style.display = "";
+
+  const userBox = msFixById("user");
+  if(userBox) userBox.textContent = "Connesso come: " + (user.email || user.displayName || "utente Google");
+
+  const subtitle = msFixById("ms15Subtitle");
+  if(subtitle) subtitle.textContent = "Connesso · " + (user.email || user.displayName || "Google");
+
+  if(typeof window.ms15SetView === "function"){
+    try { window.ms15SetView("home"); } catch(e) {}
+  }
+
+  setTimeout(() => {
+    const view = msFixById("ms15View");
+    if(view && !view.innerHTML.trim()){
+      view.innerHTML = `
+        <div class="ms15-card ms15-hero">
+          <h2>Benvenuto in Mini Sentient</h2>
+          <p>Sei entrato. Ora puoi pubblicare un bisogno, offrire una risorsa, parlare con qualcuno o entrare nella tua tribù empatica.</p>
+        </div>
+        <div class="ms15-card">
+          <h3>Come ti senti oggi?</h3>
+          <textarea placeholder="Scrivi qui un pensiero, un bisogno o una risorsa..."></textarea>
+          <div class="ms15-row">
+            <button onclick="alert('Post demo creato')">Pubblica</button>
+            <button onclick="ms15SetView('help')">Trova aiuto</button>
+          </div>
+        </div>`;
+    }
+  }, 500);
+}
+
+function msFixLockIfNeeded(){
+  const hasDemo = localStorage.getItem("miniSentientDemoUser");
+  const hasAuth = localStorage.getItem("miniSentientAuthUser");
+  if(hasDemo || hasAuth || msFixAuth.currentUser) return;
+
+  document.body.classList.remove("ms-app-unlocked");
+  const root = msFixById("ms15Root");
+  if(root) root.style.display = "none";
+  const gate = msFixById("msLoginGate");
+  if(gate) gate.classList.add("open");
+}
+
+window.msLoginGoogle = async function(){
+  if(window.location.protocol === "file:"){
+    msFixStatus("Google non funziona da file locale. Pubblica il file su minisentient.com/Firebase Hosting oppure usa la modalità demo.", true);
+    return;
+  }
+
+  try {
+    msFixStatus("Apro Google… dopo la scelta della mail tornerai automaticamente dentro Mini Sentient.", false);
+    await setPersistence(msFixAuth, browserLocalPersistence);
+    const provider = new GoogleAuthProvider();
+    provider.setCustomParameters({ prompt: "select_account" });
+    await signInWithRedirect(msFixAuth, provider);
+  } catch(error) {
+    const code = error && error.code ? error.code : "";
+    const message = error && error.message ? error.message : String(error);
+
+    if(code === "auth/unauthorized-domain"){
+      msFixStatus("Dominio non autorizzato in Firebase. Aggiungi minisentient.com in Firebase Console → Authentication → Settings → Authorized domains.", true);
+      return;
+    }
+
+    msFixStatus("Errore Google: " + code + " " + message, true);
+  }
+};
+
+getRedirectResult(msFixAuth)
+  .then(result => {
+    if(result && result.user) msFixUnlock(result.user);
+  })
+  .catch(error => {
+    const code = error && error.code ? error.code : "";
+    const message = error && error.message ? error.message : String(error);
+    msFixStatus("Rientro Google non completato: " + code + " " + message, true);
+  });
+
+onAuthStateChanged(msFixAuth, user => {
+  if(user) {
+    msFixUnlock(user);
+  } else {
+    setTimeout(msFixLockIfNeeded, 300);
+  }
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+  if(msFixAuth.currentUser) msFixUnlock(msFixAuth.currentUser);
+  else msFixLockIfNeeded();
+});
+
+// Poll di sicurezza: se il vecchio script Firebase scrive il login in ritardo,
+// la schermata Facebook viene chiusa comunque.
+let msFixTries = 0;
+const msFixTimer = setInterval(() => {
+  msFixTries++;
+  const userText = (msFixById("user")?.textContent || "");
+  if(msFixAuth.currentUser) {
+    msFixUnlock(msFixAuth.currentUser);
+    clearInterval(msFixTimer);
+  } else if(userText.includes("Connesso come:")) {
+    document.body.classList.add("ms-app-unlocked");
+    const gate = msFixById("msLoginGate");
+    if(gate) gate.classList.remove("open");
+    const root = msFixById("ms15Root");
+    if(root) root.style.display = "";
+    clearInterval(msFixTimer);
+  } else if(msFixTries > 80) {
+    clearInterval(msFixTimer);
+  }
+}, 250);
+</script>
+
 </body>
 </html>
