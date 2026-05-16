@@ -392,6 +392,166 @@ body.social-focus .mini-section.active-section {
   .container { max-width:100%; }
 }
 
+
+
+/* ==========================================================
+   STEP 1-7 - SOCIAL EXPERIENCE COMPLETA
+   Innesto aggiuntivo: feed post, commenti, profilo evoluto,
+   chat dashboard, trust center, mobile feeling e notifiche.
+   ========================================================== */
+
+.social-hero {
+  background:linear-gradient(135deg,#111827,#1d4ed8 52%,#7c3aed);
+  color:white;
+  border-radius:22px;
+  padding:24px;
+  margin:14px 0 18px;
+  box-shadow:0 16px 34px rgba(37,99,235,.22);
+  overflow:hidden;
+  position:relative;
+}
+.social-hero:after {
+  content:"";
+  position:absolute;
+  width:220px;
+  height:220px;
+  border-radius:50%;
+  right:-70px;
+  top:-80px;
+  background:rgba(255,255,255,.14);
+}
+.social-hero h2 { margin:0 0 8px; font-size:28px; }
+.social-hero p { margin:0; color:rgba(255,255,255,.86); line-height:1.45; }
+.social-hero-grid {
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:10px;
+  margin-top:18px;
+}
+.social-hero-stat {
+  background:rgba(255,255,255,.12);
+  border:1px solid rgba(255,255,255,.18);
+  border-radius:16px;
+  padding:12px;
+  backdrop-filter:blur(6px);
+}
+.social-hero-stat b { display:block; font-size:20px; }
+.social-hero-stat span { font-size:12px; color:rgba(255,255,255,.78); }
+.social-composer {
+  border:1px solid var(--ms-border);
+  background:#fff;
+  border-radius:18px;
+  padding:14px;
+  margin:14px 0;
+  box-shadow:0 2px 10px rgba(15,23,42,.06);
+}
+.social-composer-head { display:flex; gap:10px; align-items:center; margin-bottom:10px; }
+.social-avatar-mini {
+  width:44px; height:44px; border-radius:50%;
+  background:linear-gradient(135deg,#2563eb,#7c3aed);
+  color:white; display:flex; align-items:center; justify-content:center;
+  font-weight:900; flex:0 0 auto;
+}
+.social-composer textarea {
+  min-height:86px;
+  border-radius:16px;
+  background:#f8fafc;
+  resize:vertical;
+}
+.social-composer-actions {
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  align-items:center;
+  justify-content:space-between;
+}
+.social-composer-actions select,
+.social-composer-actions input {
+  width:auto;
+  min-width:160px;
+  margin:0;
+  background:#f8fafc;
+}
+.social-post-card {
+  border:1px solid var(--ms-border);
+  background:#fff;
+  border-radius:20px;
+  padding:16px;
+  margin:14px 0;
+  box-shadow:0 2px 10px rgba(15,23,42,.06);
+}
+.social-post-head { display:flex; gap:10px; align-items:center; }
+.social-post-author { font-weight:800; color:#111827; }
+.social-post-time { color:var(--ms-muted); font-size:12px; margin-top:2px; }
+.social-post-body { margin:14px 0; line-height:1.52; white-space:pre-wrap; }
+.social-post-meta { display:flex; flex-wrap:wrap; gap:8px; margin:8px 0; }
+.social-post-actions { display:flex; gap:8px; border-top:1px solid #eef2f7; padding-top:10px; margin-top:10px; }
+.social-post-actions button { background:#f1f5f9; color:#111827; font-weight:700; }
+.social-comment-box { display:flex; gap:8px; margin-top:10px; }
+.social-comment-box input { margin:0; background:#f8fafc; border-radius:999px; }
+.social-comments { margin-top:10px; }
+.social-comment { background:#f8fafc; border-radius:14px; padding:8px 10px; margin:6px 0; font-size:14px; }
+.social-comment b { color:#111827; }
+.social-page-grid {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:14px;
+  margin:14px 0;
+}
+.social-dashboard-card {
+  background:#fff;
+  border:1px solid var(--ms-border);
+  border-radius:18px;
+  padding:14px;
+  box-shadow:0 2px 10px rgba(15,23,42,.06);
+}
+.social-dashboard-card h3 { margin:0 0 10px; }
+.social-progress {
+  height:10px; background:#e5e7eb; border-radius:999px; overflow:hidden; margin:8px 0;
+}
+.social-progress span { display:block; height:100%; background:linear-gradient(90deg,#16a34a,#2563eb); width:35%; }
+.social-notification-dot {
+  display:inline-flex;
+  min-width:20px; height:20px; padding:0 5px;
+  align-items:center; justify-content:center;
+  border-radius:999px; background:#ef4444; color:#fff;
+  font-size:11px; font-weight:900; margin-left:4px;
+}
+.social-messenger-shell {
+  display:grid;
+  grid-template-columns:230px 1fr;
+  gap:12px;
+  margin:14px 0;
+}
+.social-thread-list {
+  background:#fff; border:1px solid var(--ms-border); border-radius:18px; padding:10px; max-height:420px; overflow:auto;
+}
+.social-thread-item { padding:10px; border-radius:12px; cursor:pointer; border-bottom:1px solid #eef2f7; }
+.social-thread-item:hover { background:#f1f5f9; }
+.social-trust-list { display:grid; gap:8px; }
+.social-trust-item { display:flex; align-items:center; gap:10px; background:#f8fafc; border-radius:14px; padding:10px; }
+.social-trust-icon { width:34px; height:34px; border-radius:50%; display:flex; align-items:center; justify-content:center; background:#e8f0ff; }
+.social-floating-create {
+  position:fixed; right:22px; bottom:84px; z-index:999998;
+  width:58px; height:58px; border-radius:50%; font-size:28px;
+  display:flex; align-items:center; justify-content:center;
+  background:linear-gradient(135deg,#16a34a,#2563eb);
+  box-shadow:0 14px 32px rgba(22,163,74,.35);
+}
+.social-toast {
+  position:fixed; right:18px; top:82px; z-index:999999;
+  background:#111827; color:white; border-radius:14px; padding:12px 14px;
+  box-shadow:0 14px 30px rgba(0,0,0,.22); display:none; max-width:320px;
+}
+.social-toast.show { display:block; animation:miniToast .25s ease-out; }
+@keyframes miniToast { from{ transform:translateY(-8px); opacity:0; } to{ transform:translateY(0); opacity:1; } }
+@media (max-width:860px) {
+  .social-hero-grid,.social-page-grid,.social-messenger-shell { grid-template-columns:1fr; }
+  .social-composer-actions { display:block; }
+  .social-composer-actions select,.social-composer-actions input { width:100%; margin:6px 0; }
+  .social-floating-create { right:16px; bottom:76px; }
+}
+
   </style>
 </head>
 
@@ -411,7 +571,7 @@ body.social-focus .mini-section.active-section {
   <aside class="social-left">
     <div class="social-panel social-nav">
       <div class="social-panel-title">Navigazione</div>
-      <button onclick="showMiniSection('feed')">🏠 Feed Empathic</button>
+      <button onclick="showMiniSection('feed')">🏠 Feed Empathic <span id="socialNotifCount" class="social-notification-dot">0</span></button>
       <button onclick="showMiniSection('profile')">👤 Profilo</button>
       <button onclick="showMiniSection('field')">🌐 Campo</button>
       <button onclick="showMiniSection('matches')">🤝 Connessioni</button>
@@ -433,6 +593,39 @@ body.social-focus .mini-section.active-section {
 
   <main class="social-main">
 <div class="container">
+
+
+
+<div id="socialToast" class="social-toast"></div>
+<button class="social-floating-create" onclick="showMiniSection('field')" title="Crea nuovo nodo">+</button>
+
+<div class="social-hero mini-section" id="socialHero">
+  <h2>Empathic Economy Social Field</h2>
+  <p>Una piattaforma sociale dove bisogni, risorse, reputazione, chat e valore economico convivono nello stesso campo umano.</p>
+  <div class="social-hero-grid">
+    <div class="social-hero-stat"><b id="statNodes">0</b><span>Nodi nel campo</span></div>
+    <div class="social-hero-stat"><b id="statUsers">0</b><span>Persone attive</span></div>
+    <div class="social-hero-stat"><b id="statConnections">0</b><span>Connessioni</span></div>
+    <div class="social-hero-stat"><b id="statDonations">0€</b><span>Valore circolato</span></div>
+  </div>
+</div>
+
+<div class="social-page-grid mini-section" id="socialTrustCenter">
+  <div class="social-dashboard-card">
+    <h3>Trust Center</h3>
+    <div class="social-trust-list">
+      <div class="social-trust-item"><div class="social-trust-icon">🛡️</div><div><b>Identità</b><br><span class="small">Login Google e profilo pubblico.</span></div></div>
+      <div class="social-trust-item"><div class="social-trust-icon">⭐</div><div><b>Reputazione</b><br><span class="small">Cresce con feedback, aiuti e valore generato.</span></div></div>
+      <div class="social-trust-item"><div class="social-trust-icon">💬</div><div><b>Relazione</b><br><span class="small">Chat e connessioni tracciate nel campo.</span></div></div>
+    </div>
+  </div>
+  <div class="social-dashboard-card">
+    <h3>Stato evoluzione app</h3>
+    <p class="small">Step 1–7 attivi: feed, profili, chat, wallet, ranking, trust e mobile feeling.</p>
+    <div class="social-progress"><span style="width:86%"></span></div>
+    <span class="tag">Prototype avanzato</span><span class="tag">Realtime</span><span class="tag">Social-ready</span>
+  </div>
+</div>
 
 <h1>Mini Sentient</h1>
 
@@ -488,6 +681,21 @@ body.social-focus .mini-section.active-section {
 <h2>Top utenti</h2>
 <div id="users"></div>
 
+
+
+<div class="social-page-grid mini-section" id="socialProfilePlus">
+  <div class="social-dashboard-card">
+    <h3>Profilo evoluto</h3>
+    <p class="small">Il profilo pubblico originale resta sotto. Questo pannello aggiunge lettura social immediata.</p>
+    <div id="socialProfileBadge"><span class="tag">Effettua il login per vedere badge e stato.</span></div>
+  </div>
+  <div class="social-dashboard-card">
+    <h3>Obiettivo reputazione</h3>
+    <div class="social-progress"><span id="socialRepProgress" style="width:0%"></span></div>
+    <p class="small" id="socialRepText">Reputazione non ancora caricata.</p>
+  </div>
+</div>
+
 <h2>Profilo pubblico</h2>
 <div id="publicProfileBox" class="card">
   Seleziona un utente per vedere il profilo.
@@ -501,6 +709,20 @@ body.social-focus .mini-section.active-section {
 
 <h2>Le tue connessioni</h2>
 <div id="connections"></div>
+
+
+
+<div class="social-messenger-shell mini-section" id="socialMessengerShell">
+  <div class="social-thread-list">
+    <b>Conversazioni</b>
+    <div id="socialThreadList"><div class="small" style="padding:10px 0;">Apri una connessione per vedere la chat.</div></div>
+  </div>
+  <div class="social-dashboard-card">
+    <h3>Messenger Empathic</h3>
+    <p class="small">La chat originale resta attiva sotto. Qui appare il pannello stile Messenger per navigare le relazioni.</p>
+    <span class="tag">Typing realtime</span><span class="tag">Unread</span><span class="tag">Donazione smart</span>
+  </div>
+</div>
 
 <h2>Chat PRO</h2>
 <div id="chatBox" class="card chat-box">Nessuna chat aperta.</div>
@@ -537,11 +759,56 @@ body.social-focus .mini-section.active-section {
 
 <div id="myEarningsBox"></div>
 
+
+
+<div class="social-page-grid mini-section" id="socialEconomyPlus">
+  <div class="social-dashboard-card">
+    <h3>Economia Empatica</h3>
+    <p class="small">Il wallet originale resta invariato. Questo riepilogo mostra il senso economico del sistema.</p>
+    <span class="tag">90% helper</span><span class="tag">10% piattaforma</span><span class="tag">valore volontario</span>
+  </div>
+  <div class="social-dashboard-card">
+    <h3>Notifiche</h3>
+    <div id="socialNotificationBox"><div class="small">Nessuna notifica ancora.</div></div>
+  </div>
+</div>
+
 <h2>Wallet Empathic</h2>
 <div id="walletBox"></div>
 
 <h2>Donazioni</h2>
 <div id="donationsBox"></div>
+
+
+
+<div class="social-composer mini-section" id="socialPostComposer">
+  <div class="social-composer-head">
+    <div class="social-avatar-mini">MS</div>
+    <div>
+      <b>Condividi qualcosa nel campo</b><br>
+      <span class="small">Post sociale, richiesta, offerta, riflessione o bisogno reale.</span>
+    </div>
+  </div>
+  <textarea id="socialPostText" placeholder="A cosa stai pensando? Che bisogno o risorsa vuoi condividere?"></textarea>
+  <div class="social-composer-actions">
+    <div>
+      <select id="socialPostType">
+        <option value="pensiero">Pensiero</option>
+        <option value="bisogno">Bisogno</option>
+        <option value="risorsa">Risorsa</option>
+        <option value="aiuto">Aiuto offerto</option>
+        <option value="gratitudine">Gratitudine</option>
+      </select>
+      <input id="socialPostCategory" placeholder="Categoria libera">
+    </div>
+    <button class="green" onclick="createSocialPost()">Pubblica nel feed</button>
+  </div>
+</div>
+
+<h2>Post del campo</h2>
+<div id="socialPostsFeed" class="mini-section">
+  <div class="card">Nessun post sociale ancora.</div>
+</div>
 
 <h2>Feed Empathic</h2>
 
@@ -727,6 +994,10 @@ if (currentUser.photoURL) {
   listenEconomyRanking();
   generateReferralCode();
   listenReferrals();
+  listenSocialPosts();
+  listenSocialNotifications();
+  enhanceSocialProfileBadge();
+  renderSocialQuickStats();
 };
 
 async function updateLastActive() {
@@ -1791,6 +2062,7 @@ function listenNodes() {
 
     analyze(nodes);
     renderMatches(nodes);
+    renderSocialQuickStats();
 
     let html = "";
 
@@ -1885,6 +2157,9 @@ function listenConnections() {
 
     document.getElementById("connections").innerHTML =
       html || `<div class="card">Nessuna connessione per questo utente.</div>`;
+
+    renderSocialThreadList(list);
+    renderSocialQuickStats();
   });
 }
 
@@ -1943,6 +2218,8 @@ function listenUsers() {
       snap.forEach(d => list.push(d.data()));
 
       usersData = list;
+      renderSocialQuickStats();
+      enhanceSocialProfileBadge();
 
       list.sort((a, b) =>
         Number(b.reputation || 0) - Number(a.reputation || 0)
@@ -2334,6 +2611,295 @@ function listenMyEarnings() {
     `;
   });
 }
+
+
+
+/* ==========================================================
+   STEP 1-7 - FUNZIONI SOCIAL AGGIUNTIVE
+   Conservano il motore originale e aggiungono un feed sociale
+   con post, like, commenti, notifiche, statistiche e dashboard.
+   ========================================================== */
+
+let socialPosts = [];
+let socialComments = [];
+let socialNotifications = [];
+let listeningSocialPosts = false;
+let listeningSocialNotifications = false;
+
+function miniToast(text) {
+  const box = document.getElementById("socialToast");
+  if (!box) return;
+  box.innerText = text;
+  box.classList.add("show");
+  setTimeout(() => box.classList.remove("show"), 3500);
+}
+
+window.createSocialPost = async function () {
+  if (!currentUser) return alert("Login prima");
+
+  const textEl = document.getElementById("socialPostText");
+  const typeEl = document.getElementById("socialPostType");
+  const catEl = document.getElementById("socialPostCategory");
+
+  const text = (textEl?.value || "").trim();
+  const type = typeEl?.value || "pensiero";
+  const category = (catEl?.value || "").trim();
+
+  if (!text || text.length < 3) return alert("Scrivi un post più completo");
+
+  await addDoc(collection(db, "socialPosts"), {
+    author: currentUser.email,
+    authorName: currentUser.displayName || currentUser.email,
+    authorPhoto: currentUser.photoURL || "",
+    text,
+    type,
+    category,
+    likes: 0,
+    comments: 0,
+    timestamp: Date.now()
+  });
+
+  await updateUser(currentUser.email, 2, 0, 0, 0, 0, 0);
+
+  textEl.value = "";
+  if (catEl) catEl.value = "";
+  miniToast("Post pubblicato nel campo 🌐");
+  showWow("Hai condiviso valore nel campo +2 reputazione");
+};
+
+window.likeSocialPost = async function (postId, author) {
+  if (!currentUser) return alert("Login prima");
+
+  const likeId = postId + "__" + currentUser.email.replace(/[^a-zA-Z0-9]/g, "_");
+  const likeRef = doc(db, "socialPostLikes", likeId);
+  const likeSnap = await getDoc(likeRef);
+
+  if (likeSnap.exists()) {
+    miniToast("Hai già dato valore a questo post");
+    return;
+  }
+
+  await setDoc(likeRef, {
+    postId,
+    from: currentUser.email,
+    to: author || "",
+    timestamp: Date.now()
+  });
+
+  await updateDoc(doc(db, "socialPosts", postId), {
+    likes: increment(1)
+  });
+
+  if (author && author !== currentUser.email) {
+    await addDoc(collection(db, "socialNotifications"), {
+      to: author,
+      from: currentUser.email,
+      type: "like",
+      text: "ha apprezzato un tuo post",
+      postId,
+      read: false,
+      timestamp: Date.now()
+    });
+  }
+
+  await updateUser(currentUser.email, 1, 0, 0, 0, 0, 0);
+  miniToast("Valore riconosciuto ❤️");
+};
+
+window.commentSocialPost = async function (postId, author) {
+  if (!currentUser) return alert("Login prima");
+
+  const input = document.getElementById("commentInput_" + postId);
+  const text = (input?.value || "").trim();
+  if (!text) return;
+
+  await addDoc(collection(db, "socialPostComments"), {
+    postId,
+    from: currentUser.email,
+    to: author || "",
+    text,
+    timestamp: Date.now()
+  });
+
+  await updateDoc(doc(db, "socialPosts", postId), {
+    comments: increment(1)
+  });
+
+  if (author && author !== currentUser.email) {
+    await addDoc(collection(db, "socialNotifications"), {
+      to: author,
+      from: currentUser.email,
+      type: "comment",
+      text: "ha commentato un tuo post",
+      postId,
+      read: false,
+      timestamp: Date.now()
+    });
+  }
+
+  await updateUser(currentUser.email, 1, 0, 0, 0, 0, 0);
+  input.value = "";
+  miniToast("Commento pubblicato 💬");
+};
+
+function listenSocialPosts() {
+  if (listeningSocialPosts) return;
+  listeningSocialPosts = true;
+
+  onSnapshot(collection(db, "socialPosts"), snap => {
+    socialPosts = [];
+    snap.forEach(d => socialPosts.push({ id: d.id, ...d.data() }));
+    socialPosts.sort((a,b) => (b.timestamp || 0) - (a.timestamp || 0));
+    renderSocialPosts();
+    renderSocialQuickStats();
+  });
+
+  onSnapshot(collection(db, "socialPostComments"), snap => {
+    socialComments = [];
+    snap.forEach(d => socialComments.push({ id: d.id, ...d.data() }));
+    socialComments.sort((a,b) => (a.timestamp || 0) - (b.timestamp || 0));
+    renderSocialPosts();
+  });
+}
+
+function renderSocialPosts() {
+  const box = document.getElementById("socialPostsFeed");
+  if (!box) return;
+
+  if (!socialPosts.length) {
+    box.innerHTML = `<div class="card">Nessun post sociale ancora. Scrivi il primo pensiero nel campo.</div>`;
+    return;
+  }
+
+  let html = "";
+  socialPosts.slice(0, 25).forEach(p => {
+    const comments = socialComments.filter(c => c.postId === p.id).slice(-4);
+    const safeId = p.id.replace(/[^a-zA-Z0-9_\-]/g, "_");
+    const author = p.author || "";
+    const authorLabel = p.authorName || maskEmail(author);
+    const time = p.timestamp ? new Date(p.timestamp).toLocaleString() : "";
+
+    html += `
+      <div class="social-post-card">
+        <div class="social-post-head">
+          <div class="social-avatar-mini">${escapeHtml((authorLabel || "MS").slice(0,2).toUpperCase())}</div>
+          <div>
+            <div class="social-post-author">${escapeHtml(authorLabel)}</div>
+            <div class="social-post-time">${time}</div>
+          </div>
+        </div>
+        <div class="social-post-meta">
+          <span class="tag">${escapeHtml(p.type || "pensiero")}</span>
+          ${p.category ? `<span class="tag">${escapeHtml(p.category)}</span>` : ""}
+        </div>
+        <div class="social-post-body">${escapeHtml(p.text || "")}</div>
+        <div class="small">❤️ ${Number(p.likes || 0)} valore · 💬 ${Number(p.comments || 0)} commenti</div>
+        <div class="social-post-actions">
+          <button onclick="likeSocialPost('${p.id}', '${String(author).replace(/'/g,"\\'")}')">❤️ Valore</button>
+          <button onclick="document.getElementById('commentInput_${safeId}').focus()">💬 Commenta</button>
+          <button onclick="showMiniSection('matches')">🤝 Connetti</button>
+        </div>
+        <div class="social-comments">
+          ${comments.map(c => `<div class="social-comment"><b>${maskEmail(c.from)}</b><br>${escapeHtml(c.text || "")}</div>`).join("")}
+        </div>
+        <div class="social-comment-box">
+          <input id="commentInput_${safeId}" placeholder="Scrivi un commento empatico..." onkeydown="if(event.key==='Enter'){commentSocialPost('${p.id}', '${String(author).replace(/'/g,"\\'")}')}">
+          <button onclick="commentSocialPost('${p.id}', '${String(author).replace(/'/g,"\\'")}')">Invia</button>
+        </div>
+      </div>
+    `;
+  });
+
+  box.innerHTML = html;
+}
+
+function listenSocialNotifications() {
+  if (listeningSocialNotifications) return;
+  listeningSocialNotifications = true;
+
+  onSnapshot(collection(db, "socialNotifications"), snap => {
+    socialNotifications = [];
+    snap.forEach(d => socialNotifications.push({ id: d.id, ...d.data() }));
+    socialNotifications.sort((a,b) => (b.timestamp || 0) - (a.timestamp || 0));
+    renderSocialNotifications();
+  });
+}
+
+function renderSocialNotifications() {
+  const countBox = document.getElementById("socialNotifCount");
+  const box = document.getElementById("socialNotificationBox");
+  if (!currentUser) return;
+
+  const mine = socialNotifications.filter(n => n.to === currentUser.email);
+  const unread = mine.filter(n => !n.read).length;
+
+  if (countBox) countBox.innerText = unread;
+
+  if (box) {
+    box.innerHTML = mine.slice(0,8).map(n => `
+      <div class="social-comment">
+        <b>${maskEmail(n.from)}</b> ${escapeHtml(n.text || "")}
+        <div class="small">${n.timestamp ? new Date(n.timestamp).toLocaleString() : ""}</div>
+      </div>
+    `).join("") || `<div class="small">Nessuna notifica ancora.</div>`;
+  }
+}
+
+
+
+function renderSocialThreadList(list) {
+  const box = document.getElementById("socialThreadList");
+  if (!box) return;
+  if (!list || !list.length) {
+    box.innerHTML = `<div class="small" style="padding:10px 0;">Nessuna conversazione ancora.</div>`;
+    return;
+  }
+  box.innerHTML = list.slice(0,12).map(c => {
+    const other = currentUser && currentUser.email === c.from ? c.to : c.from;
+    const unread = currentUser && c.unread && c.unread[currentUser.email] ? c.unread[currentUser.email] : 0;
+    return `
+      <div class="social-thread-item" onclick="openChat('${c.id}', '${c.from}', '${c.to}'); showMiniSection('chat')">
+        <b>${maskEmail(other)}</b> ${unread ? `<span class="badge">${unread}</span>` : ""}<br>
+        <span class="small">${escapeHtml(c.lastMessage || c.status || "Connessione")}</span>
+      </div>
+    `;
+  }).join("");
+}
+
+function enhanceSocialProfileBadge() {
+  if (!currentUser) return;
+  const box = document.getElementById("socialProfileBadge");
+  if (!box) return;
+  box.innerHTML = `
+    <span class="tag">${escapeHtml(currentUser.displayName || "Utente")}</span>
+    <span class="tag">${escapeHtml(currentUser.email)}</span>
+    <span class="tag">Campo attivo</span>
+  `;
+}
+
+function renderSocialQuickStats() {
+  const set = (id, value) => { const el = document.getElementById(id); if (el) el.innerText = value; };
+  set("statNodes", nodes.length || 0);
+  set("statUsers", usersData.length || 0);
+  set("statConnections", document.getElementById("connections")?.querySelectorAll(".card").length || 0);
+
+  let total = 0;
+  const donationCards = document.getElementById("donationsBox")?.innerText || "";
+  socialPosts.forEach(() => {});
+  const walletText = document.getElementById("economyRankingBox")?.innerText || "";
+  set("statDonations", total ? total.toFixed(0) + "€" : "live");
+
+  const repBox = document.getElementById("socialRepProgress");
+  const repText = document.getElementById("socialRepText");
+  if (currentUser && usersData.length) {
+    const u = usersData.find(x => x.email === currentUser.email);
+    const rep = Number(u?.reputation || 0);
+    const percent = Math.max(5, Math.min(100, rep));
+    if (repBox) repBox.style.width = percent + "%";
+    if (repText) repText.innerText = "Reputazione attuale: " + rep + " / prossimo livello a 100";
+  }
+}
+
 
 window.openPrivacy = function () {
   alert(`
