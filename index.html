@@ -4206,7 +4206,7 @@ function renderMatches(nodes) {
           reason = "Connessione possibile per compatibilità emotiva o parole simili.";
         }
 
-        const safeReason = reason.replace(/'/g, "\\'");
+        const safeReason = reason.replace(/'/g, "\'");
 
         html += `
           <div class="card">
@@ -4973,7 +4973,7 @@ function renderSocialPosts() {
         <div class="social-post-body">${escapeHtml(p.text || "")}</div>
         <div class="small">❤️ ${Number(p.likes || 0)} valore · 💬 ${Number(p.comments || 0)} commenti</div>
         <div class="social-post-actions">
-          <button onclick="likeSocialPost('${p.id}', '${String(author).replace(/'/g,"\\'")}')">❤️ Valore</button>
+          <button onclick="likeSocialPost('${p.id}', '${String(author).replace(/'/g,"\'")}')">❤️ Valore</button>
           <button onclick="document.getElementById('commentInput_${safeId}').focus()">💬 Commenta</button>
           <button onclick="showMiniSection('matches')">🤝 Connetti</button>
         </div>
@@ -4981,8 +4981,8 @@ function renderSocialPosts() {
           ${comments.map(c => `<div class="social-comment"><b>${maskEmail(c.from)}</b><br>${escapeHtml(c.text || "")}</div>`).join("")}
         </div>
         <div class="social-comment-box">
-          <input id="commentInput_${safeId}" placeholder="Scrivi un commento empatico..." onkeydown="if(event.key==='Enter'){commentSocialPost('${p.id}', '${String(author).replace(/'/g,"\\'")}')}">
-          <button onclick="commentSocialPost('${p.id}', '${String(author).replace(/'/g,"\\'")}')">Invia</button>
+          <input id="commentInput_${safeId}" placeholder="Scrivi un commento empatico..." onkeydown="if(event.key==='Enter'){commentSocialPost('${p.id}', '${String(author).replace(/'/g,"\'")}')}">
+          <button onclick="commentSocialPost('${p.id}', '${String(author).replace(/'/g,"\'")}')">Invia</button>
         </div>
       </div>
     `;
@@ -5857,7 +5857,7 @@ function ms8RenderFriendRequests() {
   const outgoing = ms8FriendRequests.filter(r => r.from === currentUser.email && r.status === "pending");
   let html = "";
   incoming.forEach(r => {
-    html += `<div class="ms8-request-item"><b>${ms8Label(r.from)}</b><br><span class="small">vuole diventare tuo amico</span><br><button class="green" onclick="ms8AcceptFriendRequest('${r.id}','${String(r.from).replace(/'/g,"\\'")}','${String(r.to).replace(/'/g,"\\'")}')">Accetta</button><button class="red" onclick="ms8RejectFriendRequest('${r.id}')">Rifiuta</button></div>`;
+    html += `<div class="ms8-request-item"><b>${ms8Label(r.from)}</b><br><span class="small">vuole diventare tuo amico</span><br><button class="green" onclick="ms8AcceptFriendRequest('${r.id}','${String(r.from).replace(/'/g,"\'")}','${String(r.to).replace(/'/g,"\'")}')">Accetta</button><button class="red" onclick="ms8RejectFriendRequest('${r.id}')">Rifiuta</button></div>`;
   });
   outgoing.forEach(r => {
     html += `<div class="ms8-request-item"><b>${ms8Label(r.to)}</b><br><span class="small">richiesta inviata, in attesa.</span></div>`;
@@ -5880,7 +5880,7 @@ function ms8RenderConnectionIcons() {
   }
   box.innerHTML = people.slice(0,24).map(p => {
     const initials = ms8Html(ms8Label(p.email).slice(0,2).toUpperCase());
-    return `<div class="ms8-avatar ${p.type === "pending" ? "pending" : ""}" title="${ms8Html(p.email)}" onclick="ms8OpenDirectPostChat('${String(p.email).replace(/'/g,"\\'")}')">${initials}</div>`;
+    return `<div class="ms8-avatar ${p.type === "pending" ? "pending" : ""}" title="${ms8Html(p.email)}" onclick="ms8OpenDirectPostChat('${String(p.email).replace(/'/g,"\'")}')">${initials}</div>`;
   }).join("");
 }
 
@@ -6066,27 +6066,27 @@ renderSocialPosts = function() {
         <div class="social-post-body">${body}</div>
         <div class="small">❤️ ${Number(p.likes || 0)} valore · 💬 ${Number(p.comments || 0)} commenti · 🤝 chat post</div>
         <div class="ms8-reactions">
-          ${["❤️ Ti sento","🤝 Posso aiutare","🧠 Ho un'idea","🌱 Crescita","🙏 Gratitudine"].map(r => `<button onclick="ms8ReactToPost('${p.id}', '${String(author).replace(/'/g,"\\'")}', '${r.replace(/'/g,"\\'")}')">${r} ${Number(reactionData[r] || 0)}</button>`).join("")}
+          ${["❤️ Ti sento","🤝 Posso aiutare","🧠 Ho un'idea","🌱 Crescita","🙏 Gratitudine"].map(r => `<button onclick="ms8ReactToPost('${p.id}', '${String(author).replace(/'/g,"\'")}', '${r.replace(/'/g,"\'")}')">${r} ${Number(reactionData[r] || 0)}</button>`).join("")}
         </div>
         <div class="social-post-actions">
-          <button onclick="likeSocialPost('${p.id}', '${String(author).replace(/'/g,"\\'")}')">❤️ Valore</button>
+          <button onclick="likeSocialPost('${p.id}', '${String(author).replace(/'/g,"\'")}')">❤️ Valore</button>
           <button onclick="document.getElementById('commentInput_${safeId}').focus()">💬 Commenta</button>
           <button onclick="ms8ToggleInlineChat('${p.id}')">🗨️ Chat nel post</button>
-          <button onclick="ms8SendFriendRequestFromPost('${String(author).replace(/'/g,"\\'")}')">👥 Amico</button>
+          <button onclick="ms8SendFriendRequestFromPost('${String(author).replace(/'/g,"\'")}')">👥 Amico</button>
         </div>
         <div class="social-comments">
           ${comments.map(c => `<div class="social-comment"><b>${ms8Label(c.from)}</b><br>${ms8Html(c.text || "")}</div>`).join("")}
         </div>
         <div class="social-comment-box">
-          <input id="commentInput_${safeId}" placeholder="Scrivi un commento empatico..." onkeydown="if(event.key==='Enter'){commentSocialPost('${p.id}', '${String(author).replace(/'/g,"\\'")}')}">
-          <button onclick="commentSocialPost('${p.id}', '${String(author).replace(/'/g,"\\'")}')">Invia</button>
+          <input id="commentInput_${safeId}" placeholder="Scrivi un commento empatico..." onkeydown="if(event.key==='Enter'){commentSocialPost('${p.id}', '${String(author).replace(/'/g,"\'")}')}">
+          <button onclick="commentSocialPost('${p.id}', '${String(author).replace(/'/g,"\'")}')">Invia</button>
         </div>
         <div id="ms8InlineChat_${safeId}" class="ms8-inline-chat">
           <b>Chat compresa nel post</b>
           ${messages.map(m => `<div class="ms8-mini-message"><b>${ms8Label(m.from)}</b><br>${ms8Html(m.text || "")}</div>`).join("") || `<div class="small">Nessun messaggio nella chat del post.</div>`}
           <div class="social-comment-box">
-            <input id="ms8InlineInput_${safeId}" placeholder="Risposta diretta nel post..." onkeydown="if(event.key==='Enter'){ms8SendInlineMessage('${p.id}', '${String(author).replace(/'/g,"\\'")}')}">
-            <button onclick="ms8SendInlineMessage('${p.id}', '${String(author).replace(/'/g,"\\'")}')">Invia</button>
+            <input id="ms8InlineInput_${safeId}" placeholder="Risposta diretta nel post..." onkeydown="if(event.key==='Enter'){ms8SendInlineMessage('${p.id}', '${String(author).replace(/'/g,"\'")}')}">
+            <button onclick="ms8SendInlineMessage('${p.id}', '${String(author).replace(/'/g,"\'")}')">Invia</button>
           </div>
         </div>
       </div>`;
@@ -6503,24 +6503,24 @@ renderSocialPosts = function(){
         <div class="ms9-body">${escapeHtml(p.text || "")}</div>
         <div class="ms9-utility"><span>❤️ ${Number(p.likes || 0)} · 💬 ${(chats.length + comments.length)} · 🎁 ${Number(p.donationCount || 0)} · ✅ utilità ${utilAvg}/5 (${utilVotes})</span><span>${matches.length ? "🤖 match trovati" : ""}</span></div>
         <div class="ms9-actions">
-          <button onclick="likeSocialPost('${p.id}','${String(author).replace(/'/g,"\\'")}')">❤️ Valore</button>
+          <button onclick="likeSocialPost('${p.id}','${String(author).replace(/'/g,"\'")}')">❤️ Valore</button>
           <button onclick="ms9TogglePanel('ms9Chat_${safeId}')">💬 Chat</button>
           <button onclick="ms9TogglePanel('ms9Matches_${safeId}')">🤖 Match</button>
-          <button onclick="ms9VoteUtility('${p.id}','${String(author).replace(/'/g,"\\'")}',5)">✅ Utile</button>
-          <button onclick="ms9DonateFromPost('${p.id}','${String(author).replace(/'/g,"\\'")}')">🎁 Dona</button>
+          <button onclick="ms9VoteUtility('${p.id}','${String(author).replace(/'/g,"\'")}',5)">✅ Utile</button>
+          <button onclick="ms9DonateFromPost('${p.id}','${String(author).replace(/'/g,"\'")}')">🎁 Dona</button>
         </div>
         <div id="ms9Chat_${safeId}" class="ms9-inline-panel">
           <b>Chat incorporata nel post</b>
           ${comments.map(c => `<div class="ms9-chat-message"><b>${escapeHtml(maskEmail(c.from))}</b><br>${escapeHtml(c.text || "")}</div>`).join("")}
           ${chats.map(c => `<div class="ms9-chat-message"><b>${escapeHtml(maskEmail(c.from))}</b><br>${escapeHtml(c.text || "")}</div>`).join("")}
           <div class="social-comment-box">
-            <input id="ms9ChatInput_${safeId}" placeholder="Scrivi nella chat del post..." onkeydown="if(event.key==='Enter'){ms9SendPostChat('${p.id}','${String(author).replace(/'/g,"\\'")}')}">
-            <button onclick="ms9SendPostChat('${p.id}','${String(author).replace(/'/g,"\\'")}')">Invia</button>
+            <input id="ms9ChatInput_${safeId}" placeholder="Scrivi nella chat del post..." onkeydown="if(event.key==='Enter'){ms9SendPostChat('${p.id}','${String(author).replace(/'/g,"\'")}')}">
+            <button onclick="ms9SendPostChat('${p.id}','${String(author).replace(/'/g,"\'")}')">Invia</button>
           </div>
         </div>
         <div id="ms9Matches_${safeId}" class="ms9-inline-panel">
           <b>Connessioni automatiche su risorse/offerte/ricerche</b>
-          ${matches.length ? matches.map(m => `<div class="ms9-match-item"><span class="ms9-match-score">${m.score}%</span> · <b>${escapeHtml(m.post.authorName || maskEmail(m.post.author))}</b> · ${escapeHtml(ms9KindLabel(m.post.kind || m.post.type))}<br><span class="small">${escapeHtml((m.post.text || "").slice(0,140))}${(m.post.text || "").length>140 ? "..." : ""}</span><br><button class="green" onclick="ms9CreateConnectionFromPost('${m.post.id}','${String(m.post.author || "").replace(/'/g,"\\'")}')">Connetti</button></div>`).join("") : `<div class="small">Nessun match automatico ancora. Servono post complementari: chi cerca con chi offre, risorse con bisogni.</div>`}
+          ${matches.length ? matches.map(m => `<div class="ms9-match-item"><span class="ms9-match-score">${m.score}%</span> · <b>${escapeHtml(m.post.authorName || maskEmail(m.post.author))}</b> · ${escapeHtml(ms9KindLabel(m.post.kind || m.post.type))}<br><span class="small">${escapeHtml((m.post.text || "").slice(0,140))}${(m.post.text || "").length>140 ? "..." : ""}</span><br><button class="green" onclick="ms9CreateConnectionFromPost('${m.post.id}','${String(m.post.author || "").replace(/'/g,"\'")}')">Connetti</button></div>`).join("") : `<div class="small">Nessun match automatico ancora. Servono post complementari: chi cerca con chi offre, risorse con bisogni.</div>`}
         </div>
       </div>`;
   });
@@ -6764,23 +6764,23 @@ document.addEventListener("DOMContentLoaded", function(){ ms9AddNav(); ms9PatchR
           <div class="ms10-mini-post-text">${ms10Escape(p.text || "")}</div>
           <div class="ms9-utility"><span>❤️ ${Number(p.likes||0)} · 💬 ${chats.length+comments.length} · 🎁 ${Number(p.donationCount||0)} · ✅ ${utilAvg}/5</span></div>
           <div class="ms10-post-actions">
-            <button onclick="likeSocialPost('${p.id}','${String(author).replace(/'/g,"\\'")}')">❤️</button>
+            <button onclick="likeSocialPost('${p.id}','${String(author).replace(/'/g,"\'")}')">❤️</button>
             <button onclick="ms10OpenPostChat('${p.id}')">💬 Chat</button>
             <button onclick="ms10OpenPostMatches('${p.id}')">🤝 Match</button>
-            <button onclick="ms9VoteUtility('${p.id}','${String(author).replace(/'/g,"\\'")}',5)">✅ Utile</button>
-            <button onclick="ms9DonateFromPost('${p.id}','${String(author).replace(/'/g,"\\'")}')">🎁 Dona</button>
+            <button onclick="ms9VoteUtility('${p.id}','${String(author).replace(/'/g,"\'")}',5)">✅ Utile</button>
+            <button onclick="ms9DonateFromPost('${p.id}','${String(author).replace(/'/g,"\'")}')">🎁 Dona</button>
             <button onclick="document.getElementById('ms10Post_${safe}')?.classList.toggle('ms10-post-open')">Leggi</button>
           </div>
           <div id="ms10Chat_${safe}" class="ms10-post-chat">
             <b>Chat del post</b>
             ${comments.map(c=>`<div class="ms10-chat-line"><b>${ms10Escape(ms10Mask(c.from))}</b><br>${ms10Escape(c.text||"")}</div>`).join("")}
             ${chats.map(c=>`<div class="ms10-chat-line"><b>${ms10Escape(ms10Mask(c.from))}</b><br>${ms10Escape(c.text||"")}</div>`).join("")}
-            <input id="ms9ChatInput_${safe}" placeholder="Scrivi una risposta..." onkeydown="if(event.key==='Enter'){ms9SendPostChat('${p.id}','${String(author).replace(/'/g,"\\'")}')}">
-            <button class="green" onclick="ms9SendPostChat('${p.id}','${String(author).replace(/'/g,"\\'")}')">Invia</button>
+            <input id="ms9ChatInput_${safe}" placeholder="Scrivi una risposta..." onkeydown="if(event.key==='Enter'){ms9SendPostChat('${p.id}','${String(author).replace(/'/g,"\'")}')}">
+            <button class="green" onclick="ms9SendPostChat('${p.id}','${String(author).replace(/'/g,"\'")}')">Invia</button>
           </div>
           <div id="ms10Matches_${safe}" class="ms10-post-chat">
             <b>Match automatici</b>
-            ${matches.length ? matches.map(m=>`<div class="ms10-chat-line"><b>${Math.round(m.score||0)}%</b> · ${ms10Escape(m.post?.authorName || ms10Mask(m.post?.author))}<br>${ms10Escape((m.post?.text || "").slice(0,110))}${(m.post?.text || "").length>110 ? "..." : ""}<br><button class="green" onclick="ms9CreateConnectionFromPost('${m.post?.id || ""}','${String(m.post?.author || "").replace(/'/g,"\\'")}')">Connetti</button></div>`).join("") : `<div class="small">Nessun match chiaro per questo post.</div>`}
+            ${matches.length ? matches.map(m=>`<div class="ms10-chat-line"><b>${Math.round(m.score||0)}%</b> · ${ms10Escape(m.post?.authorName || ms10Mask(m.post?.author))}<br>${ms10Escape((m.post?.text || "").slice(0,110))}${(m.post?.text || "").length>110 ? "..." : ""}<br><button class="green" onclick="ms9CreateConnectionFromPost('${m.post?.id || ""}','${String(m.post?.author || "").replace(/'/g,"\'")}')">Connetti</button></div>`).join("") : `<div class="small">Nessun match chiaro per questo post.</div>`}
           </div>
         </div>
       `;
@@ -7001,14 +7001,14 @@ document.addEventListener("DOMContentLoaded", function(){ ms9AddNav(); ms9PatchR
       <div class="ms11-text">${esc(p.text||"")}</div>
       <div style="font-size:12px;color:#64748b">❤️ ${Number(p.likes||0)} · 💬 ${chats.length} · 🎁 ${Number(p.donationCount||0)} · ✅ ${avg}/5</div>
       <div class="ms11-actions">
-        <button onclick="ms11Like('${esc(p.id)}','${String(p.author||'').replace(/'/g,"\\'")}')">❤️ Sento</button>
+        <button onclick="ms11Like('${esc(p.id)}','${String(p.author||'').replace(/'/g,"\'")}')">❤️ Sento</button>
         <button onclick="ms11Toggle('chat','${id}')">💬 Chat</button>
         <button onclick="ms11Toggle('match','${id}')">🤝 Match</button>
-        <button onclick="ms11Useful('${esc(p.id)}','${String(p.author||'').replace(/'/g,"\\'")}')">✅ Utile</button>
-        <button onclick="ms11Donate('${esc(p.id)}','${String(p.author||'').replace(/'/g,"\\'")}')">🎁 Dona</button>
+        <button onclick="ms11Useful('${esc(p.id)}','${String(p.author||'').replace(/'/g,"\'")}')">✅ Utile</button>
+        <button onclick="ms11Donate('${esc(p.id)}','${String(p.author||'').replace(/'/g,"\'")}')">🎁 Dona</button>
         <button onclick="document.getElementById('ms11Post_${id}')?.classList.toggle('open')">Leggi</button>
       </div>
-      <div class="ms11-panel" id="ms11_chat_${id}"><b>Chat del post</b>${chats.map(c=>`<div class="ms11-line"><b>${esc(mask(c.from))}</b><br>${esc(c.text||"")}</div>`).join("")}<div class="ms11-inputline"><input id="ms11_chat_input_${id}" placeholder="Scrivi una risposta..."><button class="ms11-btn green" onclick="ms11SendChat('${esc(p.id)}','${String(p.author||'').replace(/'/g,"\\'")}','${id}')">Invia</button></div></div>
+      <div class="ms11-panel" id="ms11_chat_${id}"><b>Chat del post</b>${chats.map(c=>`<div class="ms11-line"><b>${esc(mask(c.from))}</b><br>${esc(c.text||"")}</div>`).join("")}<div class="ms11-inputline"><input id="ms11_chat_input_${id}" placeholder="Scrivi una risposta..."><button class="ms11-btn green" onclick="ms11SendChat('${esc(p.id)}','${String(p.author||'').replace(/'/g,"\'")}','${id}')">Invia</button></div></div>
       <div class="ms11-panel" id="ms11_match_${id}"><b>Match del post</b>${matches.length?matches.map(m=>`<div class="ms11-line"><b>${Math.round(m.score||0)}%</b> · ${esc(m.post?.authorName||mask(m.post?.author))}<br>${esc(String(m.post?.text||"").slice(0,100))}${String(m.post?.text||"").length>100?"...":""}</div>`).join(""):`<div class="ms11-line">Nessun match chiaro: il sistema evita rumore e liste inutili.</div>`}</div>
     </article>`;
   }
@@ -7039,7 +7039,7 @@ document.addEventListener("DOMContentLoaded", function(){ ms9AddNav(); ms9PatchR
         <div class="ms12-match-top"><div class="ms12-match-title">${title}</div><div class="ms12-score">${Math.round(m.score||0)}%</div></div>
         <div class="ms12-pills"><span class="ms12-pill">${esc(m.category||"generale")}</span>${need?`<span class="ms12-pill">cerca: ${esc(need)}</span>`:""}${res?`<span class="ms12-pill">offre: ${esc(res)}</span>`:""}</div>
         <div class="ms12-reason">${esc(short)}</div>
-        <div class="ms12-actions"><button class="ms11-btn green" onclick="activateConnection('${String(m.a.user).replace(/'/g,"\\'")}','${String(m.b.user).replace(/'/g,"\\'")}',${Math.round(m.score||0)},'${String(short).replace(/'/g,"\\'")}','${String(m.category).replace(/'/g,"\\'")}')">Attiva</button><button class="ms11-btn light" onclick="ms12Toggle('${det}')">Dettagli</button></div>
+        <div class="ms12-actions"><button class="ms11-btn green" onclick="activateConnection('${String(m.a.user).replace(/'/g,"\'")}','${String(m.b.user).replace(/'/g,"\'")}',${Math.round(m.score||0)},'${String(short).replace(/'/g,"\'")}','${String(m.category).replace(/'/g,"\'")}')">Attiva</button><button class="ms11-btn light" onclick="ms12Toggle('${det}')">Dettagli</button></div>
         <div class="ms12-details" id="${det}">${esc(m.reason)}<br><b>Bisogno:</b> ${esc(m.a.need||m.b.need||"")}<br><b>Risorsa:</b> ${esc(m.a.resource||m.b.resource||"")}</div>
       </div>`;
     }).join(""):`<div class="ms11-empty">Nessun match utile pronto. Aggiungi bisogni e risorse più specifici.</div>`);
@@ -7059,7 +7059,7 @@ document.addEventListener("DOMContentLoaded", function(){ ms9AddNav(); ms9PatchR
       return `<div class="ms12-conn-row">
         <div class="ms12-avatars"><div class="ms12-dot">${ms12Initials(c.from)}</div><div class="ms12-dot">${ms12Initials(c.to)}</div></div>
         <div class="ms12-main"><b>${esc(mask(other||c.to||c.from))}</b><span>${status}${c.category?" · #"+esc(c.category):""} · ${last}</span></div>
-        <button class="ms12-open" onclick="openChat && openChat('${c.id}','${String(c.from).replace(/'/g,"\\'")}','${String(c.to).replace(/'/g,"\\'")}')">Apri</button>
+        <button class="ms12-open" onclick="openChat && openChat('${c.id}','${String(c.from).replace(/'/g,"\'")}','${String(c.to).replace(/'/g,"\'")}')">Apri</button>
       </div>`;
     }).join(""):`<div class="ms11-empty">Nessuna chat. Attiva prima un match.</div>`);
   }
@@ -7649,145 +7649,407 @@ document.addEventListener("DOMContentLoaded", function(){ ms9AddNav(); ms9PatchR
 </script>
 
 
-<div id="msLoginGate" class="ms-login-gate" aria-label="Accesso Mini Sentient">
-  <button class="ms-login-close" onclick="msLoginClose()">×</button>
+
+<!-- ==========================================================
+     LOGIN FACEBOOK STYLE - FIX DEFINITIVO
+     ========================================================== -->
+<div id="msLoginGate" class="ms-login-gate open" aria-label="Accesso Mini Sentient">
   <div class="ms-login-card">
-    <div class="ms-login-brand">
+    <section class="ms-login-brand">
       <div class="logo">MS</div>
       <h1>Mini Sentient</h1>
-      <p>Entra nel social empatico: condividi bisogni, risorse, ascolto e aiuto reale. Semplice come Facebook, più umano.</p>
-    </div>
-    <div class="ms-login-box">
-      <h2>Accedi a Mini Sentient</h2>
-      <p class="hint">Usa Google per entrare subito, oppure email e password. Se apri il file direttamente dal telefono, usa la modalità demo o pubblicalo su hosting per il login reale Firebase.</p>
-      <button class="ms-login-main-btn" onclick="msLoginGoogle()">Continua con Google</button>
-      <button class="ms-login-main-btn green" onclick="msLoginDemo()">Entra in modalità demo</button>
+      <p>Il social empatico dove entri, racconti cosa senti, trovi ascolto, aiuto reale e persone con cui creare valore.</p>
+    </section>
+
+    <section class="ms-login-box">
+      <h2>Accedi</h2>
+      <p class="hint">Entra con Google oppure con email e password.</p>
+
+      <button class="ms-login-main-btn" type="button" onclick="msLoginGoogle()">Continua con Google</button>
 
       <div class="ms-login-tabs">
-        <button id="msLoginTabEmail" class="active" onclick="msLoginPanel('email')">Accedi</button>
-        <button id="msLoginTabRegister" onclick="msLoginPanel('register')">Registrati</button>
+        <button id="msLoginTabEmail" class="active" type="button" onclick="msLoginPanel('email')">Accedi</button>
+        <button id="msLoginTabRegister" type="button" onclick="msLoginPanel('register')">Crea account</button>
       </div>
 
       <div id="msLoginPanelEmail" class="ms-login-panel active">
-        <input id="msLoginEmail" type="email" placeholder="Email">
-        <input id="msLoginPassword" type="password" placeholder="Password">
-        <button class="ms-login-main-btn dark" onclick="msLoginEmailSubmit()">Accedi con email</button>
+        <input id="msLoginEmail" type="email" autocomplete="email" placeholder="Email">
+        <input id="msLoginPassword" type="password" autocomplete="current-password" placeholder="Password">
+        <button class="ms-login-main-btn dark" type="button" onclick="msLoginEmailSubmit()">Accedi</button>
       </div>
 
       <div id="msLoginPanelRegister" class="ms-login-panel">
-        <input id="msRegisterName" placeholder="Nome pubblico">
-        <input id="msRegisterEmail" type="email" placeholder="Email">
-        <input id="msRegisterPassword" type="password" placeholder="Password">
-        <button class="ms-login-main-btn dark" onclick="msRegisterSubmit()">Crea account</button>
+        <input id="msRegisterName" autocomplete="name" placeholder="Nome pubblico">
+        <input id="msRegisterEmail" type="email" autocomplete="email" placeholder="Email">
+        <input id="msRegisterPassword" type="password" autocomplete="new-password" placeholder="Password">
+        <input id="msRegisterPassword2" type="password" autocomplete="new-password" placeholder="Ripeti password">
+        <button class="ms-login-main-btn green" type="button" onclick="msRegisterSubmit()">Registrati</button>
       </div>
 
-      <button class="ms-login-main-btn light" onclick="msLoginClose()">Continua senza accedere</button>
+      <button class="ms-login-main-btn light" type="button" onclick="msLoginDemo()">Entra in modalità demo</button>
       <div id="msLoginStatus" class="ms-login-status"></div>
-    </div>
+    </section>
   </div>
 </div>
 
-
 <script>
-/* PATCH ACCESSO: rende il tasto Accedi realmente visibile e centrale */
 (function(){
-  function byId(id){return document.getElementById(id)}
-  function status(msg,isError){
-    const box=byId("msLoginStatus");
-    if(!box){ if(isError) alert(msg); return; }
-    box.textContent=msg;
+  "use strict";
+
+  function byId(id){ return document.getElementById(id); }
+
+  function status(msg, isError){
+    var box = byId("msLoginStatus");
+    if(!box){
+      if(isError) alert(msg);
+      return;
+    }
+    box.textContent = msg;
     box.classList.add("show");
-    box.classList.toggle("error",!!isError);
+    box.classList.toggle("error", !!isError);
   }
-  function copyValue(fromId,toId){
-    const from=byId(fromId), to=byId(toId);
-    if(from && to) to.value=from.value;
+
+  function copyValue(fromId, toId){
+    var from = byId(fromId);
+    var to = byId(toId);
+    if(from && to) to.value = from.value || "";
   }
-  window.msLoginOpen=function(panel){
-    const gate=byId("msLoginGate");
-    if(gate) gate.classList.add("open");
-    msLoginPanel(panel||"email");
-    status("Accesso pronto. Per il login reale non aprire il file come file locale: usa Firebase Hosting o localhost.", false);
-  };
-  window.msLoginClose=function(){
-    const gate=byId("msLoginGate");
+
+  function showApp(){
+    document.body.classList.add("ms-app-unlocked");
+    var gate = byId("msLoginGate");
     if(gate) gate.classList.remove("open");
-  };
-  window.msLoginPanel=function(panel){
-    const email=panel!=="register";
-    byId("msLoginPanelEmail")?.classList.toggle("active",email);
-    byId("msLoginPanelRegister")?.classList.toggle("active",!email);
-    byId("msLoginTabEmail")?.classList.toggle("active",email);
-    byId("msLoginTabRegister")?.classList.toggle("active",!email);
-  };
-  window.msLoginGoogle=function(){
-    if(location.protocol==="file:"){
-      status("Il login Google Firebase non può funzionare aprendo il file direttamente. Pubblicalo su Firebase Hosting oppure aprilo da localhost. Intanto puoi usare la modalità demo.", true);
-      return;
+
+    var root = byId("ms15Root");
+    if(root) root.style.display = "";
+
+    if(typeof window.ms15SetView === "function"){
+      try { window.ms15SetView("home"); } catch(e) {}
     }
-    if(typeof window.login==="function") window.login();
-    else if(typeof window.openAuth==="function") window.openAuth("google");
-    else status("Funzione login non trovata.", true);
-  };
-  window.msLoginEmailSubmit=function(){
-    copyValue("msLoginEmail","loginEmail");
-    copyValue("msLoginPassword","loginPassword");
-    if(location.protocol==="file:"){
-      status("Il login email Firebase non funziona da file locale. Usa localhost/Firebase Hosting oppure modalità demo.", true);
-      return;
-    }
-    if(typeof window.loginWithEmail==="function") window.loginWithEmail();
-    else if(typeof window.openAuth==="function") window.openAuth("email");
-    else status("Funzione login email non trovata.", true);
-  };
-  window.msRegisterSubmit=function(){
-    copyValue("msRegisterName","registerName");
-    copyValue("msRegisterEmail","registerEmail");
-    copyValue("msRegisterPassword","registerPassword");
-    if(location.protocol==="file:"){
-      status("La registrazione Firebase non funziona da file locale. Usa localhost/Firebase Hosting oppure modalità demo.", true);
-      return;
-    }
-    if(typeof window.registerWithEmail==="function") window.registerWithEmail();
-    else if(typeof window.openAuth==="function") window.openAuth("register");
-    else status("Funzione registrazione non trovata.", true);
-  };
-  window.msLoginDemo=function(){
-    localStorage.setItem("miniSentientDemoUser","demo@mini-sentient.local");
-    msLoginClose();
-    const subtitle=byId("ms15Subtitle");
-    if(subtitle) subtitle.textContent="Modalità demo · interfaccia attiva";
-    const userBox=byId("user");
-    if(userBox) userBox.textContent="Connesso come: demo@mini-sentient.local";
-    if(typeof window.ms15SetView==="function") window.ms15SetView("home");
+
     setTimeout(function(){
-      const view=byId("ms15View");
-      if(view && !byId("msDemoBanner")){
-        view.insertAdjacentHTML("afterbegin", '<div id="msDemoBanner" class="ms-login-inline-entry"><h2>Sei entrato in modalità demo</h2><p>Per salvare davvero post, chat e profilo serve accesso Firebase da dominio autorizzato.</p><button onclick="msLoginOpen(\\'email\\')">Accedi davvero</button></div>');
+      var view = byId("ms15View");
+      if(view && !view.innerHTML.trim()){
+        view.innerHTML =
+          '<div class="ms15-card ms15-hero">' +
+            '<h2>Benvenuto in Mini Sentient</h2>' +
+            '<p>Ora puoi pubblicare un bisogno, offrire una risorsa, parlare con qualcuno o entrare nella tua tribù empatica.</p>' +
+          '</div>' +
+          '<div class="ms15-card">' +
+            '<h3>Come ti senti oggi?</h3>' +
+            '<textarea placeholder="Scrivi qui un pensiero, un bisogno o una risorsa..."></textarea>' +
+            '<div class="ms15-row"><button onclick="alert(\'Post demo creato\')">Pubblica</button><button onclick="ms15SetView(\'help\')">Trova aiuto</button></div>' +
+          '</div>';
       }
-    },100);
+    }, 450);
+  }
+
+  function showLogin(){
+    document.body.classList.remove("ms-app-unlocked");
+    var root = byId("ms15Root");
+    if(root) root.style.display = "none";
+
+    var gate = byId("msLoginGate");
+    if(gate) gate.classList.add("open");
+  }
+
+  window.msLoginOpen = function(panel){
+    var root = byId("ms15Root");
+    if(root) root.style.display = "none";
+    var gate = byId("msLoginGate");
+    if(gate) gate.classList.add("open");
+    window.msLoginPanel(panel || "email");
   };
 
-  const oldQuick=window.ms15QuickAccess;
-  window.ms15QuickAccess=function(){
-    msLoginOpen("email");
+  window.msLoginClose = function(){
+    // Non chiude su pagina iniziale anonima: deve sembrare un vero accesso tipo Facebook.
+    if(localStorage.getItem("miniSentientDemoUser")){
+      showApp();
+      return;
+    }
+    status("Accedi o usa la modalità demo per entrare.", false);
   };
 
-  document.addEventListener("DOMContentLoaded",function(){
+  window.msLoginPanel = function(panel){
+    var emailMode = panel !== "register";
+    byId("msLoginPanelEmail")?.classList.toggle("active", emailMode);
+    byId("msLoginPanelRegister")?.classList.toggle("active", !emailMode);
+    byId("msLoginTabEmail")?.classList.toggle("active", emailMode);
+    byId("msLoginTabRegister")?.classList.toggle("active", !emailMode);
+  };
+
+  window.msLoginGoogle = function(){
+    if(window.location.protocol === "file:"){
+      status("Google Firebase non funziona se apri il file locale. Caricalo su minisentinel/minisentient.com o Firebase Hosting. Intanto usa la modalità demo.", true);
+      return;
+    }
+    if(typeof window.login === "function"){
+      try { window.login(); }
+      catch(e){ status("Errore login Google: " + e.message, true); }
+    } else {
+      status("Funzione login Google non trovata nel file.", true);
+    }
+  };
+
+  window.msLoginEmailSubmit = function(){
+    copyValue("msLoginEmail", "loginEmail");
+    copyValue("msLoginPassword", "loginPassword");
+
+    if(window.location.protocol === "file:"){
+      status("Il login email Firebase non funziona da file locale. Usa il dominio/hosting oppure modalità demo.", true);
+      return;
+    }
+
+    if(typeof window.loginWithEmail === "function"){
+      try { window.loginWithEmail(); }
+      catch(e){ status("Errore login email: " + e.message, true); }
+    } else {
+      status("Funzione login email non trovata nel file.", true);
+    }
+  };
+
+  window.msRegisterSubmit = function(){
+    copyValue("msRegisterName", "registerName");
+    copyValue("msRegisterEmail", "registerEmail");
+    copyValue("msRegisterPassword", "registerPassword");
+    copyValue("msRegisterPassword2", "registerPassword2");
+
+    if(window.location.protocol === "file:"){
+      status("La registrazione Firebase non funziona da file locale. Usa il dominio/hosting oppure modalità demo.", true);
+      return;
+    }
+
+    if(typeof window.registerWithEmail === "function"){
+      try { window.registerWithEmail(); }
+      catch(e){ status("Errore registrazione: " + e.message, true); }
+    } else {
+      status("Funzione registrazione non trovata nel file.", true);
+    }
+  };
+
+  window.msLoginDemo = function(){
+    localStorage.setItem("miniSentientDemoUser", "demo@mini-sentient.local");
+    var userBox = byId("user");
+    if(userBox) userBox.textContent = "Connesso come: demo@mini-sentient.local";
+    var subtitle = byId("ms15Subtitle");
+    if(subtitle) subtitle.textContent = "Modalità demo · interfaccia attiva";
+    showApp();
+  };
+
+  window.ms15QuickAccess = function(){
+    window.msLoginOpen("email");
+  };
+
+  // Patch completeLogin: quando Firebase conclude, chiude login e mostra l'app.
+  var patchComplete = function(){
+    if(typeof window.completeLogin === "function" && !window.__msFacebookLoginPatched){
+      window.__msFacebookLoginPatched = true;
+      var oldComplete = window.completeLogin;
+      window.completeLogin = async function(user){
+        var result = await oldComplete(user);
+        showApp();
+        return result;
+      };
+    }
+  };
+
+  document.addEventListener("DOMContentLoaded", function(){
+    patchComplete();
+
     document.querySelectorAll('[onclick="ms15QuickAccess()"]').forEach(function(btn){
-      btn.textContent="Accedi / Registrati";
-      btn.onclick=function(e){e.preventDefault();msLoginOpen("email");};
+      btn.textContent = "Accedi";
+      btn.onclick = function(e){
+        e.preventDefault();
+        window.msLoginOpen("email");
+      };
     });
+
+    // Schermata iniziale vera tipo Facebook.
+    if(localStorage.getItem("miniSentientDemoUser")){
+      showApp();
+    } else {
+      showLogin();
+    }
+
     setTimeout(function(){
-      const view=byId("ms15View");
-      const alreadyLogged=(byId("user")?.textContent||"").includes("Connesso come:");
-      if(view && !alreadyLogged && !localStorage.getItem("miniSentientDemoUser") && !byId("msLoginInlineEntry")){
-        view.insertAdjacentHTML("afterbegin", '<div id="msLoginInlineEntry" class="ms-login-inline-entry"><h2>Connettiti a Mini Sentient</h2><p>Entra per pubblicare, parlare, aiutare e ricevere supporto.</p><button onclick="msLoginOpen(\\'email\\')">Accedi o registrati</button></div>');
-      }
-    },700);
+      patchComplete();
+      // Se Firebase ha già scritto "Connesso come", sblocca.
+      var txt = (byId("user") && byId("user").textContent) ? byId("user").textContent : "";
+      if(txt.indexOf("Connesso come:") >= 0) showApp();
+    }, 1200);
+  });
+
+  window.addEventListener("load", function(){
+    patchComplete();
+    if(!localStorage.getItem("miniSentientDemoUser")){
+      var txt = (byId("user") && byId("user").textContent) ? byId("user").textContent : "";
+      if(txt.indexOf("Connesso come:") < 0) showLogin();
+    }
   });
 })();
 </script>
+
+<style>
+/* Override finale: login grande centrale, stile Facebook */
+body:not(.ms-app-unlocked) #ms15Root{
+  display:none !important;
+}
+.ms-login-gate{
+  position:fixed !important;
+  inset:0 !important;
+  z-index:2147483646 !important;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:18px;
+  background:
+    radial-gradient(circle at 18% 10%, rgba(37,99,235,.22), transparent 32%),
+    radial-gradient(circle at 90% 5%, rgba(22,163,74,.18), transparent 28%),
+    #eef3f8;
+}
+.ms-login-gate.open{display:flex !important;}
+.ms-login-card{
+  width:min(1040px,100%);
+  display:grid;
+  grid-template-columns:1.12fr .88fr;
+  gap:34px;
+  align-items:center;
+}
+.ms-login-brand .logo{
+  width:82px;
+  height:82px;
+  border-radius:28px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:linear-gradient(135deg,#2563eb,#7c3aed);
+  color:white;
+  font-weight:950;
+  font-size:30px;
+  box-shadow:0 20px 50px rgba(37,99,235,.30);
+  margin-bottom:20px;
+}
+.ms-login-brand h1{
+  margin:0 0 14px;
+  font-size:60px;
+  line-height:.95;
+  letter-spacing:-2.5px;
+  color:#0f172a;
+}
+.ms-login-brand p{
+  margin:0;
+  font-size:22px;
+  line-height:1.35;
+  color:#475569;
+  max-width:590px;
+}
+.ms-login-box{
+  background:#fff;
+  border:1px solid #d9e2ef;
+  border-radius:30px;
+  box-shadow:0 24px 75px rgba(15,23,42,.18);
+  padding:24px;
+}
+.ms-login-box h2{
+  margin:0 0 8px;
+  font-size:32px;
+  color:#0f172a;
+}
+.ms-login-box .hint{
+  margin:0 0 16px;
+  color:#64748b;
+  line-height:1.4;
+  font-size:14px;
+}
+.ms-login-main-btn{
+  width:100%;
+  min-height:56px;
+  border-radius:16px;
+  margin:0 0 10px;
+  border:0;
+  font-size:17px;
+  font-weight:950;
+  background:#2563eb;
+  color:white;
+  cursor:pointer;
+}
+.ms-login-main-btn.green{background:#16a34a;}
+.ms-login-main-btn.dark{background:#111827;}
+.ms-login-main-btn.light{
+  background:#f8fafc;
+  color:#111827;
+  border:1px solid #d9e2ef;
+}
+.ms-login-tabs{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+  margin:14px 0;
+}
+.ms-login-tabs button{
+  margin:0;
+  border-radius:999px;
+  background:#f1f5f9;
+  color:#111827;
+  border:1px solid #e2e8f0;
+  font-weight:900;
+}
+.ms-login-tabs button.active{
+  background:#2563eb;
+  color:white;
+}
+.ms-login-panel{display:none;}
+.ms-login-panel.active{display:block;}
+.ms-login-box input{
+  width:100%;
+  box-sizing:border-box;
+  border:1px solid #d9e2ef;
+  border-radius:14px;
+  padding:14px;
+  margin:7px 0;
+  font-size:16px;
+  background:#f8fafc;
+}
+.ms-login-status{
+  display:none;
+  border-radius:14px;
+  padding:10px 12px;
+  margin:10px 0 0;
+  background:#eff6ff;
+  color:#1d4ed8;
+  font-size:13px;
+  line-height:1.35;
+}
+.ms-login-status.show{display:block;}
+.ms-login-status.error{background:#fef2f2;color:#991b1b;}
+@media(max-width:760px){
+  .ms-login-card{
+    grid-template-columns:1fr;
+    gap:16px;
+  }
+  .ms-login-brand{
+    text-align:center;
+  }
+  .ms-login-brand .logo{
+    margin:0 auto 12px;
+    width:64px;
+    height:64px;
+    border-radius:22px;
+    font-size:24px;
+  }
+  .ms-login-brand h1{
+    font-size:42px;
+    letter-spacing:-1.2px;
+  }
+  .ms-login-brand p{
+    font-size:17px;
+  }
+  .ms-login-box{
+    border-radius:24px;
+    padding:18px;
+  }
+}
+</style>
 
 </body>
 </html>
