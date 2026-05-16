@@ -1373,6 +1373,25 @@ body.dark-mode .ms11-top, body.dark-mode .ms11-bottom, body.dark-mode .ms11-card
 body.dark-mode .ms11-tabs{background:rgba(15,23,42,.94)}
 body.dark-mode .ms11-tabs button, body.dark-mode .ms11-actions button, body.dark-mode .ms11-panel, body.dark-mode .ms11-composer textarea, body.dark-mode .ms11-row select, body.dark-mode .ms11-row input, body.dark-mode .ms11-inputline input, body.dark-mode .ms11-settings-grid input, body.dark-mode .ms11-settings-grid select{background:#1f2937;color:#e5e7eb;border-color:#334155;}
 
+
+
+/* ==========================================================
+   STEP 12 - CONNESSIONI COMPATTE / ZERO TESTI LUNGHI
+   Riduce match e connessioni a card sintetiche: chi, perché,
+   azione. I dettagli si aprono solo su richiesta.
+   ========================================================== */
+.ms12-match-card{background:#fff;border:1px solid #d9dee8;border-radius:16px;padding:11px;margin:8px 0;box-shadow:0 1px 8px rgba(15,23,42,.06)}
+.ms12-match-top{display:flex;justify-content:space-between;gap:8px;align-items:flex-start}
+.ms12-match-title{font-weight:900;font-size:14px;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:70%}
+.ms12-score{background:#ecfdf5;color:#166534;border-radius:999px;padding:5px 8px;font-size:12px;font-weight:900;white-space:nowrap}
+.ms12-reason{font-size:13px;color:#64748b;line-height:1.3;margin:6px 0;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.ms12-pills{display:flex;gap:5px;overflow-x:auto;margin:6px 0}.ms12-pill{background:#e8f0ff;color:#1d4ed8;border-radius:999px;padding:4px 8px;font-size:11px;font-weight:900;white-space:nowrap}
+.ms12-actions{display:flex;gap:7px;margin-top:8px}.ms12-actions button{margin:0;border-radius:999px;padding:8px 10px;font-size:12px;font-weight:900}
+.ms12-details{display:none;background:#f8fafc;border:1px solid #e5e7eb;border-radius:13px;padding:8px;margin-top:8px;font-size:12px;color:#475569;line-height:1.35}.ms12-details.open{display:block}
+.ms12-conn-row{display:flex;align-items:center;gap:9px;background:#fff;border:1px solid #d9dee8;border-radius:16px;padding:10px;margin:8px 0;box-shadow:0 1px 8px rgba(15,23,42,.06)}
+.ms12-avatars{display:flex;min-width:58px}.ms12-dot{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#2563eb,#7c3aed);color:#fff;font-size:12px;font-weight:900;border:2px solid #fff;margin-left:-8px}.ms12-dot:first-child{margin-left:0}.ms12-main{flex:1;min-width:0}.ms12-main b{font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:block}.ms12-main span{font-size:12px;color:#64748b;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:block}.ms12-open{margin:0!important;border-radius:999px!important;padding:8px 10px!important;font-size:12px!important;background:#7c3aed!important;color:white!important}
+body.dark-mode .ms12-match-card,body.dark-mode .ms12-conn-row{background:#111827;color:#e5e7eb;border-color:#334155}body.dark-mode .ms12-details{background:#0f172a;color:#cbd5e1;border-color:#334155}
+
 </style>
 </head>
 
@@ -3586,7 +3605,7 @@ function renderMatches(nodes) {
             <b>${maskEmail(a.user)}</b> ↔ <b>${maskEmail(b.user)}</b><br>
             <span class="tag">${a.category || "senza categoria"}</span><br>
             Score: ${score.toFixed(1)}<br>
-            Motivo: ${reason}<br>
+            <span class="tag">${shortReason}</span><br>
 
             <button class="green"
               onclick="activateConnection('${a.user}', '${b.user}', ${score}, '${safeReason}', '${a.category || b.category || ""}')">
@@ -6227,7 +6246,29 @@ document.addEventListener("DOMContentLoaded", function(){ ms9AddNav(); ms9PatchR
     return out.sort((a,b)=>(a.timestamp||0)-(b.timestamp||0)).slice(-8);
   }
 
-  function buildMatches(limit=8){
+
+  function ms12ShortReason(text){
+    const raw=String(text||"").replace(/\s+/g," ").trim();
+    if(!raw) return "Compatibilità tra bisogno e risorsa.";
+    const parts=raw.split(/\.\s+/).map(x=>x.trim()).filter(Boolean);
+    const unique=[];
+    for(const p of parts){
+      const key=p.toLowerCase().replace(/\([^)]*\)/g,"").slice(0,45);
+      if(!unique.some(u=>u.key===key)) unique.push({key,p});
+      if(unique.length>=2) break;
+    }
+    return unique.map(x=>x.p.replace(/\.$/,"")).join(". ") + ".";
+  }
+  function ms12Initials(v){
+    v=String(v||"?").replace(/@.*/,"").replace(/[^a-zA-Z0-9]/g," ").trim();
+    return (v.split(/\s+/).map(x=>x[0]).join("")||"?").slice(0,2).toUpperCase();
+  }
+  function ms12Toggle(id){
+    const el=document.getElementById(id);
+    if(el) el.classList.toggle("open");
+  }
+
+  function buildMatches(limit=5){
     const list=[];
     let nd=[];
     try{ nd=(typeof nodes!=="undefined" && Array.isArray(nodes)) ? nodes.slice() : []; }catch(e){}
@@ -6245,7 +6286,7 @@ document.addEventListener("DOMContentLoaded", function(){ ms9AddNav(); ms9PatchR
         list.push({a,b,score,reason,category:a.category||b.category||""});
       }
     }
-    return list;
+    return list.sort((a,b)=>(b.score||0)-(a.score||0)).slice(0,limit);
   }
 
   window.ms11Show=function(view){
@@ -6379,9 +6420,21 @@ document.addEventListener("DOMContentLoaded", function(){ ms9AddNav(); ms9PatchR
   };
 
   function renderMatchesView(box){
-    const ms=buildMatches(10);
-    box.innerHTML=`<div class="ms11-card"><b>Match automatici</b><br><span style="font-size:12px;color:#64748b">Mostro solo connessioni sintetiche e azionabili.</span></div>` + (ms.length?ms.map((m,i)=>`
-      <div class="ms11-card ms11-match"><div><h4>${mask(m.a.user)} ↔ ${mask(m.b.user)}</h4><p>${esc(m.reason)} ${esc(m.a.need||"")} ↔ ${esc(m.b.resource||m.b.need||"")}</p><span class="ms11-pill">${esc(m.category||"generale")}</span></div><div><div class="ms11-score">${m.score}%</div><button class="ms11-btn green" style="margin-top:8px" onclick="activateConnection('${String(m.a.user).replace(/'/g,"\\'")}','${String(m.b.user).replace(/'/g,"\\'")}',${m.score},'Compatibilità sintetica','${String(m.category).replace(/'/g,"\\'")}')">Attiva</button></div></div>`).join(""):`<div class="ms11-empty">Nessun match utile pronto. Aggiungi bisogni e risorse più specifici.</div>`);
+    const ms=buildMatches(5);
+    box.innerHTML=`<div class="ms11-card"><b>Match essenziali</b><br><span style="font-size:12px;color:#64748b">Massimo 5 connessioni, ordinate per utilità. Apri i dettagli solo se ti serve.</span></div>` + (ms.length?ms.map((m,i)=>{
+      const det="ms12_det_"+i;
+      const title=`${mask(m.a.user)} ↔ ${mask(m.b.user)}`;
+      const short=ms12ShortReason(m.reason);
+      const need=String(m.a.need||m.b.need||"").slice(0,70);
+      const res=String(m.a.resource||m.b.resource||"").slice(0,70);
+      return `<div class="ms12-match-card">
+        <div class="ms12-match-top"><div class="ms12-match-title">${title}</div><div class="ms12-score">${Math.round(m.score||0)}%</div></div>
+        <div class="ms12-pills"><span class="ms12-pill">${esc(m.category||"generale")}</span>${need?`<span class="ms12-pill">cerca: ${esc(need)}</span>`:""}${res?`<span class="ms12-pill">offre: ${esc(res)}</span>`:""}</div>
+        <div class="ms12-reason">${esc(short)}</div>
+        <div class="ms12-actions"><button class="ms11-btn green" onclick="activateConnection('${String(m.a.user).replace(/'/g,"\\'")}','${String(m.b.user).replace(/'/g,"\\'")}',${Math.round(m.score||0)},'${String(short).replace(/'/g,"\\'")}','${String(m.category).replace(/'/g,"\\'")}')">Attiva</button><button class="ms11-btn light" onclick="ms12Toggle('${det}')">Dettagli</button></div>
+        <div class="ms12-details" id="${det}">${esc(m.reason)}<br><b>Bisogno:</b> ${esc(m.a.need||m.b.need||"")}<br><b>Risorsa:</b> ${esc(m.a.resource||m.b.resource||"")}</div>
+      </div>`;
+    }).join(""):`<div class="ms11-empty">Nessun match utile pronto. Aggiungi bisogni e risorse più specifici.</div>`);
   }
 
   function listenConnectionsMini(){
@@ -6390,7 +6443,17 @@ document.addEventListener("DOMContentLoaded", function(){ ms9AddNav(); ms9PatchR
   }
   function renderChatView(box){
     listenConnectionsMini();
-    box.innerHTML=`<div class="ms11-card"><b>Chat</b><br><span style="font-size:12px;color:#64748b">Apri una connessione, non una pagina infinita.</span></div>` + (ms11Connections.length?ms11Connections.slice(0,20).map(c=>`<div class="ms11-card"><b>${mask(c.from)} ↔ ${mask(c.to)}</b><br><span class="ms11-pill">${esc(c.status||"")}</span>${c.category?`<span class="ms11-pill">#${esc(c.category)}</span>`:""}<p style="font-size:13px;color:#64748b;margin:8px 0">${esc(c.lastMessage||c.reason||"Nessun messaggio")}</p><button class="ms11-btn purple" onclick="openChat && openChat('${c.id}','${String(c.from).replace(/'/g,"\\'")}','${String(c.to).replace(/'/g,"\\'")}')">Apri chat</button></div>`).join(""):`<div class="ms11-empty">Nessuna chat. Attiva prima un match.</div>`);
+    const rows=ms11Connections.slice(0,12);
+    box.innerHTML=`<div class="ms11-card"><b>Chat e connessioni</b><br><span style="font-size:12px;color:#64748b">Lista compatta: apri solo la conversazione che ti interessa.</span></div>` + (rows.length?rows.map(c=>{
+      const other=(currentUser && c.from===currentUser.email)?c.to:c.from;
+      const status=esc(c.status||"attiva");
+      const last=esc(String(c.lastMessage||c.reason||"Nessun messaggio").slice(0,90));
+      return `<div class="ms12-conn-row">
+        <div class="ms12-avatars"><div class="ms12-dot">${ms12Initials(c.from)}</div><div class="ms12-dot">${ms12Initials(c.to)}</div></div>
+        <div class="ms12-main"><b>${esc(mask(other||c.to||c.from))}</b><span>${status}${c.category?" · #"+esc(c.category):""} · ${last}</span></div>
+        <button class="ms12-open" onclick="openChat && openChat('${c.id}','${String(c.from).replace(/'/g,"\\'")}','${String(c.to).replace(/'/g,"\\'")}')">Apri</button>
+      </div>`;
+    }).join(""):`<div class="ms11-empty">Nessuna chat. Attiva prima un match.</div>`);
   }
 
   function renderProfile(box){
