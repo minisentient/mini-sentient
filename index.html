@@ -1250,6 +1250,129 @@ body.dark-mode .ms10-post-actions button{
   border-color:#334155;
 }
 
+
+
+/* ==========================================================
+   STEP 11 - APP SHELL IMMEDIATA / ZERO PAGINA CHILOMETRICA
+   Nasconde la vecchia pagina lunga e crea una UI a schede:
+   Feed, Match, Chat, Profilo. Le funzioni Firebase restano.
+   ========================================================== */
+body.ms11-shell-active{
+  padding:0!important;
+  margin:0!important;
+  background:#eef2f7!important;
+  overflow-x:hidden;
+}
+body.ms11-shell-active .social-topbar,
+body.ms11-shell-active .social-layout,
+body.ms11-shell-active .social-mobile-nav,
+body.ms11-shell-active .social-floating-create,
+body.ms11-shell-active #donationModal.hidden{
+  display:none!important;
+}
+#ms11Root{
+  min-height:100vh;
+  background:#eef2f7;
+  color:#111827;
+  font-family:Arial,sans-serif;
+}
+.ms11-top{
+  position:sticky;
+  top:0;
+  z-index:999999;
+  background:rgba(255,255,255,.96);
+  backdrop-filter:blur(12px);
+  border-bottom:1px solid #d9dee8;
+  padding:10px 12px;
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+.ms11-logo{
+  width:36px;height:36px;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  background:linear-gradient(135deg,#2563eb,#7c3aed);color:white;font-weight:900;
+  flex:0 0 auto;
+}
+.ms11-title{flex:1;min-width:0;}
+.ms11-title b{display:block;font-size:15px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.ms11-title span{font-size:12px;color:#64748b;}
+.ms11-top button{
+  margin:0;padding:8px 10px;border-radius:999px;border:0;background:#111827;color:#fff;font-weight:800;font-size:12px;
+}
+.ms11-tabs{
+  position:sticky;
+  top:57px;
+  z-index:999998;
+  display:flex;
+  gap:8px;
+  overflow-x:auto;
+  padding:9px 10px;
+  background:rgba(238,242,247,.96);
+  backdrop-filter:blur(10px);
+}
+.ms11-tabs button{
+  margin:0;
+  white-space:nowrap;
+  border:1px solid #d9dee8;
+  background:#fff;
+  color:#111827;
+  border-radius:999px;
+  padding:9px 13px;
+  font-weight:900;
+  font-size:13px;
+}
+.ms11-tabs button.active{background:#2563eb;color:#fff;border-color:#2563eb;}
+.ms11-wrap{max-width:720px;margin:0 auto;padding:0 10px 86px;}
+.ms11-card{
+  background:#fff;
+  border:1px solid #d9dee8;
+  border-radius:18px;
+  padding:13px;
+  margin:10px 0;
+  box-shadow:0 2px 10px rgba(15,23,42,.07);
+}
+.ms11-composer textarea{
+  width:100%;box-sizing:border-box;min-height:74px;border-radius:16px;border:1px solid #d9dee8;background:#f8fafc;padding:12px;font-size:15px;
+}
+.ms11-row{display:flex;gap:8px;align-items:center;flex-wrap:wrap;}
+.ms11-row select,.ms11-row input{
+  flex:1;min-width:120px;border-radius:999px;border:1px solid #d9dee8;background:#f8fafc;padding:9px 11px;font-size:13px;box-sizing:border-box;
+}
+.ms11-btn{margin:0;border:0;border-radius:999px;padding:9px 12px;background:#2563eb;color:#fff;font-weight:900;font-size:13px;}
+.ms11-btn.green{background:#16a34a}.ms11-btn.purple{background:#7c3aed}.ms11-btn.dark{background:#111827}.ms11-btn.light{background:#f1f5f9;color:#111827;border:1px solid #d9dee8;}
+.ms11-post-head{display:flex;gap:9px;align-items:center;margin-bottom:7px;}
+.ms11-avatar{width:42px;height:42px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#2563eb,#7c3aed);color:#fff;font-weight:900;flex:0 0 auto;}
+.ms11-author{font-weight:900;font-size:14px;}
+.ms11-time{font-size:12px;color:#64748b;margin-top:2px;}
+.ms11-pill{display:inline-flex;align-items:center;gap:5px;border-radius:999px;padding:4px 8px;background:#e8f0ff;color:#1d4ed8;font-size:12px;font-weight:900;margin:2px 4px 2px 0;}
+.ms11-text{font-size:15px;line-height:1.42;margin:8px 0;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden;}
+.ms11-card.open .ms11-text{display:block;}
+.ms11-actions{display:flex;gap:7px;overflow-x:auto;border-top:1px solid #eef2f7;padding-top:9px;margin-top:9px;}
+.ms11-actions button{white-space:nowrap;margin:0;border-radius:999px;border:1px solid #e5e7eb;background:#f8fafc;color:#111827;padding:8px 10px;font-weight:900;font-size:13px;}
+.ms11-panel{display:none;background:#f8fafc;border:1px solid #e5e7eb;border-radius:16px;padding:10px;margin-top:9px;}
+.ms11-panel.open{display:block;}
+.ms11-line{background:#fff;border:1px solid #e5e7eb;border-radius:13px;padding:8px 10px;margin:6px 0;font-size:13px;}
+.ms11-inputline{display:flex;gap:7px;margin-top:8px;}
+.ms11-inputline input{flex:1;border-radius:999px;border:1px solid #d9dee8;padding:10px 12px;}
+.ms11-match{display:grid;grid-template-columns:1fr auto;gap:8px;align-items:center;}
+.ms11-match h4{margin:0 0 4px;font-size:14px;}
+.ms11-match p{margin:0;color:#64748b;font-size:13px;line-height:1.32;}
+.ms11-score{font-weight:900;color:#16a34a;background:#ecfdf5;border-radius:999px;padding:6px 9px;font-size:12px;}
+.ms11-empty{text-align:center;color:#64748b;padding:24px 14px;border:1px dashed #cbd5e1;border-radius:18px;background:#fff;margin:12px 0;}
+.ms11-bottom{
+  position:fixed;left:0;right:0;bottom:0;z-index:999999;background:#fff;border-top:1px solid #d9dee8;display:flex;justify-content:space-around;padding:7px 4px calc(7px + env(safe-area-inset-bottom,0px));
+}
+.ms11-bottom button{margin:0;background:transparent;color:#111827;border:0;font-size:11px;font-weight:900;padding:6px 4px;border-radius:12px;min-width:54px;}
+.ms11-bottom button.active{background:#e8f0ff;color:#1d4ed8;}
+.ms11-settings-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+.ms11-settings-grid input,.ms11-settings-grid select{width:100%;box-sizing:border-box;border-radius:12px;border:1px solid #d9dee8;background:#f8fafc;padding:10px;font-size:14px;}
+@media(max-width:760px){.ms11-wrap{padding-left:8px;padding-right:8px}.ms11-settings-grid{grid-template-columns:1fr}.ms11-top{padding:8px}.ms11-tabs{top:53px}.ms11-card{border-radius:16px;margin:8px 0}.ms11-text{font-size:14px}.ms11-actions button{font-size:12px;padding:7px 9px}}
+body.dark-mode #ms11Root, body.dark-mode.ms11-shell-active{background:#0f172a!important;color:#e5e7eb!important;}
+body.dark-mode .ms11-top, body.dark-mode .ms11-bottom, body.dark-mode .ms11-card, body.dark-mode .ms11-line{background:#111827;color:#e5e7eb;border-color:#334155;}
+body.dark-mode .ms11-tabs{background:rgba(15,23,42,.94)}
+body.dark-mode .ms11-tabs button, body.dark-mode .ms11-actions button, body.dark-mode .ms11-panel, body.dark-mode .ms11-composer textarea, body.dark-mode .ms11-row select, body.dark-mode .ms11-row input, body.dark-mode .ms11-inputline input, body.dark-mode .ms11-settings-grid input, body.dark-mode .ms11-settings-grid select{background:#1f2937;color:#e5e7eb;border-color:#334155;}
+
 </style>
 </head>
 
@@ -6053,6 +6176,245 @@ document.addEventListener("DOMContentLoaded", function(){ ms9AddNav(); ms9PatchR
     };
   }
   document.addEventListener("DOMContentLoaded", ms10Boot);
+})();
+
+
+
+/* ==========================================================
+   STEP 11 - APP SHELL IMMEDIATA / ZERO PAGINA CHILOMETRICA
+   ========================================================== */
+(function(){
+  let ms11View="feed";
+  let ms11Connections=[];
+  let ms11ConnectionsListening=false;
+  let ms11LocalPosts=[];
+
+  function esc(v){ return String(v||"").replace(/[&<>"']/g, m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m])); }
+  function mask(email){ try{ if(typeof maskEmail==="function") return maskEmail(email||""); }catch(e){} return String(email||"").replace(/^(.{2}).*(@.*)$/,"$1***$2"); }
+  function safe(id){ return String(id||"").replace(/[^a-zA-Z0-9_\-]/g,"_"); }
+  function initials(label){ return String(label||"MS").replace(/[^a-zA-Z0-9]/g,"").slice(0,2).toUpperCase() || "MS"; }
+  function kindLabel(k){ return ({cerco:"Cerco",offro:"Offro",risorsa:"Risorsa",bisogno:"Bisogno",economia_empatica:"Economia Empatica",pensiero:"Pensiero",aiuto:"Aiuto",gratitudine:"Grazie"}[k]||k||"Post"); }
+  function toast(t){ try{ if(typeof miniToast==="function") return miniToast(t); }catch(e){} alert(t); }
+
+  function getPosts(){
+    let arr=[];
+    try{ if(typeof socialPosts!=="undefined" && Array.isArray(socialPosts)) arr=socialPosts.slice(); }catch(e){}
+    if(!arr.length){
+      try{
+        const nd=(typeof nodes!=="undefined" && Array.isArray(nodes)) ? nodes : [];
+        arr=nd.slice().sort((a,b)=>(b.timestamp||0)-(a.timestamp||0)).map((n,i)=>({
+          id:"node_"+(n.id||i)+"_"+(n.timestamp||i),
+          author:n.user,
+          authorName:mask(n.user),
+          text:`Bisogno: ${n.need||""}\nRisorsa: ${n.resource||""}`,
+          category:n.category||"",
+          kind:n.need?"bisogno":"risorsa",
+          timestamp:n.timestamp||0,
+          city:n.city||"",
+          utilityVotes:0,
+          utilityScore:0
+        }));
+      }catch(e){}
+    }
+    arr=arr.concat(ms11LocalPosts);
+    return arr.sort((a,b)=>(b.timestamp||0)-(a.timestamp||0));
+  }
+
+  function getPostChats(postId){
+    const out=[];
+    try{ if(typeof socialComments!=="undefined") out.push(...socialComments.filter(c=>c.postId===postId)); }catch(e){}
+    try{ if(typeof ms9PostChats!=="undefined") out.push(...ms9PostChats.filter(c=>c.postId===postId)); }catch(e){}
+    return out.sort((a,b)=>(a.timestamp||0)-(b.timestamp||0)).slice(-8);
+  }
+
+  function buildMatches(limit=8){
+    const list=[];
+    let nd=[];
+    try{ nd=(typeof nodes!=="undefined" && Array.isArray(nodes)) ? nodes.slice() : []; }catch(e){}
+    for(let i=0;i<nd.length && list.length<limit;i++){
+      for(let j=i+1;j<nd.length && list.length<limit;j++){
+        const a=nd[i], b=nd[j];
+        if(!a||!b||!a.user||!b.user||a.user===b.user) continue;
+        const sameCat=a.category&&b.category&&a.category===b.category;
+        const an=String(a.need||"").toLowerCase(), br=String(b.resource||"").toLowerCase();
+        const bn=String(b.need||"").toLowerCase(), ar=String(a.resource||"").toLowerCase();
+        const direct=(an&&br&&(an.includes(br)||br.includes(an))) || (bn&&ar&&(bn.includes(ar)||ar.includes(bn)));
+        if(!sameCat && !direct) continue;
+        const score=Math.min(95,45+(sameCat?25:0)+(direct?25:0));
+        const reason=(sameCat?`Stessa categoria: ${a.category}. `:"") + (direct?"Bisogno e risorsa compatibili. ":"Profilo simile.");
+        list.push({a,b,score,reason,category:a.category||b.category||""});
+      }
+    }
+    return list;
+  }
+
+  window.ms11Show=function(view){
+    ms11View=view||"feed";
+    document.querySelectorAll(".ms11-tabs button,.ms11-bottom button").forEach(b=>b.classList.remove("active"));
+    document.querySelectorAll(`[data-ms11='${ms11View}']`).forEach(b=>b.classList.add("active"));
+    render();
+    window.scrollTo({top:0,behavior:"smooth"});
+  };
+
+  function ensureRoot(){
+    document.body.classList.add("ms11-shell-active");
+    if(document.getElementById("ms11Root")) return;
+    const root=document.createElement("div");
+    root.id="ms11Root";
+    root.innerHTML=`
+      <div class="ms11-top">
+        <div class="ms11-logo">MS</div>
+        <div class="ms11-title"><b>Mini Sentient</b><span id="ms11UserLabel">Economia Empatica</span></div>
+        <button onclick="login && login()">Accedi</button>
+      </div>
+      <div class="ms11-tabs">
+        <button data-ms11="feed" onclick="ms11Show('feed')">🏠 Feed</button>
+        <button data-ms11="publish" onclick="ms11Show('publish')">✍️ Pubblica</button>
+        <button data-ms11="matches" onclick="ms11Show('matches')">🤝 Match</button>
+        <button data-ms11="chat" onclick="ms11Show('chat')">💬 Chat</button>
+        <button data-ms11="profile" onclick="ms11Show('profile')">👤 Profilo</button>
+      </div>
+      <main class="ms11-wrap" id="ms11Content"></main>
+      <div class="ms11-bottom">
+        <button data-ms11="feed" onclick="ms11Show('feed')">🏠<br>Feed</button>
+        <button data-ms11="publish" onclick="ms11Show('publish')">✍️<br>Post</button>
+        <button data-ms11="matches" onclick="ms11Show('matches')">🤝<br>Match</button>
+        <button data-ms11="chat" onclick="ms11Show('chat')">💬<br>Chat</button>
+        <button data-ms11="profile" onclick="ms11Show('profile')">👤<br>Profilo</button>
+      </div>`;
+    document.body.prepend(root);
+  }
+
+  function render(){
+    ensureRoot();
+    const box=document.getElementById("ms11Content");
+    const label=document.getElementById("ms11UserLabel");
+    if(label){
+      try{ label.textContent=currentUser ? mask(currentUser.email) : "Economia Empatica"; }catch(e){ label.textContent="Economia Empatica"; }
+    }
+    document.querySelectorAll(".ms11-tabs button,.ms11-bottom button").forEach(b=>b.classList.remove("active"));
+    document.querySelectorAll(`[data-ms11='${ms11View}']`).forEach(b=>b.classList.add("active"));
+    if(!box) return;
+    if(ms11View==="publish") return renderPublish(box);
+    if(ms11View==="matches") return renderMatchesView(box);
+    if(ms11View==="chat") return renderChatView(box);
+    if(ms11View==="profile") return renderProfile(box);
+    return renderFeed(box);
+  }
+
+  function renderPublish(box){
+    box.innerHTML=`
+      <div class="ms11-card ms11-composer">
+        <b>Pubblica su Economia Empatica</b><br><span style="font-size:12px;color:#64748b">Scrivi breve: cosa cerchi, cosa offri, quale risorsa hai.</span>
+        <textarea id="ms11PostText" placeholder="A cosa stai pensando? Che bisogno o risorsa vuoi condividere?"></textarea>
+        <div class="ms11-row">
+          <select id="ms11PostKind"><option value="bisogno">Cerco aiuto</option><option value="risorsa">Offro risorsa</option><option value="economia_empatica">Economia Empatica</option><option value="gratitudine">Gratitudine</option></select>
+          <input id="ms11PostCategory" placeholder="Categoria">
+          <button class="ms11-btn green" onclick="ms11CreatePost()">Pubblica</button>
+        </div>
+      </div>`;
+  }
+
+  window.ms11CreatePost=async function(){
+    const text=document.getElementById("ms11PostText")?.value.trim();
+    if(!text) return toast("Scrivi prima il post");
+    const kind=document.getElementById("ms11PostKind")?.value||"economia_empatica";
+    const category=document.getElementById("ms11PostCategory")?.value.trim()||"";
+    const post={id:"local_"+Date.now(),author:currentUser?.email||"utente",authorName:currentUser?.displayName||mask(currentUser?.email||"utente"),text,kind,category,timestamp:Date.now(),utilityVotes:0,utilityScore:0,likes:0,donationCount:0};
+    try{
+      if(typeof createSocialPost==="function"){
+        const oldText=document.getElementById("socialPostText"), oldType=document.getElementById("socialPostType"), oldCat=document.getElementById("socialPostCategory");
+        if(oldText) oldText.value=text; if(oldType) oldType.value=kind; if(oldCat) oldCat.value=category;
+        await createSocialPost();
+      } else if(typeof addDoc!=="undefined") {
+        await addDoc(collection(db,"socialPosts"),post);
+      }
+    }catch(e){ ms11LocalPosts.unshift(post); }
+    toast("Post pubblicato");
+    ms11View="feed"; render();
+  };
+
+  function renderFeed(box){
+    const posts=getPosts();
+    if(!posts.length){ box.innerHTML=`<div class="ms11-empty">Nessun post. Premi “Pubblica” e crea il primo contenuto.</div>`; return; }
+    box.innerHTML=posts.slice(0,20).map(p=>postCard(p)).join("");
+  }
+
+  function postCard(p){
+    const id=safe(p.id||p.timestamp||Math.random());
+    const chats=getPostChats(p.id);
+    let matches=[];
+    try{ if(typeof ms9FindMatchesForPost==="function") matches=ms9FindMatchesForPost(p).slice(0,3); }catch(e){}
+    const avg=p.utilityVotes? (Number(p.utilityScore||0)/Number(p.utilityVotes||1)).toFixed(1):"0.0";
+    return `<article class="ms11-card" id="ms11Post_${id}">
+      <div class="ms11-post-head"><div class="ms11-avatar">${initials(p.authorName||p.author)}</div><div><div class="ms11-author">${esc(p.authorName||mask(p.author))}</div><div class="ms11-time">${p.timestamp?new Date(p.timestamp).toLocaleString():""}${p.city?" · 📍 "+esc(p.city):""}</div></div></div>
+      <div><span class="ms11-pill">${esc(kindLabel(p.kind||p.type))}</span>${p.category?`<span class="ms11-pill">#${esc(p.category)}</span>`:""}${matches.length?`<span class="ms11-pill">🤝 ${matches.length} match</span>`:""}</div>
+      <div class="ms11-text">${esc(p.text||"")}</div>
+      <div style="font-size:12px;color:#64748b">❤️ ${Number(p.likes||0)} · 💬 ${chats.length} · 🎁 ${Number(p.donationCount||0)} · ✅ ${avg}/5</div>
+      <div class="ms11-actions">
+        <button onclick="ms11Like('${esc(p.id)}','${String(p.author||'').replace(/'/g,"\\'")}')">❤️ Sento</button>
+        <button onclick="ms11Toggle('chat','${id}')">💬 Chat</button>
+        <button onclick="ms11Toggle('match','${id}')">🤝 Match</button>
+        <button onclick="ms11Useful('${esc(p.id)}','${String(p.author||'').replace(/'/g,"\\'")}')">✅ Utile</button>
+        <button onclick="ms11Donate('${esc(p.id)}','${String(p.author||'').replace(/'/g,"\\'")}')">🎁 Dona</button>
+        <button onclick="document.getElementById('ms11Post_${id}')?.classList.toggle('open')">Leggi</button>
+      </div>
+      <div class="ms11-panel" id="ms11_chat_${id}"><b>Chat del post</b>${chats.map(c=>`<div class="ms11-line"><b>${esc(mask(c.from))}</b><br>${esc(c.text||"")}</div>`).join("")}<div class="ms11-inputline"><input id="ms11_chat_input_${id}" placeholder="Scrivi una risposta..."><button class="ms11-btn green" onclick="ms11SendChat('${esc(p.id)}','${String(p.author||'').replace(/'/g,"\\'")}','${id}')">Invia</button></div></div>
+      <div class="ms11-panel" id="ms11_match_${id}"><b>Match del post</b>${matches.length?matches.map(m=>`<div class="ms11-line"><b>${Math.round(m.score||0)}%</b> · ${esc(m.post?.authorName||mask(m.post?.author))}<br>${esc(String(m.post?.text||"").slice(0,100))}${String(m.post?.text||"").length>100?"...":""}</div>`).join(""):`<div class="ms11-line">Nessun match chiaro: il sistema evita rumore e liste inutili.</div>`}</div>
+    </article>`;
+  }
+
+  window.ms11Toggle=function(type,id){
+    const el=document.getElementById(`ms11_${type}_${id}`); if(!el) return;
+    el.classList.toggle("open");
+    if(el.classList.contains("open")) setTimeout(()=>document.getElementById(`ms11_chat_input_${id}`)?.focus(),100);
+  };
+  window.ms11Like=function(id,author){ try{ if(typeof likeSocialPost==="function") likeSocialPost(id,author); }catch(e){} };
+  window.ms11Useful=function(id,author){ try{ if(typeof ms9VoteUtility==="function") ms9VoteUtility(id,author,5); else toast("Voto utile registrato"); }catch(e){ toast("Voto utile registrato"); } };
+  window.ms11Donate=function(id,author){ try{ if(typeof ms9DonateFromPost==="function") ms9DonateFromPost(id,author); else if(typeof openDonation==="function") openDonation(author); }catch(e){ toast("Donazione avviata"); } };
+  window.ms11SendChat=async function(postId,author,id){
+    const input=document.getElementById(`ms11_chat_input_${id}`); const text=input?.value.trim(); if(!text) return;
+    try{ if(typeof ms9SendPostChat==="function") { const old=document.getElementById(`ms9ChatInput_${safe(postId)}`); if(old) old.value=text; else input.id=`ms9ChatInput_${safe(postId)}`; await ms9SendPostChat(postId,author); } else { await addDoc(collection(db,"postChats"),{postId,from:currentUser?.email||"utente",to:author,text,timestamp:Date.now()}); } }catch(e){ toast("Messaggio salvato localmente"); }
+    if(input) input.value=""; setTimeout(render,200);
+  };
+
+  function renderMatchesView(box){
+    const ms=buildMatches(10);
+    box.innerHTML=`<div class="ms11-card"><b>Match automatici</b><br><span style="font-size:12px;color:#64748b">Mostro solo connessioni sintetiche e azionabili.</span></div>` + (ms.length?ms.map((m,i)=>`
+      <div class="ms11-card ms11-match"><div><h4>${mask(m.a.user)} ↔ ${mask(m.b.user)}</h4><p>${esc(m.reason)} ${esc(m.a.need||"")} ↔ ${esc(m.b.resource||m.b.need||"")}</p><span class="ms11-pill">${esc(m.category||"generale")}</span></div><div><div class="ms11-score">${m.score}%</div><button class="ms11-btn green" style="margin-top:8px" onclick="activateConnection('${String(m.a.user).replace(/'/g,"\\'")}','${String(m.b.user).replace(/'/g,"\\'")}',${m.score},'Compatibilità sintetica','${String(m.category).replace(/'/g,"\\'")}')">Attiva</button></div></div>`).join(""):`<div class="ms11-empty">Nessun match utile pronto. Aggiungi bisogni e risorse più specifici.</div>`);
+  }
+
+  function listenConnectionsMini(){
+    if(ms11ConnectionsListening) return; ms11ConnectionsListening=true;
+    try{ onSnapshot(collection(db,"connections"), snap=>{ ms11Connections=[]; snap.forEach(d=>{ const c={id:d.id,...d.data()}; if(!currentUser || c.from===currentUser.email || c.to===currentUser.email || (c.participants||[]).includes(currentUser.email)) ms11Connections.push(c); }); ms11Connections.sort((a,b)=>(b.lastMessageAt||b.timestamp||0)-(a.lastMessageAt||a.timestamp||0)); if(ms11View==="chat") render(); }); }catch(e){}
+  }
+  function renderChatView(box){
+    listenConnectionsMini();
+    box.innerHTML=`<div class="ms11-card"><b>Chat</b><br><span style="font-size:12px;color:#64748b">Apri una connessione, non una pagina infinita.</span></div>` + (ms11Connections.length?ms11Connections.slice(0,20).map(c=>`<div class="ms11-card"><b>${mask(c.from)} ↔ ${mask(c.to)}</b><br><span class="ms11-pill">${esc(c.status||"")}</span>${c.category?`<span class="ms11-pill">#${esc(c.category)}</span>`:""}<p style="font-size:13px;color:#64748b;margin:8px 0">${esc(c.lastMessage||c.reason||"Nessun messaggio")}</p><button class="ms11-btn purple" onclick="openChat && openChat('${c.id}','${String(c.from).replace(/'/g,"\\'")}','${String(c.to).replace(/'/g,"\\'")}')">Apri chat</button></div>`).join(""):`<div class="ms11-empty">Nessuna chat. Attiva prima un match.</div>`);
+  }
+
+  function renderProfile(box){
+    const name=currentUser?.displayName||mask(currentUser?.email||"");
+    box.innerHTML=`<div class="ms11-card"><div class="ms11-post-head"><div class="ms11-avatar">${initials(name)}</div><div><div class="ms11-author">${esc(name||"Profilo")}</div><div class="ms11-time">${esc(currentUser?.email||"Non connesso")}</div></div></div></div>
+    <div class="ms11-card"><b>Impostazioni rapide</b><div class="ms11-settings-grid" style="margin-top:10px"><input id="ms11Name" placeholder="Nome pubblico" value="${esc(name||"")}"><select id="ms11ProfileMode"><option value="public">Profilo pubblico</option><option value="friends">Solo amici</option><option value="private">Privato</option></select><input id="ms11Country" placeholder="Stato"><input id="ms11City" placeholder="Città"></div><button class="ms11-btn green" style="margin-top:10px" onclick="ms11SaveProfile()">Salva</button></div>`;
+  }
+  window.ms11SaveProfile=async function(){
+    try{ if(!currentUser) return toast("Accedi prima"); await updateDoc(doc(db,"users",currentUser.email),{nickname:document.getElementById("ms11Name")?.value||currentUser.displayName||currentUser.email, profileMode:document.getElementById("ms11ProfileMode")?.value||"public", country:document.getElementById("ms11Country")?.value||"", city:document.getElementById("ms11City")?.value||"", updatedAt:Date.now()}); toast("Profilo salvato"); }catch(e){ toast("Impostazioni salvate localmente"); }
+  };
+
+  const oldRenderMatches=(typeof renderMatches==="function")?renderMatches:null;
+  renderMatches=function(nodesArg){
+    if(oldRenderMatches && !document.body.classList.contains("ms11-shell-active")) oldRenderMatches(nodesArg);
+    if(ms11View==="matches") render();
+  };
+  const oldRenderSocialPosts=(typeof renderSocialPosts==="function")?renderSocialPosts:null;
+  renderSocialPosts=function(){
+    if(oldRenderSocialPosts && !document.body.classList.contains("ms11-shell-active")) oldRenderSocialPosts();
+    if(ms11View==="feed") render();
+  };
+  const oldCompleteLogin=(typeof completeLogin!=="undefined")?completeLogin:null;
+  if(oldCompleteLogin && !window.__ms11CompletePatched){ window.__ms11CompletePatched=true; completeLogin=async function(user){ await oldCompleteLogin(user); listenConnectionsMini(); render(); }; }
+  document.addEventListener("DOMContentLoaded",()=>{ ensureRoot(); render(); setTimeout(render,500); setInterval(()=>{ if(["feed","matches","chat"].includes(ms11View)) render(); },4000); });
 })();
 
 </script>
