@@ -841,6 +841,7 @@ body.dark-mode .social-trust-item {
 
 <button onclick="login()">Login Google</button>
 <p id="user"></p>
+<div id="loginHelp" class="card" style="font-size:13px; display:none;"></div>
 
 <h2>Il mio profilo</h2>
 <div class="card" id="profileBox">
@@ -1278,6 +1279,9 @@ import {
 import {
   getAuth,
   signInWithPopup,
+  signInWithRedirect,
+  getRedirectResult,
+  onAuthStateChanged,
   GoogleAuthProvider
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
@@ -1333,24 +1337,30 @@ if (localStorage.getItem("miniSentientOnboardingSeen") === "true") {
   }, 100);
 }
 
-window.login = async function () {
-  const provider = new GoogleAuthProvider();
-  const result = await signInWithPopup(auth, provider);
+let authAlreadyInitialized = false;
 
-  currentUser = result.user;
+async function completeLogin(user) {
+  if (!user) return;
 
-  document.getElementById("user").innerText =
-    "Connesso come: " + currentUser.email;
+  currentUser = user;
+
+  const userBox = document.getElementById("user");
+  if (userBox) {
+    userBox.innerText = "Connesso come: " + currentUser.email;
+  }
 
   await ensureUser(currentUser.email);
-  
-  document.getElementById("profileName").innerText =
-  currentUser.displayName || currentUser.email;
 
-if (currentUser.photoURL) {
-  document.getElementById("profilePhoto").src = currentUser.photoURL;
-  document.getElementById("profilePhoto").style.display = "block";
-}
+  const profileName = document.getElementById("profileName");
+  if (profileName) {
+    profileName.innerText = currentUser.displayName || currentUser.email;
+  }
+
+  const profilePhoto = document.getElementById("profilePhoto");
+  if (currentUser.photoURL && profilePhoto) {
+    profilePhoto.src = currentUser.photoURL;
+    profilePhoto.style.display = "block";
+  }
 
   await updateLastActive();
 
@@ -1371,7 +1381,90 @@ if (currentUser.photoURL) {
   enhanceSocialProfileBadge();
   renderSocialQuickStats();
   msxInitAdvancedLayer();
+
+  authAlreadyInitialized = true;
+
+  if (typeof miniToast === "function") {
+    miniToast("Login Google completato ✅");
+  }
+}
+
+window.login = async function () {
+  if (window.location.protocol === "file:") {
+    alert(
+      "Il login Google Firebase non funziona aprendo il file direttamente.\n\n" +
+      "Aprilo tramite un server locale, ad esempio:\n" +
+      "http://localhost:5500\n\n" +
+      "oppure pubblicalo su Firebase Hosting."
+    );
+    return;
+  }
+
+  const provider = new GoogleAuthProvider();
+  provider.setCustomParameters({
+    prompt: "select_account"
+  });
+
+  try {
+    const result = await signInWithPopup(auth, provider);
+    await completeLogin(result.user);
+  } catch (error) {
+    console.error("ERRORE LOGIN GOOGLE:", error);
+
+    const code = error && error.code ? error.code : "";
+    const message = error && error.message ? error.message : String(error);
+
+    if (code === "auth/unauthorized-domain") {
+      alert(
+        "Dominio non autorizzato in Firebase Authentication.\n\n" +
+        "Vai in Firebase Console → Authentication → Settings → Authorized domains\n" +
+        "e aggiungi il dominio da cui stai aprendo l'app, ad esempio:\n" +
+        "localhost\n127.0.0.1\nmini-sentient.web.app"
+      );
+      return;
+    }
+
+    if (
+      code === "auth/popup-blocked" ||
+      code === "auth/popup-closed-by-user" ||
+      code === "auth/cancelled-popup-request" ||
+      code === "auth/operation-not-supported-in-this-environment"
+    ) {
+      const useRedirect = confirm(
+        "Il popup Google è stato bloccato o chiuso.\n\n" +
+        "Vuoi provare con il login tramite redirect?"
+      );
+
+      if (useRedirect) {
+        await signInWithRedirect(auth, provider);
+      }
+
+      return;
+    }
+
+    alert("Errore login Google:\n" + code + "\n\n" + message);
+  }
 };
+
+getRedirectResult(auth)
+  .then(async result => {
+    if (result && result.user) {
+      await completeLogin(result.user);
+    }
+  })
+  .catch(error => {
+    console.error("ERRORE REDIRECT LOGIN:", error);
+  });
+
+onAuthStateChanged(auth, user => {
+  if (user && !authAlreadyInitialized) {
+    setTimeout(() => {
+      completeLogin(user).catch(error => {
+        console.error("ERRORE RIPRISTINO SESSIONE:", error);
+      });
+    }, 0);
+  }
+});
 
 async function updateLastActive() {
   if (!currentUser) return;
