@@ -1392,10 +1392,235 @@ body.dark-mode .ms11-tabs button, body.dark-mode .ms11-actions button, body.dark
 .ms12-avatars{display:flex;min-width:58px}.ms12-dot{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#2563eb,#7c3aed);color:#fff;font-size:12px;font-weight:900;border:2px solid #fff;margin-left:-8px}.ms12-dot:first-child{margin-left:0}.ms12-main{flex:1;min-width:0}.ms12-main b{font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:block}.ms12-main span{font-size:12px;color:#64748b;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;display:block}.ms12-open{margin:0!important;border-radius:999px!important;padding:8px 10px!important;font-size:12px!important;background:#7c3aed!important;color:white!important}
 body.dark-mode .ms12-match-card,body.dark-mode .ms12-conn-row{background:#111827;color:#e5e7eb;border-color:#334155}body.dark-mode .ms12-details{background:#0f172a;color:#cbd5e1;border-color:#334155}
 
+
+/* ==========================================================
+   STEP 13 - WORLD CLASS SOCIAL / MESSAGE LOGO NETWORK
+   UI finale: niente elenchi match/connessioni. Le relazioni sono
+   sintetizzate in loghi-messaggio apribili, stile app social.
+   ========================================================== */
+body.ms13-active{
+  margin:0!important;
+  padding:0!important;
+  background:#edf2f7!important;
+  overflow-x:hidden;
+  font-family:Arial,sans-serif;
+}
+body.ms13-active .social-topbar,
+body.ms13-active .social-layout,
+body.ms13-active .social-mobile-nav,
+body.ms13-active .social-floating-create,
+body.ms13-active #ms11Root{
+  display:none!important;
+}
+#ms13Root{
+  min-height:100vh;
+  background:
+    radial-gradient(circle at top left, rgba(37,99,235,.13), transparent 34%),
+    radial-gradient(circle at top right, rgba(22,163,74,.12), transparent 28%),
+    #edf2f7;
+  color:#0f172a;
+  display:none;
+}
+body.ms13-active #ms13Root{display:block;}
+.ms13-top{
+  position:sticky;top:0;z-index:999999;
+  background:rgba(255,255,255,.92);
+  backdrop-filter:blur(16px);
+  border-bottom:1px solid rgba(148,163,184,.35);
+  padding:10px 12px;
+}
+.ms13-topline{display:flex;align-items:center;gap:10px;max-width:820px;margin:0 auto;}
+.ms13-logo{
+  width:38px;height:38px;border-radius:16px;
+  display:flex;align-items:center;justify-content:center;
+  background:linear-gradient(135deg,#2563eb,#7c3aed);
+  color:white;font-weight:950;box-shadow:0 8px 22px rgba(37,99,235,.25);
+}
+.ms13-title{flex:1;min-width:0}
+.ms13-title b{display:block;font-size:16px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ms13-title span{font-size:12px;color:#64748b}
+.ms13-top button{margin:0;border:0;border-radius:999px;padding:8px 11px;background:#111827;color:white;font-size:12px;font-weight:900}
+.ms13-wrap{max-width:820px;margin:0 auto;padding:10px 10px 92px;}
+.ms13-tabs{
+  display:grid;grid-template-columns:repeat(5,1fr);gap:7px;
+  margin:8px 0 10px;
+}
+.ms13-tabs button{
+  margin:0;border:1px solid #d9dee8;background:rgba(255,255,255,.92);
+  color:#111827;border-radius:16px;padding:10px 5px;font-size:11px;font-weight:950;
+  box-shadow:0 1px 8px rgba(15,23,42,.05);
+}
+.ms13-tabs button.active{background:#2563eb;color:#fff;border-color:#2563eb;}
+.ms13-card{
+  background:rgba(255,255,255,.95);
+  border:1px solid rgba(148,163,184,.36);
+  border-radius:24px;
+  padding:14px;
+  margin:10px 0;
+  box-shadow:0 8px 28px rgba(15,23,42,.08);
+}
+.ms13-hero{
+  background:linear-gradient(135deg,#0f172a,#1d4ed8 58%,#16a34a);
+  color:white;border:none;overflow:hidden;position:relative;
+}
+.ms13-hero:after{
+  content:"";position:absolute;right:-40px;top:-50px;width:150px;height:150px;border-radius:50%;background:rgba(255,255,255,.16);
+}
+.ms13-hero h2{margin:0;font-size:22px;line-height:1.1}
+.ms13-hero p{margin:7px 0 0;color:rgba(255,255,255,.82);font-size:13px;line-height:1.35}
+.ms13-kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:13px;position:relative;z-index:1}
+.ms13-kpi{background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.18);border-radius:18px;padding:10px}
+.ms13-kpi b{display:block;font-size:18px}
+.ms13-kpi span{font-size:11px;color:rgba(255,255,255,.75)}
+.ms13-composer textarea{
+  width:100%;box-sizing:border-box;min-height:82px;resize:vertical;
+  border-radius:20px;border:1px solid #d9dee8;background:#f8fafc;
+  padding:13px;font-size:15px;outline:none;
+}
+.ms13-row{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:9px}
+.ms13-row select,.ms13-row input{
+  flex:1;min-width:120px;box-sizing:border-box;border:1px solid #d9dee8;
+  border-radius:999px;background:#f8fafc;padding:10px 12px;font-size:13px;outline:none;
+}
+.ms13-btn{margin:0;border:0;border-radius:999px;padding:10px 13px;background:#2563eb;color:#fff;font-weight:950;font-size:13px}
+.ms13-btn.green{background:#16a34a}.ms13-btn.purple{background:#7c3aed}.ms13-btn.dark{background:#111827}.ms13-btn.light{background:#f1f5f9;color:#111827;border:1px solid #d9dee8}
+.ms13-section-title{display:flex;align-items:center;justify-content:space-between;gap:8px;margin:12px 2px 6px}
+.ms13-section-title b{font-size:13px;text-transform:uppercase;letter-spacing:.05em;color:#64748b}
+.ms13-section-title span{font-size:12px;color:#94a3b8}
+.ms13-bubble-rail{
+  display:flex;gap:11px;overflow-x:auto;padding:4px 1px 11px;scroll-snap-type:x mandatory;
+}
+.ms13-bubble{
+  scroll-snap-align:start;
+  min-width:76px;max-width:76px;text-align:center;position:relative;cursor:pointer;
+}
+.ms13-bubble-logo{
+  width:62px;height:62px;margin:0 auto 5px;border-radius:24px;
+  display:flex;align-items:center;justify-content:center;
+  background:linear-gradient(135deg,#2563eb,#7c3aed);
+  color:white;font-size:22px;font-weight:950;
+  box-shadow:0 10px 24px rgba(37,99,235,.22);
+  border:3px solid #fff;
+}
+.ms13-bubble.hot .ms13-bubble-logo{background:linear-gradient(135deg,#ef4444,#f59e0b);}
+.ms13-bubble.near .ms13-bubble-logo{background:linear-gradient(135deg,#16a34a,#2563eb);}
+.ms13-bubble.active .ms13-bubble-logo{background:linear-gradient(135deg,#7c3aed,#ec4899);}
+.ms13-badge{
+  position:absolute;right:4px;top:-1px;background:#ef4444;color:#fff;border-radius:999px;
+  min-width:19px;height:19px;padding:0 4px;display:flex;align-items:center;justify-content:center;
+  font-size:10px;font-weight:950;border:2px solid #fff;
+}
+.ms13-bubble small{
+  display:block;font-size:10px;line-height:1.15;color:#475569;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+}
+.ms13-bubble em{display:block;font-style:normal;font-size:10px;color:#94a3b8;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ms13-post-head{display:flex;gap:10px;align-items:center;margin-bottom:8px}
+.ms13-avatar{width:44px;height:44px;border-radius:18px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#2563eb,#7c3aed);color:#fff;font-weight:950;flex:0 0 auto}
+.ms13-author{font-size:14px;font-weight:950}
+.ms13-time{font-size:12px;color:#64748b;margin-top:1px}
+.ms13-pill{display:inline-flex;align-items:center;gap:5px;border-radius:999px;background:#e8f0ff;color:#1d4ed8;font-size:11px;font-weight:950;padding:4px 8px;margin:2px 4px 2px 0}
+.ms13-text{font-size:15px;line-height:1.43;margin:8px 0;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden}
+.ms13-card.open .ms13-text{display:block}
+.ms13-actions{display:flex;gap:7px;overflow-x:auto;border-top:1px solid #eef2f7;padding-top:10px;margin-top:10px}
+.ms13-actions button{white-space:nowrap;margin:0;border:1px solid #e5e7eb;background:#f8fafc;color:#111827;border-radius:999px;padding:8px 10px;font-size:12px;font-weight:950}
+.ms13-panel{display:none;background:#f8fafc;border:1px solid #e5e7eb;border-radius:18px;padding:10px;margin-top:10px}
+.ms13-panel.open{display:block}
+.ms13-line{background:#fff;border:1px solid #e5e7eb;border-radius:14px;padding:8px 10px;margin:6px 0;font-size:13px}
+.ms13-inputline{display:flex;gap:7px;margin-top:8px}
+.ms13-inputline input{flex:1;border-radius:999px;border:1px solid #d9dee8;padding:10px 12px;outline:none}
+.ms13-compact-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:9px}
+.ms13-logo-card{
+  border:1px solid #d9dee8;background:#fff;border-radius:20px;padding:10px;text-align:center;
+  box-shadow:0 2px 12px rgba(15,23,42,.06);cursor:pointer;min-height:105px;
+}
+.ms13-logo-card .icon{
+  width:54px;height:54px;border-radius:22px;margin:0 auto 7px;
+  display:flex;align-items:center;justify-content:center;color:white;font-size:20px;font-weight:950;
+  background:linear-gradient(135deg,#2563eb,#7c3aed);
+}
+.ms13-logo-card:nth-child(2n) .icon{background:linear-gradient(135deg,#16a34a,#2563eb)}
+.ms13-logo-card:nth-child(3n) .icon{background:linear-gradient(135deg,#f59e0b,#ef4444)}
+.ms13-logo-card b{display:block;font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ms13-logo-card span{display:block;font-size:11px;color:#64748b;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:2px}
+.ms13-empty{text-align:center;color:#64748b;background:rgba(255,255,255,.85);border:1px dashed #cbd5e1;border-radius:22px;padding:28px 16px;margin:12px 0}
+.ms13-sheet{
+  position:fixed;left:0;right:0;bottom:0;z-index:1000000;
+  background:#fff;border-radius:28px 28px 0 0;border:1px solid #d9dee8;
+  box-shadow:0 -20px 50px rgba(15,23,42,.25);
+  padding:12px 14px calc(18px + env(safe-area-inset-bottom,0px));
+  transform:translateY(110%);transition:.22s ease;max-height:72vh;overflow:auto;
+}
+.ms13-sheet.open{transform:translateY(0)}
+.ms13-sheet-handle{width:46px;height:5px;border-radius:999px;background:#cbd5e1;margin:0 auto 12px}
+.ms13-sheet-title{display:flex;gap:10px;align-items:center;margin-bottom:8px}
+.ms13-sheet-title .icon{width:48px;height:48px;border-radius:18px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#2563eb,#7c3aed);color:white;font-weight:950}
+.ms13-sheet-title b{display:block;font-size:15px}
+.ms13-sheet-title span{font-size:12px;color:#64748b}
+.ms13-bottom{
+  position:fixed;left:0;right:0;bottom:0;z-index:999999;
+  background:rgba(255,255,255,.96);backdrop-filter:blur(12px);
+  border-top:1px solid #d9dee8;display:flex;justify-content:space-around;
+  padding:7px 5px calc(7px + env(safe-area-inset-bottom,0px));
+}
+.ms13-bottom button{margin:0;background:transparent;color:#111827;border:0;font-size:11px;font-weight:950;padding:6px 5px;border-radius:14px;min-width:54px}
+.ms13-bottom button.active{background:#e8f0ff;color:#1d4ed8}
+.ms13-settings-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.ms13-settings-grid input,.ms13-settings-grid select{width:100%;box-sizing:border-box;border:1px solid #d9dee8;background:#f8fafc;border-radius:14px;padding:11px;font-size:14px;outline:none}
+@media(max-width:760px){
+  .ms13-wrap{padding:8px 8px 88px}
+  .ms13-tabs{grid-template-columns:repeat(5,1fr);gap:5px}
+  .ms13-tabs button{font-size:10px;padding:9px 3px}
+  .ms13-compact-grid{grid-template-columns:repeat(3,1fr)}
+  .ms13-settings-grid{grid-template-columns:1fr}
+  .ms13-card{border-radius:20px;padding:12px;margin:8px 0}
+  .ms13-hero h2{font-size:20px}
+}
+body.dark-mode.ms13-active,#ms13Root.dark{background:#0f172a!important;color:#e5e7eb!important}
+body.dark-mode .ms13-top,body.dark-mode .ms13-bottom,body.dark-mode .ms13-card,body.dark-mode .ms13-sheet,body.dark-mode .ms13-logo-card,body.dark-mode .ms13-line{background:#111827;color:#e5e7eb;border-color:#334155}
+body.dark-mode .ms13-row select,body.dark-mode .ms13-row input,body.dark-mode .ms13-composer textarea,body.dark-mode .ms13-inputline input,body.dark-mode .ms13-settings-grid input,body.dark-mode .ms13-settings-grid select,body.dark-mode .ms13-panel{background:#1f2937;color:#e5e7eb;border-color:#334155}
+body.dark-mode .ms13-bottom button,body.dark-mode .ms13-actions button{color:#e5e7eb;background:#1f2937;border-color:#334155}
+
 </style>
 </head>
 
 <body>
+
+<div id="ms13Root" aria-label="Mini Sentient Social">
+  <div class="ms13-top">
+    <div class="ms13-topline">
+      <div class="ms13-logo">MS</div>
+      <div class="ms13-title">
+        <b>Mini Sentient</b>
+        <span id="ms13Subtitle">Economia Empatica · rete viva</span>
+      </div>
+      <button onclick="ms13QuickLogin()">Accedi</button>
+    </div>
+  </div>
+
+  <div class="ms13-wrap">
+    <div class="ms13-tabs">
+      <button id="ms13TabFeed" onclick="ms13SetView('feed')">🏠 Feed</button>
+      <button id="ms13TabCreate" onclick="ms13SetView('create')">✍️ Post</button>
+      <button id="ms13TabNetwork" onclick="ms13SetView('network')">💬 Rete</button>
+      <button id="ms13TabChat" onclick="ms13SetView('chat')">🤝 Chat</button>
+      <button id="ms13TabProfile" onclick="ms13SetView('profile')">👤 Profilo</button>
+    </div>
+
+    <div id="ms13View"></div>
+  </div>
+
+  <div id="ms13Sheet" class="ms13-sheet"></div>
+
+  <div class="ms13-bottom">
+    <button id="ms13BottomFeed" onclick="ms13SetView('feed')">🏠<br>Feed</button>
+    <button id="ms13BottomCreate" onclick="ms13SetView('create')">✍️<br>Post</button>
+    <button id="ms13BottomNetwork" onclick="ms13SetView('network')">💬<br>Rete</button>
+    <button id="ms13BottomChat" onclick="ms13SetView('chat')">🤝<br>Chat</button>
+    <button id="ms13BottomProfile" onclick="ms13SetView('profile')">👤<br>Profilo</button>
+  </div>
+</div>
+
 
 <div class="social-topbar">
   <div class="social-brand"><div class="social-logo">MS</div><span>Mini Sentient</span></div>
@@ -6478,6 +6703,426 @@ document.addEventListener("DOMContentLoaded", function(){ ms9AddNav(); ms9PatchR
   const oldCompleteLogin=(typeof completeLogin!=="undefined")?completeLogin:null;
   if(oldCompleteLogin && !window.__ms11CompletePatched){ window.__ms11CompletePatched=true; completeLogin=async function(user){ await oldCompleteLogin(user); listenConnectionsMini(); render(); }; }
   document.addEventListener("DOMContentLoaded",()=>{ ensureRoot(); render(); setTimeout(render,500); setInterval(()=>{ if(["feed","matches","chat"].includes(ms11View)) render(); },4000); });
+})();
+
+
+/* ==========================================================
+   STEP 13 - JS WORLD CLASS SOCIAL / MESSAGE LOGO NETWORK
+   ========================================================== */
+(function(){
+  let view = "feed";
+  let postsCache = [];
+  let connCache = [];
+  let matchCache = [];
+  let connListening = false;
+  let postListening = false;
+
+  function byId(id){ return document.getElementById(id); }
+  function safe(v){ return (v ?? "").toString(); }
+  function esc(v){ return safe(v).replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m])); }
+  function initials(email){
+    const s = safe(email || "MS").replace(/[^a-zA-Z0-9]/g,"").slice(0,2).toUpperCase();
+    return s || "MS";
+  }
+  function userLabel(email){ return (typeof maskEmail === "function") ? maskEmail(email) : safe(email).replace(/(.{2}).+(@.+)/,"$1***$2"); }
+  function timeAgo(ts){
+    if(!ts) return "ora";
+    const d = Date.now() - Number(ts);
+    if(d < 60000) return "ora";
+    if(d < 3600000) return Math.floor(d/60000)+" min";
+    if(d < 86400000) return Math.floor(d/3600000)+" h";
+    return Math.floor(d/86400000)+" g";
+  }
+  function setActive(){
+    ["Feed","Create","Network","Chat","Profile"].forEach(k=>{
+      const key=k.toLowerCase();
+      const t=byId("ms13Tab"+k), b=byId("ms13Bottom"+k);
+      if(t) t.classList.toggle("active", view===key);
+      if(b) b.classList.toggle("active", view===key);
+    });
+  }
+
+  function makeMatchData(){
+    const out = [];
+    const list = Array.isArray(nodes) ? nodes : [];
+    for(let i=0;i<list.length;i++){
+      for(let j=i+1;j<list.length;j++){
+        const a=list[i], b=list[j];
+        if(!a || !b || !a.user || !b.user || a.user===b.user) continue;
+        const cat = a.category || b.category || "campo";
+        const needResource = (typeof similarity==="function")
+          ? (similarity(a.need,b.resource)*4 + similarity(b.need,a.resource)*4 + similarity(a.need,b.need))
+          : 1;
+        const sameCat = a.category && b.category && a.category===b.category ? 8 : 0;
+        const eA = Number(a.emotionValue||0), eB = Number(b.emotionValue||0);
+        const support = ((eA<0 && eB>=0) || (eB<0 && eA>=0)) ? 6 : 0;
+        const score = Math.max(1, needResource + sameCat + support);
+        if(score >= 2){
+          out.push({
+            id:"m_"+i+"_"+j,
+            from:a.user,to:b.user,category:cat,
+            score,
+            icon: sameCat ? "🤝" : (support ? "❤️" : "💬"),
+            style: sameCat ? "near" : (support ? "hot" : ""),
+            title:`${userLabel(a.user)} ↔ ${userLabel(b.user)}`,
+            subtitle: sameCat ? `Categoria ${cat}` : "Compatibilità utile",
+            reasons:[
+              sameCat ? "stessa categoria" : "",
+              support ? "supporto emotivo" : "",
+              needResource > 0 ? "risorsa compatibile" : ""
+            ].filter(Boolean).slice(0,3),
+            rawReason:`Connessione proposta fra ${userLabel(a.user)} e ${userLabel(b.user)}. ${sameCat ? "Stessa categoria. " : ""}${support ? "Possibile supporto emotivo. " : ""}${needResource > 0 ? "Bisogni e risorse sembrano compatibili." : ""}`
+          });
+        }
+      }
+    }
+    return out.sort((a,b)=>b.score-a.score).slice(0,18);
+  }
+
+  function renderBubbles(){
+    const matches = makeMatchData().slice(0,10);
+    const active = connCache.slice(0,10).map(c=>{
+      const other = c.from === currentUser?.email ? c.to : c.from;
+      const unread = currentUser && c.unread && c.unread[currentUser.email] ? c.unread[currentUser.email] : 0;
+      return {
+        id:c.id, from:c.from, to:c.to, category:c.category||"chat",
+        icon: unread ? "🔔" : "💬",
+        style: unread ? "hot active" : "active",
+        title:userLabel(other || c.to || c.from),
+        subtitle:c.lastMessage ? safe(c.lastMessage).slice(0,24) : (c.status || "connessione"),
+        unread,
+        connection:c
+      };
+    });
+    const all = [...active, ...matches].slice(0,14);
+    if(!all.length) return `<div class="ms13-empty">💬 Le connessioni appariranno qui come loghi-messaggio, non come elenchi.</div>`;
+    return `
+      <div class="ms13-section-title"><b>Messaggi e connessioni vive</b><span>${all.length}</span></div>
+      <div class="ms13-bubble-rail">
+        ${all.map(x=>`
+          <div class="ms13-bubble ${esc(x.style||"")}" onclick="ms13OpenBubble('${esc(x.id)}')">
+            ${x.unread ? `<div class="ms13-badge">${x.unread}</div>` : ""}
+            <div class="ms13-bubble-logo">${x.icon || initials(x.title)}</div>
+            <small>${esc(x.title)}</small>
+            <em>${esc(x.subtitle||x.category||"")}</em>
+          </div>
+        `).join("")}
+      </div>`;
+  }
+
+  function renderHero(){
+    return `
+      <div class="ms13-card ms13-hero">
+        <h2>Economia Empatica</h2>
+        <p>Post, aiuto reale, chat, donazioni e connessioni intelligenti sintetizzate come messaggi vivi.</p>
+        <div class="ms13-kpis">
+          <div class="ms13-kpi"><b>${postsCache.length}</b><span>post</span></div>
+          <div class="ms13-kpi"><b>${connCache.length}</b><span>chat</span></div>
+          <div class="ms13-kpi"><b>${makeMatchData().length}</b><span>segnali</span></div>
+        </div>
+      </div>`;
+  }
+
+  function renderPostCard(p, idx){
+    const id = p.id || ("post_"+idx);
+    const author = p.user || p.author || p.email || "utente";
+    const text = p.text || p.body || p.content || p.need || p.resource || "Post nel campo empatico.";
+    const type = p.type || p.postType || p.category || "economia empatica";
+    return `
+      <div class="ms13-card" id="ms13Post_${esc(id)}">
+        <div class="ms13-post-head">
+          <div class="ms13-avatar">${initials(author)}</div>
+          <div>
+            <div class="ms13-author">${esc(userLabel(author))}</div>
+            <div class="ms13-time">${esc(timeAgo(p.timestamp || p.createdAt))}</div>
+          </div>
+        </div>
+        <span class="ms13-pill">🌱 ${esc(type)}</span>
+        ${p.city ? `<span class="ms13-pill">📍 ${esc(p.city)}</span>` : ""}
+        <div class="ms13-text">${esc(text)}</div>
+        <div class="ms13-actions">
+          <button onclick="ms13ToggleOpen('ms13Post_${esc(id)}')">Leggi</button>
+          <button onclick="ms13TogglePanel('${esc(id)}','chat')">💬 Chat</button>
+          <button onclick="ms13Utility('${esc(id)}')">⭐ Utile</button>
+          <button onclick="ms13Donate('${esc(author)}')">🎁 Dona</button>
+          <button onclick="ms13SetView('network')">🤝 Rete</button>
+        </div>
+        <div id="ms13Panel_${esc(id)}_chat" class="ms13-panel">
+          <div id="ms13ChatLines_${esc(id)}">
+            <div class="ms13-line"><b>Mini Sentient</b><br>Apri una micro-chat direttamente da questo post.</div>
+          </div>
+          <div class="ms13-inputline">
+            <input id="ms13ChatInput_${esc(id)}" placeholder="Scrivi una risposta empatica...">
+            <button class="ms13-btn" onclick="ms13LocalPostMessage('${esc(id)}')">Invia</button>
+          </div>
+        </div>
+      </div>`;
+  }
+
+  function renderFeed(){
+    const posts = postsCache.length ? postsCache : (Array.isArray(nodes) ? nodes.slice(-8).reverse().map((n,i)=>({id:"node"+i,user:n.user,text:`Bisogno: ${n.need || ""}\nRisorsa: ${n.resource || ""}`,category:n.category,timestamp:n.timestamp})) : []);
+    return `
+      ${renderHero()}
+      ${renderBubbles()}
+      <div class="ms13-section-title"><b>Feed vivo</b><span>post uno dopo l'altro</span></div>
+      ${posts.length ? posts.slice(0,20).map(renderPostCard).join("") : `<div class="ms13-empty">Ancora nessun post. Pubblica il primo messaggio di Economia Empatica.</div>`}
+    `;
+  }
+
+  function renderCreate(){
+    return `
+      <div class="ms13-card ms13-composer">
+        <div class="ms13-section-title"><b>Nuovo post</b><span>Economia Empatica</span></div>
+        <textarea id="ms13PostText" placeholder="Cosa cerchi, cosa offri o quale bisogno vuoi condividere?"></textarea>
+        <div class="ms13-row">
+          <select id="ms13PostType">
+            <option value="ricerca">Cerco</option>
+            <option value="offerta">Offro</option>
+            <option value="risorsa">Risorsa</option>
+            <option value="gratitudine">Gratitudine</option>
+          </select>
+          <input id="ms13PostCategory" placeholder="Categoria">
+          <button class="ms13-btn green" onclick="ms13CreatePost()">Pubblica</button>
+        </div>
+      </div>
+      ${renderBubbles()}
+    `;
+  }
+
+  function renderNetwork(){
+    const matches = makeMatchData().slice(0,12);
+    return `
+      ${renderBubbles()}
+      <div class="ms13-section-title"><b>Rete sintetica</b><span>loghi, non elenchi</span></div>
+      <div class="ms13-compact-grid">
+        ${matches.map(x=>`
+          <div class="ms13-logo-card" onclick="ms13OpenBubble('${esc(x.id)}')">
+            <div class="icon">${x.icon}</div>
+            <b>${esc(x.category)}</b>
+            <span>${Math.round(x.score)}% · ${esc(x.reasons[0]||"segnale utile")}</span>
+          </div>
+        `).join("") || `<div class="ms13-empty">Nessun segnale forte.</div>`}
+      </div>
+    `;
+  }
+
+  function renderChat(){
+    if(!connCache.length) return `${renderBubbles()}<div class="ms13-empty">Le chat appariranno come loghi-messaggio quando attivi una connessione.</div>`;
+    return `
+      ${renderBubbles()}
+      <div class="ms13-section-title"><b>Chat attive</b><span>${connCache.length}</span></div>
+      <div class="ms13-compact-grid">
+        ${connCache.slice(0,12).map(c=>{
+          const other = c.from === currentUser?.email ? c.to : c.from;
+          return `<div class="ms13-logo-card" onclick="ms13OpenConnection('${esc(c.id)}')">
+            <div class="icon">💬</div>
+            <b>${esc(userLabel(other || c.to || c.from))}</b>
+            <span>${esc(c.lastMessage || c.status || "apri")}</span>
+          </div>`;
+        }).join("")}
+      </div>
+    `;
+  }
+
+  function renderProfile(){
+    return `
+      <div class="ms13-card">
+        <div class="ms13-post-head">
+          <div class="ms13-avatar">${initials(currentUser?.email || "MS")}</div>
+          <div>
+            <div class="ms13-author">${esc(currentUser?.displayName || userLabel(currentUser?.email || "Utente"))}</div>
+            <div class="ms13-time">${esc(currentUser?.email || "Non connesso")}</div>
+          </div>
+        </div>
+        <div class="ms13-settings-grid">
+          <input id="ms13City" placeholder="Città / zona">
+          <input id="ms13Country" placeholder="Stato">
+          <select id="ms13Privacy"><option value="public">Profilo pubblico</option><option value="friends">Solo amici</option><option value="private">Privato</option></select>
+          <select id="ms13Range"><option value="sameCountry">Stesso Stato</option><option value="near">Vicino a me</option><option value="global">Globale</option></select>
+        </div>
+        <div class="ms13-row">
+          <button class="ms13-btn green" onclick="ms13SaveProfile()">Salva</button>
+          <button class="ms13-btn purple" onclick="ms13DetectLocation()">📍 Posizione</button>
+          <button class="ms13-btn dark" onclick="logout()">Logout</button>
+        </div>
+      </div>
+    `;
+  }
+
+  function render(){
+    document.body.classList.add("ms13-active");
+    const root = byId("ms13Root");
+    if(!root) return;
+    setActive();
+    const box = byId("ms13View");
+    if(!box) return;
+    if(view==="feed") box.innerHTML = renderFeed();
+    if(view==="create") box.innerHTML = renderCreate();
+    if(view==="network") box.innerHTML = renderNetwork();
+    if(view==="chat") box.innerHTML = renderChat();
+    if(view==="profile") box.innerHTML = renderProfile();
+  }
+
+  function listenPosts13(){
+    if(postListening) return;
+    postListening = true;
+    try{
+      onSnapshot(collection(db,"socialPosts"), snap=>{
+        const arr=[]; snap.forEach(d=>arr.push({id:d.id,...d.data()}));
+        postsCache = arr.sort((a,b)=>Number(b.timestamp||b.createdAt||0)-Number(a.timestamp||a.createdAt||0));
+        if(["feed","create"].includes(view)) render();
+      });
+    }catch(e){ console.warn("ms13 posts listen", e); }
+  }
+  function listenConnections13(){
+    if(connListening || !currentUser) return;
+    connListening = true;
+    try{
+      onSnapshot(collection(db,"connections"), snap=>{
+        const arr=[]; snap.forEach(d=>{
+          const c={id:d.id,...d.data()};
+          const mine = c.from===currentUser.email || c.to===currentUser.email || (c.participants||[]).includes(currentUser.email);
+          if(mine) arr.push(c);
+        });
+        connCache = arr.sort((a,b)=>Number(b.lastMessageAt||0)-Number(a.lastMessageAt||0));
+        if(["feed","network","chat"].includes(view)) render();
+      });
+    }catch(e){ console.warn("ms13 conn listen", e); }
+  }
+
+  window.ms13SetView = function(v){ view=v; render(); };
+  window.ms13QuickLogin = function(){ if(currentUser){ view="profile"; render(); } else if(typeof openAuth==="function") openAuth("google"); else if(typeof login==="function") login(); };
+  window.ms13ToggleOpen = function(id){ const el=byId(id); if(el) el.classList.toggle("open"); };
+  window.ms13TogglePanel = function(id,kind){ const el=byId(`ms13Panel_${id}_${kind}`); if(el) el.classList.toggle("open"); };
+  window.ms13LocalPostMessage = function(id){
+    const input=byId("ms13ChatInput_"+id), lines=byId("ms13ChatLines_"+id);
+    if(!input || !lines || !input.value.trim()) return;
+    lines.insertAdjacentHTML("beforeend", `<div class="ms13-line"><b>${esc(userLabel(currentUser?.email||"io"))}</b><br>${esc(input.value.trim())}</div>`);
+    input.value="";
+  };
+  window.ms13Utility = function(){ if(typeof miniToast==="function") miniToast("Utilità registrata ⭐"); };
+  window.ms13Donate = function(email){
+    if(typeof openDonation==="function") openDonation(email);
+    else if(typeof miniToast==="function") miniToast("Donazione pronta per "+userLabel(email));
+  };
+  window.ms13CreatePost = async function(){
+    if(!currentUser){ if(typeof openAuth==="function") openAuth("google"); return; }
+    const textEl=byId("ms13PostText"); const typeEl=byId("ms13PostType"); const catEl=byId("ms13PostCategory");
+    const body=safe(textEl?.value).trim(); if(!body) return;
+    try{
+      await addDoc(collection(db,"socialPosts"),{
+        user:currentUser.email,
+        text:body,
+        type:typeEl?.value || "post",
+        category:catEl?.value || "",
+        visibility:"public",
+        timestamp:Date.now(),
+        createdAt:Date.now()
+      });
+      textEl.value=""; if(catEl) catEl.value="";
+      view="feed"; render();
+    }catch(e){ alert("Errore pubblicazione: "+(e.message||e)); }
+  };
+  window.ms13OpenBubble = function(id){
+    const match = makeMatchData().find(x=>x.id===id);
+    const conn = connCache.find(x=>x.id===id);
+    if(conn){ window.ms13OpenConnection(id); return; }
+    if(!match) return;
+    const sheet=byId("ms13Sheet");
+    sheet.innerHTML = `
+      <div class="ms13-sheet-handle" onclick="ms13CloseSheet()"></div>
+      <div class="ms13-sheet-title">
+        <div class="icon">${match.icon}</div>
+        <div><b>${esc(match.category)}</b><span>${esc(match.title)}</span></div>
+      </div>
+      ${match.reasons.map(r=>`<span class="ms13-pill">${esc(r)}</span>`).join("")}
+      <div class="ms13-line">${esc(match.rawReason)}</div>
+      <div class="ms13-row">
+        <button class="ms13-btn green" onclick="ms13ActivateMatch('${esc(match.id)}')">Attiva</button>
+        <button class="ms13-btn purple" onclick="ms13SetView('chat');ms13CloseSheet()">Chat</button>
+        <button class="ms13-btn light" onclick="ms13CloseSheet()">Chiudi</button>
+      </div>`;
+    sheet.classList.add("open");
+  };
+  window.ms13CloseSheet=function(){ const s=byId("ms13Sheet"); if(s) s.classList.remove("open"); };
+  window.ms13ActivateMatch = function(id){
+    const m=makeMatchData().find(x=>x.id===id); if(!m) return;
+    if(typeof activateConnection==="function"){
+      activateConnection(m.from,m.to,m.score,m.rawReason,m.category);
+      window.ms13CloseSheet();
+      view="chat"; setTimeout(render,600);
+    }
+  };
+  window.ms13OpenConnection=function(id){
+    const c=connCache.find(x=>x.id===id); if(!c) return;
+    const other = c.from === currentUser?.email ? c.to : c.from;
+    const sheet=byId("ms13Sheet");
+    sheet.innerHTML = `
+      <div class="ms13-sheet-handle" onclick="ms13CloseSheet()"></div>
+      <div class="ms13-sheet-title">
+        <div class="icon">💬</div>
+        <div><b>${esc(userLabel(other||c.to||c.from))}</b><span>${esc(c.status||"connessione")}</span></div>
+      </div>
+      <div class="ms13-line">${esc(c.lastMessage || "Apri la chat per continuare la relazione.")}</div>
+      <div class="ms13-row">
+        <button class="ms13-btn purple" onclick="openChat('${esc(c.id)}','${esc(c.from)}','${esc(c.to)}');ms13CloseSheet()">Apri chat</button>
+        <button class="ms13-btn green" onclick="ms13Donate('${esc(other||c.to||c.from)}')">Dona</button>
+        <button class="ms13-btn light" onclick="ms13CloseSheet()">Chiudi</button>
+      </div>`;
+    sheet.classList.add("open");
+  };
+  window.ms13SaveProfile = async function(){
+    if(!currentUser) return;
+    try{
+      await setDoc(doc(db,"users",currentUser.email),{
+        city: byId("ms13City")?.value || "",
+        country: byId("ms13Country")?.value || "",
+        privacy: byId("ms13Privacy")?.value || "public",
+        range: byId("ms13Range")?.value || "sameCountry",
+        updatedAt: Date.now()
+      }, {merge:true});
+      if(typeof miniToast==="function") miniToast("Profilo salvato");
+    }catch(e){ alert(e.message||e); }
+  };
+  window.ms13DetectLocation=function(){
+    if(!navigator.geolocation){ alert("Geolocalizzazione non disponibile"); return; }
+    navigator.geolocation.getCurrentPosition(async pos=>{
+      if(currentUser){
+        await setDoc(doc(db,"users",currentUser.email),{
+          lat:pos.coords.latitude,lng:pos.coords.longitude,locationUpdatedAt:Date.now()
+        },{merge:true});
+      }
+      if(typeof miniToast==="function") miniToast("Posizione aggiornata");
+    },err=>alert("Posizione non autorizzata"));
+  };
+
+  const oldCompleteLogin13 = (typeof completeLogin !== "undefined") ? completeLogin : null;
+  if(oldCompleteLogin13 && !window.__ms13CompletePatched){
+    window.__ms13CompletePatched=true;
+    completeLogin = async function(user){
+      await oldCompleteLogin13(user);
+      listenPosts13();
+      listenConnections13();
+      render();
+    };
+  }
+  const oldRenderMatches13 = (typeof renderMatches === "function") ? renderMatches : null;
+  if(oldRenderMatches13 && !window.__ms13RenderMatchesPatched){
+    window.__ms13RenderMatchesPatched=true;
+    renderMatches = function(nodesArg){
+      if(!document.body.classList.contains("ms13-active")) oldRenderMatches13(nodesArg);
+      matchCache = makeMatchData();
+      if(["feed","network"].includes(view)) render();
+    };
+  }
+
+  document.addEventListener("DOMContentLoaded",()=>{
+    document.body.classList.add("ms13-active");
+    listenPosts13();
+    setTimeout(()=>{ listenConnections13(); render(); },300);
+    render();
+    setInterval(()=>{ if(["feed","network","chat"].includes(view)) render(); },5000);
+  });
 })();
 
 </script>
