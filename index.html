@@ -919,6 +919,50 @@ body.dark-mode .auth-entry-extra button {
   }
 }
 
+
+
+/* ==========================================================
+   STEP 1-8 - SOCIAL PRIVACY / AMICI / POST / CHAT EMPATICA
+   Innesto conservativo: mantiene tutto il file precedente e
+   aggiunge profili pubblici/privati, feed amici, amicizie,
+   icone connessioni, chat nei post, reazioni e stanze.
+   ========================================================== */
+.ms8-card {
+  background:#fff;
+  border:1px solid var(--ms-border, #d9dee8);
+  border-radius:22px;
+  padding:16px;
+  margin:14px 0;
+  box-shadow:0 2px 12px rgba(15,23,42,.07);
+}
+.ms8-title { display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:10px; }
+.ms8-title h3 { margin:0; }
+.ms8-grid { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+.ms8-tabs { display:flex; flex-wrap:wrap; gap:8px; margin:10px 0; }
+.ms8-tabs button { background:#f1f5f9; color:#111827; font-weight:800; margin:0; }
+.ms8-tabs button.active { background:#2563eb; color:#fff; }
+.ms8-privacy-row { display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; }
+.ms8-icon-rail { display:flex; gap:8px; overflow-x:auto; padding:8px 0; }
+.ms8-avatar {
+  width:44px; height:44px; min-width:44px; border-radius:50%;
+  background:linear-gradient(135deg,#2563eb,#7c3aed); color:#fff;
+  display:flex; align-items:center; justify-content:center; font-weight:900;
+  border:3px solid #fff; box-shadow:0 2px 8px rgba(15,23,42,.18); cursor:pointer;
+}
+.ms8-avatar.pending { background:linear-gradient(135deg,#f59e0b,#ef4444); }
+.ms8-avatar.room { background:linear-gradient(135deg,#16a34a,#2563eb); }
+.ms8-post-extra { border-top:1px solid #eef2f7; margin-top:10px; padding-top:10px; }
+.ms8-reactions { display:flex; flex-wrap:wrap; gap:6px; margin:8px 0; }
+.ms8-reactions button { background:#f8fafc; color:#111827; border:1px solid #e5e7eb; margin:0; padding:7px 9px; border-radius:999px; font-size:13px; }
+.ms8-inline-chat { background:#f8fafc; border:1px solid #eef2f7; border-radius:16px; padding:10px; margin-top:10px; display:none; }
+.ms8-inline-chat.open { display:block; }
+.ms8-mini-message { background:#fff; border-radius:12px; padding:8px 10px; margin:6px 0; border:1px solid #e5e7eb; font-size:13px; }
+.ms8-room-item, .ms8-request-item { background:#f8fafc; border:1px solid #eef2f7; border-radius:16px; padding:10px; margin:8px 0; }
+.ms8-badge { display:inline-flex; align-items:center; gap:5px; padding:5px 9px; border-radius:999px; background:#e8f0ff; color:#1d4ed8; font-size:12px; font-weight:800; margin:3px; }
+body.dark-mode .ms8-card, body.dark-mode .ms8-inline-chat, body.dark-mode .ms8-mini-message, body.dark-mode .ms8-room-item, body.dark-mode .ms8-request-item { background:#111827; color:#e5e7eb; border-color:#334155; }
+body.dark-mode .ms8-tabs button, body.dark-mode .ms8-reactions button { background:#1f2937; color:#e5e7eb; border-color:#334155; }
+@media (max-width:860px) { .ms8-grid, .ms8-privacy-row { grid-template-columns:1fr; } }
+
 </style>
 </head>
 
@@ -1377,6 +1421,81 @@ body.dark-mode .auth-entry-extra button {
 <div id="donationsBox"></div>
 
 
+
+
+
+<!-- ==========================================================
+     STEP 1-8 - SOCIAL PRIVACY / AMICI / POST / CHAT EMPATICA
+     Blocco aggiunto in modo conservativo, senza rimuovere righe.
+     ========================================================== -->
+<div class="ms8-card mini-section" id="ms8SocialPrivacySection">
+  <div class="ms8-title">
+    <h3>Social Empathic - Privacy, amici e interazioni</h3>
+    <span class="tag">Step 1-8</span>
+  </div>
+  <p class="small">Gestisci profilo pubblico/privato, feed amici, anteprime, connessioni sintetiche, reazioni empatiche e stanze multiutente.</p>
+
+  <div class="ms8-tabs" id="ms8FeedTabs">
+    <button id="ms8TabAll" class="active" onclick="ms8SetFeedScope('all')">🌍 Tutti</button>
+    <button id="ms8TabFriends" onclick="ms8SetFeedScope('friends')">👥 Amici</button>
+    <button id="ms8TabPreview" onclick="ms8SetFeedScope('preview')">👁️ Anteprime</button>
+    <button id="ms8TabUrgent" onclick="ms8SetFeedScope('urgent')">🔥 Bisogni</button>
+  </div>
+
+  <div class="ms8-grid">
+    <div>
+      <h4>Profilo pubblico / privato</h4>
+      <div class="ms8-privacy-row">
+        <select id="ms8ProfileVisibility">
+          <option value="public">Profilo pubblico</option>
+          <option value="friends">Solo amici</option>
+          <option value="private">Privato</option>
+        </select>
+        <select id="ms8DefaultPostVisibility">
+          <option value="public">Post pubblici</option>
+          <option value="friends">Post amici</option>
+          <option value="private">Post privati</option>
+        </select>
+        <select id="ms8ChatPrivacy">
+          <option value="open">Chat aperta</option>
+          <option value="friends">Chat solo amici</option>
+          <option value="request">Chat su richiesta</option>
+        </select>
+      </div>
+      <button class="green" onclick="ms8SavePrivacySettings()">Salva privacy</button>
+      <div id="ms8PrivacyStatus" class="small"></div>
+    </div>
+
+    <div>
+      <h4>Richieste amicizia</h4>
+      <input id="ms8FriendEmail" type="email" placeholder="Email utente da aggiungere agli amici">
+      <button class="purple" onclick="ms8SendFriendRequest()">Invia richiesta</button>
+      <div id="ms8FriendRequestsBox"><div class="small">Nessuna richiesta caricata.</div></div>
+    </div>
+  </div>
+
+  <h4>Connessioni sintetizzate</h4>
+  <div id="ms8ConnectionIcons" class="ms8-icon-rail"><div class="small">Le icone appariranno dopo login, amicizie o connessioni.</div></div>
+
+  <div class="ms8-grid">
+    <div>
+      <h4>Stanza empatica multiutente</h4>
+      <input id="ms8RoomTitle" placeholder="Titolo stanza, es. Supporto genitori">
+      <textarea id="ms8RoomDescription" placeholder="Scopo della stanza"></textarea>
+      <button class="green" onclick="ms8CreateRoom()">Crea stanza</button>
+      <div id="ms8RoomsBox"></div>
+    </div>
+    <div>
+      <h4>Azioni attive</h4>
+      <div class="ms8-badge">❤️ Ti sento</div>
+      <div class="ms8-badge">🤝 Posso aiutare</div>
+      <div class="ms8-badge">🧠 Ho un'idea</div>
+      <div class="ms8-badge">🌱 Crescita</div>
+      <div class="ms8-badge">🙏 Gratitudine</div>
+      <p class="small">Le reazioni sono integrate direttamente nei post del campo.</p>
+    </div>
+  </div>
+</div>
 
 <div class="social-composer mini-section" id="socialPostComposer">
   <div class="social-composer-head">
@@ -4422,6 +4541,549 @@ window.closeLegal = function () {
       if (el) labelize(el);
     });
   });
+
+/* ==========================================================
+   STEP 1-8 - LOGICA SOCIAL CONSERVATIVA
+   Mantiene funzioni esistenti e sovrascrive solo la resa dei post
+   per aggiungere privacy, feed amici, anteprime, reazioni e chat.
+   ========================================================== */
+var ms8FeedScope = "all";
+var ms8Friends = [];
+var ms8FriendRequests = [];
+var ms8Rooms = [];
+var ms8RoomMessages = [];
+var ms8GraphListening = false;
+var ms8RoomsListening = false;
+
+function ms8Id(email) {
+  return String(email || "").replace(/[^a-zA-Z0-9]/g, "_");
+}
+
+function ms8FriendId(a, b) {
+  return [String(a || ""), String(b || "")].sort().map(ms8Id).join("__");
+}
+
+function ms8Label(email) {
+  if (typeof maskEmail === "function") return maskEmail(email);
+  return String(email || "utente");
+}
+
+function ms8Html(text) {
+  if (typeof escapeHtml === "function") return escapeHtml(text);
+  return String(text || "").replace(/[&<>"']/g, m => ({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#039;"}[m]));
+}
+
+function ms8Notify(text) {
+  if (typeof miniToast === "function") miniToast(text);
+  else alert(text);
+}
+
+function ms8IsFriend(email) {
+  if (!currentUser || !email) return false;
+  return ms8Friends.some(f => Array.isArray(f.members) && f.members.includes(currentUser.email) && f.members.includes(email));
+}
+
+function ms8CanSeePost(post) {
+  if (!post) return false;
+  if (!currentUser) return (post.visibility || "public") === "public";
+  if (post.author === currentUser.email) return true;
+  const visibility = post.visibility || "public";
+  if (visibility === "public") return true;
+  if (visibility === "friends") return ms8IsFriend(post.author);
+  if (visibility === "private") return false;
+  return true;
+}
+
+function ms8CanSeePreview(post) {
+  if (!post) return false;
+  if (ms8CanSeePost(post)) return true;
+  return post.previewMode === "friends" && currentUser && ms8IsFriend(post.author);
+}
+
+window.ms8SetFeedScope = function(scope) {
+  ms8FeedScope = scope || "all";
+  ["All","Friends","Preview","Urgent"].forEach(name => {
+    const el = document.getElementById("ms8Tab" + name);
+    if (el) el.classList.remove("active");
+  });
+  const active = scope === "friends" ? "Friends" : scope === "preview" ? "Preview" : scope === "urgent" ? "Urgent" : "All";
+  const btn = document.getElementById("ms8Tab" + active);
+  if (btn) btn.classList.add("active");
+  renderSocialPosts();
+};
+
+window.ms8SavePrivacySettings = async function() {
+  if (!currentUser) return alert("Login prima");
+  const profileVisibility = document.getElementById("ms8ProfileVisibility")?.value || "public";
+  const defaultPostVisibility = document.getElementById("ms8DefaultPostVisibility")?.value || "public";
+  const chatPrivacy = document.getElementById("ms8ChatPrivacy")?.value || "open";
+  await updateDoc(doc(db, "users", currentUser.email), {
+    privacy: { profileVisibility, defaultPostVisibility, chatPrivacy },
+    profileVisibility,
+    defaultPostVisibility,
+    chatPrivacy,
+    updatedAt: Date.now()
+  });
+  const box = document.getElementById("ms8PrivacyStatus");
+  if (box) box.innerText = "Privacy salvata: " + profileVisibility + " / " + defaultPostVisibility + " / " + chatPrivacy;
+  ms8Notify("Privacy aggiornata 🔒");
+};
+
+async function ms8LoadPrivacyDefaults() {
+  if (!currentUser) return;
+  const snap = await getDoc(doc(db, "users", currentUser.email));
+  const u = snap.exists() ? snap.data() : {};
+  const p = u.privacy || {};
+  const profile = document.getElementById("ms8ProfileVisibility");
+  const posts = document.getElementById("ms8DefaultPostVisibility");
+  const chat = document.getElementById("ms8ChatPrivacy");
+  if (profile) profile.value = p.profileVisibility || u.profileVisibility || "public";
+  if (posts) posts.value = p.defaultPostVisibility || u.defaultPostVisibility || "public";
+  if (chat) chat.value = p.chatPrivacy || u.chatPrivacy || "open";
+}
+
+window.ms8SendFriendRequest = async function() {
+  if (!currentUser) return alert("Login prima");
+  const input = document.getElementById("ms8FriendEmail");
+  const to = (input?.value || "").trim().toLowerCase();
+  if (!to || to === currentUser.email) return alert("Inserisci una email diversa dalla tua");
+  const id = ms8FriendId(currentUser.email, to);
+  await setDoc(doc(db, "friendRequests", id), {
+    from: currentUser.email,
+    to,
+    members: [currentUser.email, to],
+    status: "pending",
+    timestamp: Date.now()
+  });
+  if (input) input.value = "";
+  await addDoc(collection(db, "socialNotifications"), {
+    to,
+    from: currentUser.email,
+    type: "friend_request",
+    text: "ti ha inviato una richiesta di amicizia",
+    read: false,
+    timestamp: Date.now()
+  });
+  ms8Notify("Richiesta amicizia inviata 👥");
+};
+
+window.ms8AcceptFriendRequest = async function(requestId, from, to) {
+  if (!currentUser) return alert("Login prima");
+  await updateDoc(doc(db, "friendRequests", requestId), { status: "accepted", acceptedAt: Date.now() });
+  await setDoc(doc(db, "friends", ms8FriendId(from, to)), {
+    members: [from, to],
+    status: "accepted",
+    createdAt: Date.now()
+  });
+  await addDoc(collection(db, "socialNotifications"), {
+    to: from,
+    from: currentUser.email,
+    type: "friend_accept",
+    text: "ha accettato la tua richiesta di amicizia",
+    read: false,
+    timestamp: Date.now()
+  });
+  ms8Notify("Amicizia attivata 🤝");
+};
+
+window.ms8RejectFriendRequest = async function(requestId) {
+  if (!currentUser) return alert("Login prima");
+  await updateDoc(doc(db, "friendRequests", requestId), { status: "rejected", rejectedAt: Date.now() });
+  ms8Notify("Richiesta archiviata");
+};
+
+function ms8ListenGraph() {
+  if (!currentUser || ms8GraphListening) return;
+  ms8GraphListening = true;
+  onSnapshot(collection(db, "friends"), snap => {
+    ms8Friends = [];
+    snap.forEach(d => {
+      const f = { id:d.id, ...d.data() };
+      if (Array.isArray(f.members) && f.members.includes(currentUser.email)) ms8Friends.push(f);
+    });
+    ms8RenderFriendRequests();
+    ms8RenderConnectionIcons();
+    renderSocialPosts();
+  });
+  onSnapshot(collection(db, "friendRequests"), snap => {
+    ms8FriendRequests = [];
+    snap.forEach(d => {
+      const r = { id:d.id, ...d.data() };
+      if (Array.isArray(r.members) && r.members.includes(currentUser.email)) ms8FriendRequests.push(r);
+    });
+    ms8RenderFriendRequests();
+    ms8RenderConnectionIcons();
+  });
+}
+
+function ms8RenderFriendRequests() {
+  const box = document.getElementById("ms8FriendRequestsBox");
+  if (!box || !currentUser) return;
+  const incoming = ms8FriendRequests.filter(r => r.to === currentUser.email && r.status === "pending");
+  const outgoing = ms8FriendRequests.filter(r => r.from === currentUser.email && r.status === "pending");
+  let html = "";
+  incoming.forEach(r => {
+    html += `<div class="ms8-request-item"><b>${ms8Label(r.from)}</b><br><span class="small">vuole diventare tuo amico</span><br><button class="green" onclick="ms8AcceptFriendRequest('${r.id}','${String(r.from).replace(/'/g,"\\'")}','${String(r.to).replace(/'/g,"\\'")}')">Accetta</button><button class="red" onclick="ms8RejectFriendRequest('${r.id}')">Rifiuta</button></div>`;
+  });
+  outgoing.forEach(r => {
+    html += `<div class="ms8-request-item"><b>${ms8Label(r.to)}</b><br><span class="small">richiesta inviata, in attesa.</span></div>`;
+  });
+  box.innerHTML = html || `<div class="small">Nessuna richiesta amicizia attiva.</div>`;
+}
+
+function ms8RenderConnectionIcons() {
+  const box = document.getElementById("ms8ConnectionIcons");
+  if (!box) return;
+  let people = [];
+  ms8Friends.forEach(f => (f.members || []).forEach(m => { if (currentUser && m !== currentUser.email) people.push({ email:m, type:"friend" }); }));
+  ms8FriendRequests.filter(r => r.status === "pending").forEach(r => {
+    const other = currentUser && r.from === currentUser.email ? r.to : r.from;
+    if (other && !people.some(p => p.email === other)) people.push({ email:other, type:"pending" });
+  });
+  if (!people.length) {
+    box.innerHTML = `<div class="small">Nessuna connessione ancora. Aggiungi un amico o apri un match.</div>`;
+    return;
+  }
+  box.innerHTML = people.slice(0,24).map(p => {
+    const initials = ms8Html(ms8Label(p.email).slice(0,2).toUpperCase());
+    return `<div class="ms8-avatar ${p.type === "pending" ? "pending" : ""}" title="${ms8Html(p.email)}" onclick="ms8OpenDirectPostChat('${String(p.email).replace(/'/g,"\\'")}')">${initials}</div>`;
+  }).join("");
+}
+
+window.ms8OpenDirectPostChat = async function(email) {
+  if (!currentUser) return alert("Login prima");
+  const connectionId = "direct__" + ms8FriendId(currentUser.email, email);
+  await setDoc(doc(db, "connections", connectionId), {
+    from: currentUser.email,
+    to: email,
+    status: "direct_social",
+    members: [currentUser.email, email],
+    updatedAt: Date.now()
+  }, { merge:true });
+  if (typeof openChat === "function") {
+    await openChat(connectionId, currentUser.email, email);
+    showMiniSection("chat");
+  }
+};
+
+function ms8InjectPostControls() {
+  const actions = document.querySelector("#socialPostComposer .social-composer-actions > div");
+  if (!actions || document.getElementById("ms8PostVisibility")) return;
+  actions.insertAdjacentHTML("beforeend", `
+    <select id="ms8PostVisibility">
+      <option value="public">🌍 Pubblico</option>
+      <option value="friends">👥 Solo amici</option>
+      <option value="private">🔒 Privato</option>
+    </select>
+    <select id="ms8PostPreview">
+      <option value="none">Nessuna anteprima</option>
+      <option value="friends">Anteprima tra amici</option>
+    </select>
+  `);
+}
+
+window.createSocialPost = async function () {
+  if (!currentUser) return alert("Login prima");
+  const textEl = document.getElementById("socialPostText");
+  const typeEl = document.getElementById("socialPostType");
+  const catEl = document.getElementById("socialPostCategory");
+  const visibilityEl = document.getElementById("ms8PostVisibility");
+  const previewEl = document.getElementById("ms8PostPreview");
+  const text = (textEl?.value || "").trim();
+  const type = typeEl?.value || "pensiero";
+  const category = (catEl?.value || "").trim();
+  if (!text || text.length < 3) return alert("Scrivi un post più completo");
+  let visibility = visibilityEl?.value || document.getElementById("ms8DefaultPostVisibility")?.value || "public";
+  let previewMode = previewEl?.value || "none";
+  await addDoc(collection(db, "socialPosts"), {
+    author: currentUser.email,
+    authorName: currentUser.displayName || currentUser.email,
+    authorPhoto: currentUser.photoURL || "",
+    text,
+    type,
+    category,
+    visibility,
+    previewMode,
+    friendOnly: visibility === "friends",
+    privatePost: visibility === "private",
+    likes: 0,
+    comments: 0,
+    empathicReactions: {},
+    timestamp: Date.now()
+  });
+  await updateUser(currentUser.email, 2, 0, 0, 0, 0, 0);
+  if (textEl) textEl.value = "";
+  if (catEl) catEl.value = "";
+  ms8Notify("Post pubblicato con privacy " + visibility + " 🌐");
+  if (typeof showWow === "function") showWow("Hai condiviso valore nel campo +2 reputazione");
+};
+
+window.ms8ReactToPost = async function(postId, author, reaction) {
+  if (!currentUser) return alert("Login prima");
+  const reactionId = postId + "__" + ms8Id(currentUser.email) + "__" + ms8Id(reaction);
+  await setDoc(doc(db, "socialPostReactions", reactionId), {
+    postId,
+    from: currentUser.email,
+    to: author || "",
+    reaction,
+    timestamp: Date.now()
+  });
+  const key = "empathicReactions." + reaction;
+  await updateDoc(doc(db, "socialPosts", postId), { [key]: increment(1) });
+  if (author && author !== currentUser.email) {
+    await addDoc(collection(db, "socialNotifications"), {
+      to: author,
+      from: currentUser.email,
+      type: "empathic_reaction",
+      text: "ha reagito al tuo post: " + reaction,
+      postId,
+      read: false,
+      timestamp: Date.now()
+    });
+  }
+  ms8Notify("Reazione empatica inviata " + reaction);
+};
+
+window.ms8ToggleInlineChat = function(postId) {
+  const safeId = String(postId).replace(/[^a-zA-Z0-9_\-]/g, "_");
+  const box = document.getElementById("ms8InlineChat_" + safeId);
+  if (box) box.classList.toggle("open");
+};
+
+window.ms8SendInlineMessage = async function(postId, author) {
+  if (!currentUser) return alert("Login prima");
+  const safeId = String(postId).replace(/[^a-zA-Z0-9_\-]/g, "_");
+  const input = document.getElementById("ms8InlineInput_" + safeId);
+  const text = (input?.value || "").trim();
+  if (!text) return;
+  await addDoc(collection(db, "postInlineMessages"), {
+    postId,
+    from: currentUser.email,
+    to: author || "",
+    text,
+    timestamp: Date.now()
+  });
+  if (input) input.value = "";
+  if (author && author !== currentUser.email) {
+    await addDoc(collection(db, "socialNotifications"), {
+      to: author,
+      from: currentUser.email,
+      type: "post_chat",
+      text: "ti ha scritto nella chat del post",
+      postId,
+      read: false,
+      timestamp: Date.now()
+    });
+  }
+};
+
+var ms8InlineMessages = [];
+function ms8ListenInlineMessages() {
+  onSnapshot(collection(db, "postInlineMessages"), snap => {
+    ms8InlineMessages = [];
+    snap.forEach(d => ms8InlineMessages.push({ id:d.id, ...d.data() }));
+    ms8InlineMessages.sort((a,b) => (a.timestamp || 0) - (b.timestamp || 0));
+    renderSocialPosts();
+  });
+}
+
+renderSocialPosts = function() {
+  const box = document.getElementById("socialPostsFeed");
+  if (!box) return;
+  if (!socialPosts.length) {
+    box.innerHTML = `<div class="card">Nessun post sociale ancora. Scrivi il primo pensiero nel campo.</div>`;
+    return;
+  }
+  let list = socialPosts.filter(p => ms8CanSeePost(p) || ms8CanSeePreview(p));
+  if (ms8FeedScope === "friends") list = list.filter(p => currentUser && (p.author === currentUser.email || ms8IsFriend(p.author)));
+  if (ms8FeedScope === "preview") list = list.filter(p => p.previewMode && p.previewMode !== "none");
+  if (ms8FeedScope === "urgent") list = list.filter(p => [p.type, p.category, p.text].join(" ").toLowerCase().includes("bisogno") || String(p.type || "") === "bisogno");
+  if (!list.length) {
+    box.innerHTML = `<div class="card">Nessun post visibile con questo filtro.</div>`;
+    return;
+  }
+  let html = "";
+  list.slice(0, 35).forEach(p => {
+    const comments = socialComments.filter(c => c.postId === p.id).slice(-4);
+    const messages = ms8InlineMessages.filter(m => m.postId === p.id).slice(-6);
+    const safeId = p.id.replace(/[^a-zA-Z0-9_\-]/g, "_");
+    const author = p.author || "";
+    const authorLabel = p.authorName || ms8Label(author);
+    const time = p.timestamp ? new Date(p.timestamp).toLocaleString() : "";
+    const fullVisible = ms8CanSeePost(p);
+    const visibility = p.visibility || "public";
+    const reactionData = p.empathicReactions || {};
+    const body = fullVisible ? ms8Html(p.text || "") : "<i>Anteprima visibile: contenuto completo riservato agli amici autorizzati.</i>";
+    html += `
+      <div class="social-post-card">
+        <div class="social-post-head">
+          <div class="social-avatar-mini">${ms8Html((authorLabel || "MS").slice(0,2).toUpperCase())}</div>
+          <div>
+            <div class="social-post-author">${ms8Html(authorLabel)}</div>
+            <div class="social-post-time">${time}</div>
+          </div>
+        </div>
+        <div class="social-post-meta">
+          <span class="tag">${ms8Html(p.type || "pensiero")}</span>
+          ${p.category ? `<span class="tag">${ms8Html(p.category)}</span>` : ""}
+          <span class="tag">${visibility === "private" ? "🔒 Privato" : visibility === "friends" ? "👥 Amici" : "🌍 Pubblico"}</span>
+          ${p.previewMode && p.previewMode !== "none" ? `<span class="tag">👁️ Anteprima</span>` : ""}
+        </div>
+        <div class="social-post-body">${body}</div>
+        <div class="small">❤️ ${Number(p.likes || 0)} valore · 💬 ${Number(p.comments || 0)} commenti · 🤝 chat post</div>
+        <div class="ms8-reactions">
+          ${["❤️ Ti sento","🤝 Posso aiutare","🧠 Ho un'idea","🌱 Crescita","🙏 Gratitudine"].map(r => `<button onclick="ms8ReactToPost('${p.id}', '${String(author).replace(/'/g,"\\'")}', '${r.replace(/'/g,"\\'")}')">${r} ${Number(reactionData[r] || 0)}</button>`).join("")}
+        </div>
+        <div class="social-post-actions">
+          <button onclick="likeSocialPost('${p.id}', '${String(author).replace(/'/g,"\\'")}')">❤️ Valore</button>
+          <button onclick="document.getElementById('commentInput_${safeId}').focus()">💬 Commenta</button>
+          <button onclick="ms8ToggleInlineChat('${p.id}')">🗨️ Chat nel post</button>
+          <button onclick="ms8SendFriendRequestFromPost('${String(author).replace(/'/g,"\\'")}')">👥 Amico</button>
+        </div>
+        <div class="social-comments">
+          ${comments.map(c => `<div class="social-comment"><b>${ms8Label(c.from)}</b><br>${ms8Html(c.text || "")}</div>`).join("")}
+        </div>
+        <div class="social-comment-box">
+          <input id="commentInput_${safeId}" placeholder="Scrivi un commento empatico..." onkeydown="if(event.key==='Enter'){commentSocialPost('${p.id}', '${String(author).replace(/'/g,"\\'")}')}">
+          <button onclick="commentSocialPost('${p.id}', '${String(author).replace(/'/g,"\\'")}')">Invia</button>
+        </div>
+        <div id="ms8InlineChat_${safeId}" class="ms8-inline-chat">
+          <b>Chat compresa nel post</b>
+          ${messages.map(m => `<div class="ms8-mini-message"><b>${ms8Label(m.from)}</b><br>${ms8Html(m.text || "")}</div>`).join("") || `<div class="small">Nessun messaggio nella chat del post.</div>`}
+          <div class="social-comment-box">
+            <input id="ms8InlineInput_${safeId}" placeholder="Risposta diretta nel post..." onkeydown="if(event.key==='Enter'){ms8SendInlineMessage('${p.id}', '${String(author).replace(/'/g,"\\'")}')}">
+            <button onclick="ms8SendInlineMessage('${p.id}', '${String(author).replace(/'/g,"\\'")}')">Invia</button>
+          </div>
+        </div>
+      </div>`;
+  });
+  box.innerHTML = html;
+  if (typeof msxRenderSmartFeed === "function") msxRenderSmartFeed();
+  if (typeof msxRenderAdminInsights === "function") msxRenderAdminInsights();
+};
+
+window.ms8SendFriendRequestFromPost = async function(author) {
+  if (!currentUser) return alert("Login prima");
+  if (!author || author === currentUser.email) return ms8Notify("Questo è un tuo post");
+  const input = document.getElementById("ms8FriendEmail");
+  if (input) input.value = author;
+  await ms8SendFriendRequest();
+};
+
+window.ms8CreateRoom = async function() {
+  if (!currentUser) return alert("Login prima");
+  const title = (document.getElementById("ms8RoomTitle")?.value || "").trim();
+  const description = (document.getElementById("ms8RoomDescription")?.value || "").trim();
+  if (!title) return alert("Inserisci il titolo della stanza");
+  await addDoc(collection(db, "empathicRooms"), {
+    title,
+    description,
+    creator: currentUser.email,
+    members: [currentUser.email],
+    visibility: "public",
+    createdAt: Date.now()
+  });
+  document.getElementById("ms8RoomTitle").value = "";
+  document.getElementById("ms8RoomDescription").value = "";
+  ms8Notify("Stanza empatica creata 🌱");
+};
+
+window.ms8JoinRoom = async function(roomId) {
+  if (!currentUser) return alert("Login prima");
+  const room = ms8Rooms.find(r => r.id === roomId);
+  const members = Array.from(new Set([...(room?.members || []), currentUser.email]));
+  await updateDoc(doc(db, "empathicRooms", roomId), { members, updatedAt: Date.now() });
+  ms8Notify("Sei entrato nella stanza");
+};
+
+window.ms8SendRoomMessage = async function(roomId) {
+  if (!currentUser) return alert("Login prima");
+  const input = document.getElementById("ms8RoomInput_" + roomId);
+  const text = (input?.value || "").trim();
+  if (!text) return;
+  await addDoc(collection(db, "empathicRoomMessages"), { roomId, from: currentUser.email, text, timestamp: Date.now() });
+  if (input) input.value = "";
+};
+
+function ms8ListenRooms() {
+  if (ms8RoomsListening) return;
+  ms8RoomsListening = true;
+  onSnapshot(collection(db, "empathicRooms"), snap => {
+    ms8Rooms = [];
+    snap.forEach(d => ms8Rooms.push({ id:d.id, ...d.data() }));
+    ms8Rooms.sort((a,b) => (b.createdAt || 0) - (a.createdAt || 0));
+    ms8RenderRooms();
+    ms8RenderConnectionIcons();
+  });
+  onSnapshot(collection(db, "empathicRoomMessages"), snap => {
+    ms8RoomMessages = [];
+    snap.forEach(d => ms8RoomMessages.push({ id:d.id, ...d.data() }));
+    ms8RoomMessages.sort((a,b) => (a.timestamp || 0) - (b.timestamp || 0));
+    ms8RenderRooms();
+  });
+}
+
+function ms8RenderRooms() {
+  const box = document.getElementById("ms8RoomsBox");
+  if (!box) return;
+  if (!ms8Rooms.length) {
+    box.innerHTML = `<div class="small">Nessuna stanza ancora.</div>`;
+    return;
+  }
+  box.innerHTML = ms8Rooms.slice(0,8).map(r => {
+    const messages = ms8RoomMessages.filter(m => m.roomId === r.id).slice(-4);
+    return `<div class="ms8-room-item"><b>${ms8Html(r.title)}</b><br><span class="small">${ms8Html(r.description || "Stanza empatica")}</span><br><span class="tag">${(r.members || []).length} membri</span><button class="green" onclick="ms8JoinRoom('${r.id}')">Entra</button>${messages.map(m => `<div class="ms8-mini-message"><b>${ms8Label(m.from)}</b><br>${ms8Html(m.text || "")}</div>`).join("")}<div class="social-comment-box"><input id="ms8RoomInput_${r.id}" placeholder="Scrivi nella stanza..." onkeydown="if(event.key==='Enter'){ms8SendRoomMessage('${r.id}')}"><button onclick="ms8SendRoomMessage('${r.id}')">Invia</button></div></div>`;
+  }).join("");
+}
+
+function ms8AddNavButton() {
+  const nav = document.querySelector(".social-nav");
+  if (!nav || document.getElementById("ms8NavButton")) return;
+  nav.insertAdjacentHTML("beforeend", `<button id="ms8NavButton" onclick="showMiniSection('privacy')">🔐 Privacy & Amici</button>`);
+}
+
+function ms8PatchSectionRouter() {
+  if (window.ms8RouterPatched) return;
+  window.ms8RouterPatched = true;
+  const oldShow = window.showMiniSection;
+  window.showMiniSection = function(name) {
+    if (name === "privacy") {
+      document.body.classList.add("social-focus");
+      document.querySelectorAll(".mini-section").forEach(el => el.classList.remove("active-section"));
+      const el = document.getElementById("ms8SocialPrivacySection");
+      if (el) {
+        el.classList.add("active-section");
+        el.scrollIntoView({behavior:"smooth", block:"start"});
+      }
+      return;
+    }
+    if (typeof oldShow === "function") return oldShow(name);
+  };
+}
+
+function ms8Init() {
+  ms8InjectPostControls();
+  ms8AddNavButton();
+  ms8PatchSectionRouter();
+  ms8LoadPrivacyDefaults();
+  ms8ListenGraph();
+  ms8ListenRooms();
+  ms8ListenInlineMessages();
+  ms8RenderConnectionIcons();
+}
+
+const ms8OriginalCompleteLogin = completeLogin;
+completeLogin = async function(user) {
+  await ms8OriginalCompleteLogin(user);
+  ms8Init();
+};
+
+document.addEventListener("DOMContentLoaded", function() {
+  ms8InjectPostControls();
+  ms8AddNavButton();
+  ms8PatchSectionRouter();
+});
+
 })();
 </script>
 
