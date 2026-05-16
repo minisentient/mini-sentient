@@ -1581,6 +1581,32 @@ body.dark-mode .ms13-top,body.dark-mode .ms13-bottom,body.dark-mode .ms13-card,b
 body.dark-mode .ms13-row select,body.dark-mode .ms13-row input,body.dark-mode .ms13-composer textarea,body.dark-mode .ms13-inputline input,body.dark-mode .ms13-settings-grid input,body.dark-mode .ms13-settings-grid select,body.dark-mode .ms13-panel{background:#1f2937;color:#e5e7eb;border-color:#334155}
 body.dark-mode .ms13-bottom button,body.dark-mode .ms13-actions button{color:#e5e7eb;background:#1f2937;border-color:#334155}
 
+
+
+/* ==========================================================
+   STEP 14 - FIX DEFINITIVO SOCIAL EMPATICO
+   Forza la UI finale, nasconde il vecchio prototipo e rende
+   rete/chat come loghi messaggio sintetici.
+   ========================================================== */
+body.ms14-force, body.ms13-active {
+  padding:0!important; margin:0!important; background:#edf2f7!important; overflow-x:hidden!important;
+}
+body.ms14-force .social-topbar, body.ms14-force .social-layout, body.ms14-force .social-mobile-nav, body.ms14-force .social-floating-create,
+body.ms13-active .social-topbar, body.ms13-active .social-layout, body.ms13-active .social-mobile-nav, body.ms13-active .social-floating-create {
+  display:none!important; visibility:hidden!important; height:0!important; overflow:hidden!important;
+}
+body.ms14-force #ms13Root, body.ms13-active #ms13Root { display:block!important; min-height:100vh!important; }
+.ms14-orbit{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:10px 0 4px}
+.ms14-logo-msg{background:rgba(255,255,255,.96);border:1px solid rgba(148,163,184,.35);border-radius:22px;padding:12px 8px;text-align:center;box-shadow:0 8px 22px rgba(15,23,42,.07);cursor:pointer;min-height:104px;position:relative}
+.ms14-logo-icon{width:58px;height:58px;border-radius:23px;margin:0 auto 7px;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#2563eb,#7c3aed);color:white;font-size:22px;font-weight:950;box-shadow:0 10px 22px rgba(37,99,235,.22)}
+.ms14-logo-msg:nth-child(2n) .ms14-logo-icon{background:linear-gradient(135deg,#16a34a,#2563eb)}
+.ms14-logo-msg:nth-child(3n) .ms14-logo-icon{background:linear-gradient(135deg,#f59e0b,#ef4444)}
+.ms14-logo-msg b{display:block;font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ms14-logo-msg span{display:block;font-size:11px;color:#64748b;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:2px}
+.ms14-red-dot{position:absolute;right:9px;top:8px;background:#ef4444;color:white;border-radius:999px;min-width:18px;height:18px;font-size:10px;font-weight:950;display:flex;align-items:center;justify-content:center;border:2px solid white}
+.ms13-section-title b{font-size:13px!important}
+@media(max-width:760px){.ms14-orbit{grid-template-columns:repeat(3,1fr);gap:8px}.ms14-logo-msg{border-radius:18px;padding:10px 6px;min-height:92px}.ms14-logo-icon{width:50px;height:50px;border-radius:20px;font-size:19px}}
+
 </style>
 </head>
 
@@ -3717,6 +3743,16 @@ function analyze(nodes) {
   `;
 }
 
+function compactReason(reason) {
+  const text = String(reason || "").replace(/\s+/g, " ").trim();
+  if (!text) return "Connessione utile";
+  if (text.includes("Stessa categoria")) return "Stessa categoria";
+  if (text.includes("può aiutare")) return "Aiuto reciproco";
+  if (text.includes("attivo ora")) return "Attivo ora";
+  if (text.includes("Match simile")) return "Esperienza già riuscita";
+  return text.slice(0, 42) + (text.length > 42 ? "…" : "");
+}
+
 function renderMatches(nodes) {
   let html = "";
 
@@ -3830,7 +3866,7 @@ function renderMatches(nodes) {
             <b>${maskEmail(a.user)}</b> ↔ <b>${maskEmail(b.user)}</b><br>
             <span class="tag">${a.category || "senza categoria"}</span><br>
             Score: ${score.toFixed(1)}<br>
-            <span class="tag">${shortReason}</span><br>
+            <span class="tag">${compactReason(reason)}</span><br>
 
             <button class="green"
               onclick="activateConnection('${a.user}', '${b.user}', ${score}, '${safeReason}', '${a.category || b.category || ""}')">
@@ -6891,17 +6927,22 @@ document.addEventListener("DOMContentLoaded", function(){ ms9AddNav(); ms9PatchR
 
   function renderNetwork(){
     const matches = makeMatchData().slice(0,12);
+    const active = connCache.slice(0,12).map(c=>{
+      const other = c.from === currentUser?.email ? c.to : c.from;
+      return {id:c.id, icon:"💬", title:userLabel(other || c.to || c.from), subtitle:c.lastMessage || c.status || "chat attiva", isConn:true};
+    });
+    const items = [...active, ...matches.map(x=>({id:x.id, icon:x.icon || "🤝", title:x.category || "match", subtitle:(Math.round(x.score)||0)+"% · "+(x.reasons?.[0]||"segnale utile"))})].slice(0,12);
     return `
       ${renderBubbles()}
-      <div class="ms13-section-title"><b>Rete sintetica</b><span>loghi, non elenchi</span></div>
-      <div class="ms13-compact-grid">
-        ${matches.map(x=>`
-          <div class="ms13-logo-card" onclick="ms13OpenBubble('${esc(x.id)}')">
-            <div class="icon">${x.icon}</div>
-            <b>${esc(x.category)}</b>
-            <span>${Math.round(x.score)}% · ${esc(x.reasons[0]||"segnale utile")}</span>
+      <div class="ms13-section-title"><b>Rete empatica</b><span>tocca un logo</span></div>
+      <div class="ms14-orbit">
+        ${items.map(x=>`
+          <div class="ms14-logo-msg" onclick="${x.isConn ? `ms13OpenConnection('${esc(x.id)}')` : `ms13OpenBubble('${esc(x.id)}')`}">
+            <div class="ms14-logo-icon">${x.icon}</div>
+            <b>${esc(x.title)}</b>
+            <span>${esc(x.subtitle||"")}</span>
           </div>
-        `).join("") || `<div class="ms13-empty">Nessun segnale forte.</div>`}
+        `).join("") || `<div class="ms13-empty">Nessun segnale forte. Aggiungi un bisogno o una risorsa.</div>`}
       </div>
     `;
   }
@@ -6910,12 +6951,14 @@ document.addEventListener("DOMContentLoaded", function(){ ms9AddNav(); ms9PatchR
     if(!connCache.length) return `${renderBubbles()}<div class="ms13-empty">Le chat appariranno come loghi-messaggio quando attivi una connessione.</div>`;
     return `
       ${renderBubbles()}
-      <div class="ms13-section-title"><b>Chat attive</b><span>${connCache.length}</span></div>
-      <div class="ms13-compact-grid">
+      <div class="ms13-section-title"><b>Chat vive</b><span>${connCache.length}</span></div>
+      <div class="ms14-orbit">
         ${connCache.slice(0,12).map(c=>{
           const other = c.from === currentUser?.email ? c.to : c.from;
-          return `<div class="ms13-logo-card" onclick="ms13OpenConnection('${esc(c.id)}')">
-            <div class="icon">💬</div>
+          const unread = currentUser && c.unread && c.unread[currentUser.email] ? c.unread[currentUser.email] : 0;
+          return `<div class="ms14-logo-msg" onclick="ms13OpenConnection('${esc(c.id)}')">
+            ${unread ? `<div class="ms14-red-dot">${unread}</div>` : ""}
+            <div class="ms14-logo-icon">💬</div>
             <b>${esc(userLabel(other || c.to || c.from))}</b>
             <span>${esc(c.lastMessage || c.status || "apri")}</span>
           </div>`;
