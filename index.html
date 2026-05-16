@@ -8226,5 +8226,243 @@ const msFixTimer = setInterval(() => {
 
 <!-- MS16 autonomous fallback removed: original Firebase/connection/donation functions preserved. -->
 
+
+<!-- ==========================================================
+     MS17 EMERGENCY RESTORE - FULL ORIGINAL FUNCTIONS VISIBLE
+     Disattiva le shell compatte MS11/MS13/MS15 che nascondevano
+     connessioni, donazioni, matching, chat e sezioni originali.
+     ========================================================== -->
+<style id="ms17EmergencyRestoreStyle">
+  html, body {
+    min-height:100%;
+  }
+
+  /* Nasconde solo le shell semplificate finali, NON le funzioni originali */
+  #ms15Root,
+  #ms13Root,
+  #ms11Root,
+  #msLoginGate {
+    display:none !important;
+    visibility:hidden !important;
+    height:0 !important;
+    min-height:0 !important;
+    overflow:hidden !important;
+    pointer-events:none !important;
+  }
+
+  body.ms17-full-original {
+    padding-top:74px !important;
+    padding-bottom:78px !important;
+    background:
+      radial-gradient(circle at 0% 0%, rgba(37,99,235,.10), transparent 34%),
+      radial-gradient(circle at 100% 0%, rgba(22,163,74,.10), transparent 30%),
+      #eef3f8 !important;
+    overflow-x:hidden !important;
+  }
+
+  body.ms17-full-original .social-topbar,
+  body.ms17-full-original .social-layout,
+  body.ms17-full-original .social-mobile-nav {
+    display:flex !important;
+    visibility:visible !important;
+    opacity:1 !important;
+    pointer-events:auto !important;
+  }
+
+  body.ms17-full-original .social-layout {
+    display:grid !important;
+    grid-template-columns:220px minmax(0, 780px) !important;
+    gap:16px !important;
+    max-width:1060px !important;
+    padding:0 10px !important;
+  }
+
+  body.ms17-full-original .social-right {
+    display:none !important;
+  }
+
+  body.ms17-full-original .social-main,
+  body.ms17-full-original .container {
+    display:block !important;
+    visibility:visible !important;
+    opacity:1 !important;
+    max-width:780px !important;
+  }
+
+  /* Le sezioni originali devono tornare accessibili */
+  body.ms17-full-original .mini-section,
+  body.ms17-full-original.social-focus .mini-section,
+  body.ms17-full-original.social-focus .mini-section.active-section {
+    display:block !important;
+    visibility:visible !important;
+    opacity:1 !important;
+    height:auto !important;
+    overflow:visible !important;
+  }
+
+  /* Le card originali tornano leggibili */
+  body.ms17-full-original .card,
+  body.ms17-full-original .auth-social-card,
+  body.ms17-full-original .auth-entry,
+  body.ms17-full-original .ms8-card,
+  body.ms17-full-original .ms9-post-card,
+  body.ms17-full-original .ms9-composer,
+  body.ms17-full-original .msx-card,
+  body.ms17-full-original .social-dashboard-card,
+  body.ms17-full-original .social-post-card,
+  body.ms17-full-original .social-composer {
+    display:block !important;
+    visibility:visible !important;
+    opacity:1 !important;
+  }
+
+  body.ms17-full-original h2,
+  body.ms17-full-original h3 {
+    color:#0f172a;
+  }
+
+  /* Evita il footer in alto: lo riporta in basso visivo */
+  body.ms17-full-original footer,
+  body.ms17-full-original .footer,
+  body.ms17-full-original #footer {
+    position:static !important;
+    order:9999 !important;
+    margin-top:28px !important;
+  }
+
+  /* Mobile: una colonna, tutto visibile */
+  @media (max-width:860px) {
+    body.ms17-full-original {
+      padding-top:66px !important;
+      padding-left:0 !important;
+      padding-right:0 !important;
+      padding-bottom:82px !important;
+    }
+
+    body.ms17-full-original .social-layout {
+      display:block !important;
+      max-width:100% !important;
+      padding:0 10px !important;
+    }
+
+    body.ms17-full-original .social-left,
+    body.ms17-full-original .social-right {
+      display:none !important;
+    }
+
+    body.ms17-full-original .social-topbar {
+      display:flex !important;
+      height:58px !important;
+      padding:0 10px !important;
+    }
+
+    body.ms17-full-original .social-mobile-nav {
+      display:flex !important;
+    }
+
+    body.ms17-full-original .container {
+      max-width:100% !important;
+    }
+
+    body.ms17-full-original .card {
+      border-radius:18px !important;
+      margin:10px 0 !important;
+    }
+  }
+
+  /* Banner di recupero funzioni */
+  #ms17RestoreNotice {
+    background:linear-gradient(135deg,#111827,#1d4ed8 58%,#16a34a);
+    color:white;
+    border-radius:18px;
+    padding:14px;
+    margin:10px 0 14px;
+    box-shadow:0 10px 28px rgba(37,99,235,.18);
+    font-size:14px;
+    line-height:1.35;
+  }
+  #ms17RestoreNotice b {font-size:16px;}
+</style>
+
+<script id="ms17EmergencyRestoreScript">
+(function(){
+  function byId(id){ return document.getElementById(id); }
+
+  function stopBrokenShells(){
+    try {
+      document.body.classList.remove(
+        "ms15-active",
+        "ms13-active",
+        "ms11-shell-active",
+        "ms10-mode"
+      );
+      document.body.classList.add("ms17-full-original");
+      /* non togliamo ms-app-unlocked: serve al login già riuscito */
+      var shellIds = ["ms15Root","ms13Root","ms11Root","msLoginGate"];
+      shellIds.forEach(function(id){
+        var el = byId(id);
+        if(el){
+          el.style.setProperty("display","none","important");
+          el.style.setProperty("visibility","hidden","important");
+          el.style.setProperty("height","0","important");
+          el.style.setProperty("overflow","hidden","important");
+          el.style.setProperty("pointer-events","none","important");
+        }
+      });
+
+      /* riapre il layout vero */
+      document.querySelectorAll(".social-topbar,.social-layout,.social-mobile-nav,.social-main,.container").forEach(function(el){
+        el.style.removeProperty("display");
+        el.style.removeProperty("visibility");
+        el.style.removeProperty("opacity");
+        el.style.removeProperty("height");
+        el.style.removeProperty("overflow");
+        el.style.removeProperty("pointer-events");
+      });
+
+      document.querySelectorAll(".mini-section").forEach(function(el){
+        el.style.setProperty("display","block","important");
+        el.style.setProperty("visibility","visible","important");
+        el.style.setProperty("opacity","1","important");
+        el.style.removeProperty("height");
+        el.style.removeProperty("overflow");
+      });
+
+      var container = document.querySelector(".social-main .container") || document.querySelector(".container");
+      if(container && !byId("ms17RestoreNotice")){
+        var notice = document.createElement("div");
+        notice.id = "ms17RestoreNotice";
+        notice.innerHTML = "<b>Funzioni complete ripristinate</b><br>Connessioni, matching, chat, profilo, ranking, donazioni e sezioni originali sono di nuovo visibili. Le shell compatte che coprivano tutto sono state disattivate.";
+        container.insertBefore(notice, container.firstChild);
+      }
+
+      /* Se i listener originali esistono, li richiama senza sostituirli */
+      ["renderNodes","renderMatches","renderConnections","renderSocialPosts","renderDonationStats","listenConnectionsMini"].forEach(function(fn){
+        try { if(typeof window[fn] === "function") window[fn](); } catch(e) {}
+      });
+    } catch(e) {
+      console.warn("MS17 restore error", e);
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", function(){
+    stopBrokenShells();
+    setTimeout(stopBrokenShells, 300);
+    setTimeout(stopBrokenShells, 1000);
+    setTimeout(stopBrokenShells, 2500);
+  });
+
+  /* i vecchi script provano a riattivare ms15: li neutralizziamo per qualche secondo */
+  var tries = 0;
+  var t = setInterval(function(){
+    tries++;
+    stopBrokenShells();
+    if(tries > 40) clearInterval(t);
+  }, 250);
+
+  window.ms17RestoreOriginalFunctions = stopBrokenShells;
+})();
+</script>
+
 </body>
 </html>
