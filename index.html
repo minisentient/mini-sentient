@@ -1014,6 +1014,15 @@ body.dark-mode .ms9-author { color:#e5e7eb; }
 body.dark-mode .ms9-filterbar button, body.dark-mode .ms9-actions button { background:#1f2937; color:#e5e7eb; border-color:#334155; }
 @media (max-width:860px) { .ms9-settings-grid, .ms9-composer-row, .ms9-actions { grid-template-columns:1fr; } .ms9-profile-row { align-items:flex-start; } }
 
+
+
+/* ==========================================================
+   STEP 1-10 V10 - EMPATHIC FACEBOOK OS
+   Layer finale: post empatici, chat dirette, donazioni wallet,
+   matching automatico, trust score, notifiche e dashboard.
+   ========================================================== */
+.ms10-root{display:grid;gap:14px;margin:14px 0}.ms10-hero{background:linear-gradient(135deg,#0f172a,#2563eb 50%,#16a34a);color:#fff;border-radius:26px;padding:22px;box-shadow:0 18px 44px rgba(37,99,235,.25);position:relative;overflow:hidden}.ms10-hero h2{margin:0 0 8px;font-size:30px}.ms10-hero p{margin:0;color:rgba(255,255,255,.86);line-height:1.45}.ms10-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:16px}.ms10-kpi{background:rgba(255,255,255,.13);border:1px solid rgba(255,255,255,.2);border-radius:18px;padding:12px}.ms10-kpi b{display:block;font-size:22px}.ms10-kpi span{font-size:12px;color:rgba(255,255,255,.8)}.ms10-card{background:#fff;border:1px solid var(--ms-border,#d9dee8);border-radius:22px;padding:16px;box-shadow:0 3px 14px rgba(15,23,42,.07)}.ms10-title{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:10px}.ms10-title h3{margin:0}.ms10-composer-grid{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}.ms10-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}.ms10-actions button{margin:0}.ms10-tabs{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 12px}.ms10-tabs button{margin:0;background:#f1f5f9;color:#111827;font-weight:900}.ms10-tabs button.active{background:#2563eb;color:#fff}.ms10-feed{display:grid;gap:14px}.ms10-post{background:#fff;border:1px solid var(--ms-border,#d9dee8);border-radius:24px;padding:16px;box-shadow:0 3px 14px rgba(15,23,42,.08)}.ms10-post-head{display:flex;gap:12px;align-items:center}.ms10-avatar{width:50px;height:50px;border-radius:50%;background:linear-gradient(135deg,#2563eb,#7c3aed);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:900}.ms10-author{font-weight:900;color:#111827}.ms10-time{font-size:12px;color:#64748b;margin-top:2px}.ms10-body{white-space:pre-wrap;line-height:1.55;margin:12px 0;font-size:15px}.ms10-pills{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}.ms10-pill{display:inline-flex;align-items:center;gap:5px;padding:5px 9px;border-radius:999px;background:#e8f0ff;color:#1d4ed8;font-size:12px;font-weight:800}.ms10-post-actions{display:grid;grid-template-columns:repeat(5,1fr);gap:7px;border-top:1px solid #eef2f7;padding-top:10px;margin-top:10px}.ms10-post-actions button{margin:0;background:#f8fafc;color:#111827;border:1px solid #e5e7eb;font-weight:850;padding:9px 7px;font-size:13px}.ms10-panel{display:none;background:#f8fafc;border:1px solid #eef2f7;border-radius:18px;padding:10px;margin-top:10px}.ms10-panel.open{display:block}.ms10-message,.ms10-match{background:#fff;border:1px solid #e5e7eb;border-radius:14px;padding:9px 10px;margin:7px 0;font-size:13px}.ms10-score{font-weight:900;color:#16a34a}.ms10-step-list{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}.ms10-step{background:#f8fafc;border:1px solid #eef2f7;border-radius:16px;padding:10px;font-size:13px}.ms10-step.done{border-left:5px solid #16a34a}.ms10-step b{color:#111827}.ms10-empty{background:#fff;border:1px dashed #cbd5e1;border-radius:20px;padding:18px;text-align:center;color:#64748b}.ms10-wallet-line{display:grid;grid-template-columns:1fr auto;gap:10px;padding:8px 0;border-bottom:1px solid #eef2f7}.ms10-wallet-line:last-child{border-bottom:none}.ms10-danger{background:#ef4444!important;color:#fff!important}.ms10-green{background:#16a34a!important;color:#fff!important}.ms10-purple{background:#7c3aed!important;color:#fff!important}.ms10-dark{background:#111827!important;color:#fff!important}body.dark-mode .ms10-card,body.dark-mode .ms10-post,body.dark-mode .ms10-panel,body.dark-mode .ms10-message,body.dark-mode .ms10-match{background:#111827;color:#e5e7eb;border-color:#334155}body.dark-mode .ms10-author,body.dark-mode .ms10-step b{color:#e5e7eb}body.dark-mode .ms10-tabs button,body.dark-mode .ms10-post-actions button,body.dark-mode .ms10-step{background:#1f2937;color:#e5e7eb;border-color:#334155}@media(max-width:860px){.ms10-grid,.ms10-composer-grid,.ms10-post-actions,.ms10-step-list{grid-template-columns:1fr}.ms10-hero h2{font-size:24px}}
+
 </style>
 </head>
 
@@ -1697,6 +1706,73 @@ body.dark-mode .ms9-filterbar button, body.dark-mode .ms9-actions button { backg
 🏆 Chi aiuta di più cresce più velocemente
 </div>
 <div id="economyRankingBox"></div>
+
+
+
+<!-- ==========================================================
+     STEP 1-10 V10 - EMPATHIC FACEBOOK OS
+     Mantiene il contenuto empatico e lo rende esperienza social.
+     ========================================================== -->
+<div class="ms10-root mini-section" id="ms10EmpathicOS">
+  <div class="ms10-hero">
+    <h2>Empathic Social OS</h2>
+    <p>Il feed non è solo contenuto: ogni post può diventare chat, connessione, aiuto reale, donazione, reputazione e valore condiviso.</p>
+    <div class="ms10-grid">
+      <div class="ms10-kpi"><b id="ms10KpiPosts">0</b><span>post empatici</span></div>
+      <div class="ms10-kpi"><b id="ms10KpiNeeds">0</b><span>bisogni/ricerche</span></div>
+      <div class="ms10-kpi"><b id="ms10KpiOffers">0</b><span>offerte/risorse</span></div>
+      <div class="ms10-kpi"><b id="ms10KpiValue">0€</b><span>valore circolato</span></div>
+    </div>
+  </div>
+
+  <div class="ms10-card">
+    <div class="ms10-title"><h3>Step 1-10 attivi</h3><span class="tag">Facebook-like empatico</span></div>
+    <div class="ms10-step-list" id="ms10StepList">
+      <div class="ms10-step done"><b>1. Feed centrale</b><br>Home trasformata in social feed empatico.</div>
+      <div class="ms10-step done"><b>2. Post empatici</b><br>Ogni post contiene bisogno, risorsa, emozione e urgenza.</div>
+      <div class="ms10-step done"><b>3. Chat diretta</b><br>Dal post si apre una conversazione collegata.</div>
+      <div class="ms10-step done"><b>4. Donazioni wallet</b><br>Ogni contenuto può ricevere valore economico.</div>
+      <div class="ms10-step done"><b>5. Matching automatico</b><br>Cerco/offro e bisogni/risorse vengono collegati.</div>
+      <div class="ms10-step done"><b>6. Reputazione</b><br>Trust score basato su aiuti, utilità e feedback.</div>
+      <div class="ms10-step done"><b>7. Privacy</b><br>Pubblico, amici, privato e filtro geografico.</div>
+      <div class="ms10-step done"><b>8. Notifiche</b><br>Azioni importanti generano avvisi nel campo.</div>
+      <div class="ms10-step done"><b>9. Economia Empatica</b><br>Valore distribuito 90/10, helper/piattaforma.</div>
+      <div class="ms10-step done"><b>10. App-ready</b><br>Struttura pronta per React/PWA/app mobile.</div>
+    </div>
+  </div>
+
+  <div class="ms10-card" id="ms10Composer">
+    <div class="ms10-title"><h3>Crea post empatico</h3><span class="tag">post → chat → aiuto → valore</span></div>
+    <textarea id="ms10Text" placeholder="Scrivi come su Facebook, ma con senso: cosa cerchi, cosa offri, quale bisogno o risorsa vuoi mettere nel campo?"></textarea>
+    <div class="ms10-composer-grid">
+      <select id="ms10Kind"><option value="economia_empatica">Economia Empatica</option><option value="cerco">Cerco</option><option value="offro">Offro</option><option value="bisogno">Bisogno</option><option value="risorsa">Risorsa</option><option value="gratitudine">Gratitudine</option></select>
+      <input id="ms10Need" placeholder="Bisogno / ricerca">
+      <input id="ms10Resource" placeholder="Risorsa / cosa puoi offrire">
+      <input id="ms10Emotion" type="number" min="-5" max="5" placeholder="Emozione -5 / +5">
+      <select id="ms10Urgency"><option value="normale">Urgenza normale</option><option value="alta">Urgenza alta</option><option value="critica">Urgenza critica</option></select>
+      <select id="ms10Visibility"><option value="public">Pubblico</option><option value="friends">Solo amici</option><option value="private">Privato</option></select>
+    </div>
+    <input id="ms10Tags" placeholder="Tag: lavoro, bambini, tecnico, ascolto, trasporto...">
+    <div class="ms10-actions"><button class="ms10-green" onclick="ms10CreateEmpathicPost()">Pubblica nel campo</button><button class="ms10-purple" onclick="ms10SeedDemoPosts()">Crea esempi demo</button><button class="ms10-dark" onclick="ms10RenderFeed()">Aggiorna feed</button></div>
+  </div>
+
+  <div class="ms10-card">
+    <div class="ms10-title"><h3>Feed Empathic</h3><span class="tag">contenuti mantenuti + layer empatico</span></div>
+    <div class="ms10-tabs" id="ms10Tabs">
+      <button class="active" onclick="ms10SetFilter('all')" id="ms10TabAll">🌍 Tutti</button>
+      <button onclick="ms10SetFilter('cerco')" id="ms10TabCerco">🔎 Cerco</button>
+      <button onclick="ms10SetFilter('offro')" id="ms10TabOffro">🤝 Offro</button>
+      <button onclick="ms10SetFilter('urgent')" id="ms10TabUrgent">🔥 Urgenti</button>
+      <button onclick="ms10SetFilter('mine')" id="ms10TabMine">👤 Miei</button>
+    </div>
+    <div id="ms10Feed" class="ms10-feed"><div class="ms10-empty">Il feed si popola con i post già presenti e con i nuovi post empatici.</div></div>
+  </div>
+
+  <div class="ms10-card" id="ms10WalletDashboard">
+    <div class="ms10-title"><h3>Wallet & valore empatico</h3><span class="tag">donazioni / reward / trust</span></div>
+    <div id="ms10WalletSummary"><div class="small">Accedi per vedere wallet, valore ricevuto, valore dato e trust score.</div></div>
+  </div>
+</div>
 
 <div id="donationModal" class="card hidden">
   <h2>Riconosci valore ❤️</h2>
@@ -4594,6 +4670,217 @@ window.closeLegal = function () {
   document.getElementById("legalBox").classList.add("hidden");
   document.getElementById("legalBox").innerHTML = "";
 };
+
+
+
+/* ==========================================================
+   STEP 1-10 V10 - EMPATHIC FACEBOOK OS ENGINE
+   Inserito dentro lo script Firebase principale: usa db/auth/wallet/chat.
+   ========================================================== */
+(function(){
+  let ms10Filter = "all";
+  let ms10Chats = [];
+  let ms10Donations = [];
+  let ms10Votes = [];
+  let ms10Started = false;
+
+  function safe(v){ return escapeHtml(String(v ?? "")); }
+  function norm(v){ return String(v || "").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,""); }
+  function words(v){ return norm(v).split(/[^a-z0-9]+/).filter(w => w.length > 2); }
+  function initials(v){ return safe(String(v || "MS").slice(0,2).toUpperCase()); }
+  function kindLabel(k){ return ({economia_empatica:"Economia Empatica",cerco:"Cerco",offro:"Offro",bisogno:"Bisogno",risorsa:"Risorsa",gratitudine:"Gratitudine",aiuto:"Aiuto"})[k] || k || "Post"; }
+  function isNeed(k){ return ["cerco","bisogno"].includes(String(k||"").toLowerCase()); }
+  function isOffer(k){ return ["offro","risorsa","aiuto"].includes(String(k||"").toLowerCase()); }
+  function postKind(p){ return p.ms10Kind || p.kind || p.type || "economia_empatica"; }
+  function postText(p){ return p.text || p.need || p.resource || ""; }
+  function postTags(p){ return Array.isArray(p.tags) ? p.tags : String(p.tags || "").split(",").map(x=>x.trim()).filter(Boolean); }
+  function allPosts(){ return (socialPosts || []).map(p => ({...p, ms10Kind:postKind(p)})); }
+  function compatibility(a,b){
+    if(!a || !b || a.id === b.id) return 0;
+    let score = 0;
+    const ak = postKind(a), bk = postKind(b);
+    if((isNeed(ak) && isOffer(bk)) || (isOffer(ak) && isNeed(bk))) score += 35;
+    const aw = new Set([...words(postText(a)), ...words(a.need), ...words(a.resource), ...words(a.category), ...postTags(a).map(norm)]);
+    const bw = new Set([...words(postText(b)), ...words(b.need), ...words(b.resource), ...words(b.category), ...postTags(b).map(norm)]);
+    aw.forEach(w => { if(bw.has(w)) score += 8; });
+    if(a.category && b.category && norm(a.category) === norm(b.category)) score += 18;
+    if(a.country && b.country && norm(a.country) === norm(b.country)) score += 6;
+    if(a.city && b.city && norm(a.city) === norm(b.city)) score += 8;
+    return Math.min(99, score);
+  }
+  function matchesFor(p){ return allPosts().filter(x => x.author !== p.author).map(x => ({post:x, score:compatibility(p,x)})).filter(x=>x.score>=24).sort((a,b)=>b.score-a.score).slice(0,5); }
+  function visiblePosts(){
+    let posts = allPosts().filter(p => {
+      if(!currentUser) return (p.visibility || "public") === "public";
+      if(p.author === currentUser.email) return true;
+      return (p.visibility || "public") !== "private";
+    });
+    if(ms10Filter === "cerco") posts = posts.filter(p => isNeed(postKind(p)));
+    if(ms10Filter === "offro") posts = posts.filter(p => isOffer(postKind(p)));
+    if(ms10Filter === "urgent") posts = posts.filter(p => ["alta","critica"].includes(String(p.urgency || p.ms10Urgency || "")));
+    if(ms10Filter === "mine" && currentUser) posts = posts.filter(p => p.author === currentUser.email);
+    return posts.sort((a,b)=>(b.timestamp||0)-(a.timestamp||0));
+  }
+  function kpis(){
+    const posts=allPosts();
+    const donations = ms10Donations.reduce((s,d)=>s+Number(d.amount||d.value||0),0);
+    const set=(id,val)=>{ const el=document.getElementById(id); if(el) el.textContent=val; };
+    set("ms10KpiPosts", posts.length);
+    set("ms10KpiNeeds", posts.filter(p=>isNeed(postKind(p))).length);
+    set("ms10KpiOffers", posts.filter(p=>isOffer(postKind(p))).length);
+    set("ms10KpiValue", Math.round(donations*100)/100 + "€");
+  }
+  window.ms10SetFilter=function(f){
+    ms10Filter=f;
+    ["All","Cerco","Offro","Urgent","Mine"].forEach(x=>document.getElementById("ms10Tab"+x)?.classList.remove("active"));
+    const map={all:"All",cerco:"Cerco",offro:"Offro",urgent:"Urgent",mine:"Mine"};
+    document.getElementById("ms10Tab"+(map[f]||"All"))?.classList.add("active");
+    ms10RenderFeed();
+  };
+  window.ms10CreateEmpathicPost=async function(){
+    if(!currentUser) return alert("Accedi prima di pubblicare.");
+    const text=document.getElementById("ms10Text")?.value.trim()||"";
+    const need=document.getElementById("ms10Need")?.value.trim()||"";
+    const resource=document.getElementById("ms10Resource")?.value.trim()||"";
+    if(!text && !need && !resource) return alert("Scrivi almeno un testo, un bisogno o una risorsa.");
+    const kind=document.getElementById("ms10Kind")?.value||"economia_empatica";
+    const tags=(document.getElementById("ms10Tags")?.value||"").split(",").map(t=>t.trim()).filter(Boolean);
+    const profileCity=document.getElementById("ms9City")?.value||"";
+    const profileCountry=document.getElementById("ms9Country")?.value||"";
+    await addDoc(collection(db,"socialPosts"),{
+      text, need, resource, tags, kind, type:kind, ms10Kind:kind,
+      category: tags[0] || kind,
+      emotion:Number(document.getElementById("ms10Emotion")?.value||0),
+      urgency:document.getElementById("ms10Urgency")?.value||"normale",
+      visibility:document.getElementById("ms10Visibility")?.value||"public",
+      walletEnabled:true, donationEnabled:true, source:"ms10EmpathicOS",
+      author:currentUser.email, authorName:currentUser.displayName||currentUser.email,
+      city:profileCity, country:profileCountry,
+      likes:0, comments:0, donationCount:0, utilityScore:0, utilityVotes:0,
+      timestamp:Date.now()
+    });
+    ["ms10Text","ms10Need","ms10Resource","ms10Emotion","ms10Tags"].forEach(id=>{ const el=document.getElementById(id); if(el) el.value=""; });
+    miniToast("Post empatico pubblicato: ora può generare chat, match e valore.");
+    ms10SetFilter("all");
+  };
+  window.ms10Toggle=function(id){ document.getElementById(id)?.classList.toggle("open"); };
+  window.ms10Chat=async function(postId,author){
+    if(!currentUser) return alert("Accedi prima.");
+    const id="ms10ChatInput_"+String(postId).replace(/[^a-zA-Z0-9_\-]/g,"_");
+    const el=document.getElementById(id); const text=el?.value.trim();
+    if(!text) return;
+    await addDoc(collection(db,"socialPostChats"),{postId,from:currentUser.email,to:author||"",text,timestamp:Date.now(),source:"ms10"});
+    if(author && author !== currentUser.email) await addDoc(collection(db,"socialNotifications"),{to:author,from:currentUser.email,type:"chat",text:"ti ha scritto dalla chat del post",postId,read:false,timestamp:Date.now()});
+    if(el) el.value="";
+  };
+  window.ms10Connect=async function(postId,author){
+    if(!currentUser) return alert("Accedi prima.");
+    if(!author || author === currentUser.email) return alert("Scegli un post di un altro utente.");
+    await addDoc(collection(db,"connections"),{from:currentUser.email,to:author,participants:[currentUser.email,author],status:"active",source:"ms10Post",sourcePostId:postId,reason:"Connessione nata da post empatico",score:80,timestamp:Date.now()});
+    await addDoc(collection(db,"socialNotifications"),{to:author,from:currentUser.email,type:"connection",text:"ha creato una connessione dal tuo post",postId,read:false,timestamp:Date.now()});
+    miniToast("Connessione empatica creata.");
+  };
+  window.ms10Donate=async function(postId,author){
+    if(!currentUser) return alert("Accedi prima.");
+    if(!author || author === currentUser.email) return alert("Puoi donare a un altro utente, non a te stesso.");
+    pendingDonation={connectionId:"ms10_post_"+postId,helperUser:author};
+    const box=document.getElementById("donationText");
+    if(box) box.innerHTML=`Riconosci valore a <b>${safe(maskEmail(author))}</b> per questo contenuto empatico.<br><br><b>90%</b> alla persona · <b>10%</b> al progetto.`;
+    document.getElementById("customDonation") && (document.getElementById("customDonation").value=10);
+    document.getElementById("donationModal")?.classList.remove("hidden");
+    try{ await updateDoc(doc(db,"socialPosts",postId),{donationCount:increment(1)}); }catch(e){}
+    window.scrollTo(0,0);
+  };
+  window.ms10Useful=async function(postId,author){
+    if(!currentUser) return alert("Accedi prima.");
+    const voteId=postId+"_"+currentUser.email.replace(/[^a-zA-Z0-9]/g,"_");
+    const ref=doc(db,"socialPostUtilityVotes",voteId);
+    const snap=await getDoc(ref);
+    if(snap.exists()) return miniToast("Hai già votato questo post.");
+    await setDoc(ref,{postId,from:currentUser.email,to:author||"",value:5,timestamp:Date.now(),source:"ms10"});
+    await updateDoc(doc(db,"socialPosts",postId),{utilityScore:increment(5),utilityVotes:increment(1)});
+    if(author && author!==currentUser.email) await addDoc(collection(db,"socialNotifications"),{to:author,from:currentUser.email,type:"utility",text:"ha dato utilità al tuo post",postId,read:false,timestamp:Date.now()});
+    miniToast("Utilità registrata.");
+  };
+  window.ms10RenderFeed=function(){
+    kpis();
+    const box=document.getElementById("ms10Feed"); if(!box) return;
+    const posts=visiblePosts();
+    if(!posts.length){ box.innerHTML='<div class="ms10-empty">Nessun post visibile per questo filtro.</div>'; return; }
+    box.innerHTML=posts.slice(0,80).map(p=>{
+      const id=String(p.id).replace(/[^a-zA-Z0-9_\-]/g,"_");
+      const author=p.author||""; const label=p.authorName||maskEmail(author)||"Utente"; const kind=postKind(p);
+      const chats=ms10Chats.filter(c=>c.postId===p.id).slice(-8);
+      const matches=matchesFor(p);
+      const votes=Number(p.utilityVotes||0), score=Number(p.utilityScore||0), avg=votes?(score/votes).toFixed(1):"0.0";
+      return `<div class="ms10-post">
+        <div class="ms10-post-head"><div class="ms10-avatar">${initials(label)}</div><div><div class="ms10-author">${safe(label)}</div><div class="ms10-time">${p.timestamp?new Date(p.timestamp).toLocaleString():""} · ${safe(p.city||"zona non indicata")} ${p.country?"· "+safe(p.country):""}</div></div></div>
+        <div class="ms10-pills"><span class="ms10-pill">${safe(kindLabel(kind))}</span>${p.urgency?`<span class="ms10-pill">🔥 ${safe(p.urgency)}</span>`:""}${p.emotion!==undefined?`<span class="ms10-pill">💭 ${safe(p.emotion)}</span>`:""}${postTags(p).slice(0,5).map(t=>`<span class="ms10-pill">#${safe(t)}</span>`).join("")}</div>
+        <div class="ms10-body">${safe(postText(p))}</div>
+        ${p.need?`<div class="ms10-pill">🆘 bisogno: ${safe(p.need)}</div>`:""} ${p.resource?`<div class="ms10-pill">🎁 risorsa: ${safe(p.resource)}</div>`:""}
+        <div class="ms10-pills"><span class="ms10-pill">❤️ ${Number(p.likes||0)}</span><span class="ms10-pill">💬 ${chats.length}</span><span class="ms10-pill">🎁 ${Number(p.donationCount||0)}</span><span class="ms10-pill">✅ utilità ${avg}/5</span>${matches.length?`<span class="ms10-pill">🤖 ${matches.length} match</span>`:""}</div>
+        <div class="ms10-post-actions"><button onclick="likeSocialPost('${p.id}','${String(author).replace(/'/g,"\\'")}')">❤️ Valore</button><button onclick="ms10Toggle('ms10Chat_${id}')">💬 Chat</button><button onclick="ms10Toggle('ms10Match_${id}')">🤖 Match</button><button onclick="ms10Useful('${p.id}','${String(author).replace(/'/g,"\\'")}')">✅ Utile</button><button onclick="ms10Donate('${p.id}','${String(author).replace(/'/g,"\\'")}')">🎁 Dona</button></div>
+        <div id="ms10Chat_${id}" class="ms10-panel"><b>Chat diretta collegata al post</b>${chats.map(c=>`<div class="ms10-message"><b>${safe(maskEmail(c.from))}</b><br>${safe(c.text)}</div>`).join("")}<div class="social-comment-box"><input id="ms10ChatInput_${id}" placeholder="Scrivi alla persona da questo post..." onkeydown="if(event.key==='Enter'){ms10Chat('${p.id}','${String(author).replace(/'/g,"\\'")}')}"><button onclick="ms10Chat('${p.id}','${String(author).replace(/'/g,"\\'")}')">Invia</button></div></div>
+        <div id="ms10Match_${id}" class="ms10-panel"><b>Matching automatico bisogno/risorsa</b>${matches.length?matches.map(m=>`<div class="ms10-match"><span class="ms10-score">${m.score}%</span> · <b>${safe(m.post.authorName||maskEmail(m.post.author))}</b> · ${safe(kindLabel(postKind(m.post)))}<br><span class="small">${safe(postText(m.post).slice(0,160))}${postText(m.post).length>160?"...":""}</span><br><button class="ms10-green" onclick="ms10Connect('${m.post.id}','${String(m.post.author||"").replace(/'/g,"\\'")}')">Connetti</button></div>`).join(""):'<div class="small">Nessun match forte ancora. Pubblica post complementari: chi cerca con chi offre.</div>'}</div>
+      </div>`;
+    }).join("");
+  };
+  window.ms10RenderWallet=function(){
+    const box=document.getElementById("ms10WalletSummary"); if(!box) return;
+    if(!currentUser){ box.innerHTML='<div class="small">Accedi per vedere wallet e trust score.</div>'; return; }
+    const email=currentUser.email;
+    const received=ms10Donations.filter(d=>d.to===email||d.helperUser===email).reduce((s,d)=>s+Number(d.amount||d.value||0),0);
+    const given=ms10Donations.filter(d=>d.from===email||d.donor===email).reduce((s,d)=>s+Number(d.amount||d.value||0),0);
+    const myPosts=allPosts().filter(p=>p.author===email);
+    const utility=myPosts.reduce((s,p)=>s+Number(p.utilityScore||0),0);
+    const trust=Math.min(100, Math.round(myPosts.length*4 + utility*2 + received));
+    box.innerHTML=`<div class="ms10-wallet-line"><span>Valore ricevuto</span><b>${received.toFixed(2)}€</b></div><div class="ms10-wallet-line"><span>Valore donato</span><b>${given.toFixed(2)}€</b></div><div class="ms10-wallet-line"><span>Post empatici</span><b>${myPosts.length}</b></div><div class="ms10-wallet-line"><span>Trust score</span><b>${trust}/100</b></div>`;
+  };
+  window.ms10SeedDemoPosts=async function(){
+    if(!currentUser) return alert("Accedi prima: gli esempi vengono salvati nel tuo campo Firebase.");
+    const demo=[
+      {kind:"cerco",text:"Cerco una persona che possa aiutarmi a organizzare una pratica o una scadenza urgente.",need:"supporto organizzativo",resource:"posso ricambiare con consulenza tecnica",tags:["organizzazione","pratica","tempo"],urgency:"alta"},
+      {kind:"offro",text:"Offro ascolto e aiuto concreto per chi deve mettere ordine in un problema pratico.",need:"",resource:"ascolto, metodo, pianificazione",tags:["ascolto","metodo","aiuto"],urgency:"normale"},
+      {kind:"economia_empatica",text:"L'economia empatica parte da un principio semplice: il valore umano deve poter circolare prima ancora del denaro.",need:"diffondere consapevolezza",resource:"visione, contenuti, rete",tags:["economia empatica","visione","rete"],urgency:"normale"}
+    ];
+    for(const d of demo){ await addDoc(collection(db,"socialPosts"),{...d,type:d.kind,ms10Kind:d.kind,category:d.tags[0],visibility:"public",walletEnabled:true,donationEnabled:true,author:currentUser.email,authorName:currentUser.displayName||currentUser.email,likes:0,donationCount:0,utilityScore:0,utilityVotes:0,timestamp:Date.now()+Math.floor(Math.random()*1000),source:"ms10Demo"}); }
+    miniToast("Esempi demo creati.");
+  };
+  function listen(){
+    if(ms10Started) return; ms10Started=true;
+    try{ onSnapshot(collection(db,"socialPostChats"),snap=>{ms10Chats=[];snap.forEach(d=>ms10Chats.push({id:d.id,...d.data()}));ms10RenderFeed();}); }catch(e){}
+    try{ onSnapshot(collection(db,"donations"),snap=>{ms10Donations=[];snap.forEach(d=>ms10Donations.push({id:d.id,...d.data()}));kpis();ms10RenderWallet();}); }catch(e){}
+    try{ onSnapshot(collection(db,"socialPostUtilityVotes"),snap=>{ms10Votes=[];snap.forEach(d=>ms10Votes.push({id:d.id,...d.data()}));}); }catch(e){}
+  }
+  function nav(){
+    const nav=document.querySelector(".social-nav");
+    if(nav && !document.getElementById("ms10NavBtn")){ const btn=document.createElement("button"); btn.id="ms10NavBtn"; btn.innerHTML="💚 Empathic OS"; btn.onclick=()=>showMiniSection("empathicos"); nav.insertBefore(btn, nav.children[1] || null); }
+  }
+  const previousShow = window.showMiniSection;
+  window.showMiniSection=function(name){
+    if(name==="empathicos" || name==="feed" || name==="socialfeed"){
+      document.body.classList.add("social-focus");
+      document.querySelectorAll(".mini-section").forEach(el=>el.classList.remove("active-section"));
+      ["socialHero","ms10EmpathicOS","socialPostsFeed","ms9FacebookLikeSection"].forEach(id=>document.getElementById(id)?.classList.add("active-section"));
+      ms10RenderFeed(); ms10RenderWallet();
+      document.getElementById("ms10EmpathicOS")?.scrollIntoView({behavior:"smooth",block:"start"});
+      return;
+    }
+    return previousShow ? previousShow(name) : undefined;
+  };
+  const prevRender = window.renderSocialPosts || (typeof renderSocialPosts !== "undefined" ? renderSocialPosts : null);
+  if(typeof renderSocialPosts !== "undefined"){
+    const originalRender = renderSocialPosts;
+    renderSocialPosts = function(){ try{ originalRender(); }catch(e){} ms10RenderFeed(); ms10RenderWallet(); };
+  }
+  function exposeGlobals(){
+    window.db=db; window.auth=auth; window.storage=storage; window.currentUser=currentUser; window.socialPosts=socialPosts; window.socialComments=socialComments; window.pendingDonation=pendingDonation;
+    window.completeLogin=completeLogin; window.renderSocialPosts=renderSocialPosts; window.miniToast=miniToast; window.maskEmail=maskEmail; window.escapeHtml=escapeHtml; window.likeSocialPost=window.likeSocialPost || likeSocialPost;
+  }
+  const prevComplete = completeLogin;
+  completeLogin = async function(user){ await prevComplete(user); exposeGlobals(); listen(); nav(); ms10RenderFeed(); ms10RenderWallet(); };
+  document.addEventListener("DOMContentLoaded",()=>{ exposeGlobals(); listen(); nav(); setTimeout(()=>{ ms10RenderFeed(); ms10RenderWallet(); },500); });
+})();
 
 </script>
 
