@@ -963,6 +963,57 @@ body.dark-mode .ms8-card, body.dark-mode .ms8-inline-chat, body.dark-mode .ms8-m
 body.dark-mode .ms8-tabs button, body.dark-mode .ms8-reactions button { background:#1f2937; color:#e5e7eb; border-color:#334155; }
 @media (max-width:860px) { .ms8-grid, .ms8-privacy-row { grid-template-columns:1fr; } }
 
+
+/* ==========================================================
+   STEP 9 - FACEBOOK-LIKE EMPATHIC ECONOMY FEED
+   Innesto conservativo: profilo/impostazioni, feed sequenziale,
+   post Economia Empatica, chat incorporata, matching automatico
+   geolocalizzato, votazione utilità e donazioni nei post.
+   ========================================================== */
+.ms9-shell { display:grid; grid-template-columns:1fr; gap:14px; }
+.ms9-profile-cover {
+  background:linear-gradient(135deg,#111827,#2563eb 55%,#16a34a);
+  color:white; border-radius:24px; padding:20px; margin:14px 0;
+  box-shadow:0 16px 34px rgba(37,99,235,.20);
+}
+.ms9-profile-row { display:flex; gap:14px; align-items:center; }
+.ms9-profile-avatar {
+  width:78px; height:78px; border-radius:50%; background:#fff; color:#2563eb;
+  display:flex; align-items:center; justify-content:center; font-size:28px; font-weight:900;
+  border:4px solid rgba(255,255,255,.78);
+}
+.ms9-profile-cover h2 { margin:0 0 4px; }
+.ms9-profile-cover p { margin:0; color:rgba(255,255,255,.84); }
+.ms9-settings-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; }
+.ms9-composer { background:#fff; border:1px solid var(--ms-border,#d9dee8); border-radius:22px; padding:16px; box-shadow:0 2px 12px rgba(15,23,42,.07); }
+.ms9-composer textarea { min-height:96px; border-radius:18px; background:#f8fafc; }
+.ms9-composer-row { display:grid; grid-template-columns:1fr 1fr 1fr; gap:8px; }
+.ms9-filterbar { display:flex; flex-wrap:wrap; gap:8px; margin:10px 0; }
+.ms9-filterbar button { margin:0; background:#f1f5f9; color:#111827; font-weight:800; }
+.ms9-filterbar button.active { background:#2563eb; color:#fff; }
+.ms9-post-card { background:#fff; border:1px solid var(--ms-border,#d9dee8); border-radius:22px; padding:16px; margin:14px 0; box-shadow:0 2px 12px rgba(15,23,42,.07); }
+.ms9-post-head { display:flex; gap:10px; align-items:center; }
+.ms9-avatar-mini { width:48px; height:48px; border-radius:50%; background:linear-gradient(135deg,#2563eb,#7c3aed); color:white; display:flex; align-items:center; justify-content:center; font-weight:900; }
+.ms9-author { font-weight:900; color:#111827; }
+.ms9-time { font-size:12px; color:#64748b; }
+.ms9-body { margin:12px 0; line-height:1.55; white-space:pre-wrap; font-size:15px; }
+.ms9-meta { display:flex; flex-wrap:wrap; gap:6px; margin:8px 0; }
+.ms9-pill { display:inline-flex; gap:5px; align-items:center; padding:5px 9px; border-radius:999px; background:#e8f0ff; color:#1d4ed8; font-size:12px; font-weight:800; }
+.ms9-actions { display:grid; grid-template-columns:repeat(5,1fr); gap:7px; border-top:1px solid #eef2f7; padding-top:10px; margin-top:10px; }
+.ms9-actions button { margin:0; background:#f8fafc; color:#111827; border:1px solid #e5e7eb; font-weight:800; padding:8px 7px; font-size:13px; }
+.ms9-inline-panel { display:none; background:#f8fafc; border:1px solid #eef2f7; border-radius:18px; padding:10px; margin-top:10px; }
+.ms9-inline-panel.open { display:block; }
+.ms9-chat-message { background:#fff; border:1px solid #e5e7eb; border-radius:14px; padding:8px 10px; margin:6px 0; font-size:13px; }
+.ms9-match-item { background:#fff; border:1px solid #e5e7eb; border-radius:14px; padding:10px; margin:7px 0; }
+.ms9-match-score { font-weight:900; color:#16a34a; }
+.ms9-location-note { font-size:12px; color:#64748b; margin-top:8px; }
+.ms9-utility { display:flex; align-items:center; justify-content:space-between; gap:8px; background:#f8fafc; border-radius:14px; padding:8px 10px; margin-top:8px; }
+.ms9-feed-empty { background:#fff; border:1px dashed #cbd5e1; border-radius:20px; padding:18px; text-align:center; color:#64748b; }
+body.dark-mode .ms9-composer, body.dark-mode .ms9-post-card, body.dark-mode .ms9-profile-cover, body.dark-mode .ms9-inline-panel, body.dark-mode .ms9-chat-message, body.dark-mode .ms9-match-item, body.dark-mode .ms9-utility { background:#111827; color:#e5e7eb; border-color:#334155; }
+body.dark-mode .ms9-author { color:#e5e7eb; }
+body.dark-mode .ms9-filterbar button, body.dark-mode .ms9-actions button { background:#1f2937; color:#e5e7eb; border-color:#334155; }
+@media (max-width:860px) { .ms9-settings-grid, .ms9-composer-row, .ms9-actions { grid-template-columns:1fr; } .ms9-profile-row { align-items:flex-start; } }
+
 </style>
 </head>
 
@@ -1494,6 +1545,103 @@ body.dark-mode .ms8-tabs button, body.dark-mode .ms8-reactions button { backgrou
       <div class="ms8-badge">🙏 Gratitudine</div>
       <p class="small">Le reazioni sono integrate direttamente nei post del campo.</p>
     </div>
+  </div>
+</div>
+
+
+
+<!-- ==========================================================
+     STEP 9 - FACEBOOK-LIKE EMPATHIC ECONOMY FEED
+     Blocco conservativo: aggiunge profilo/impostazioni, post
+     sequenziali, localizzazione, match, utilità e chat nei post.
+     ========================================================== -->
+<div class="ms9-shell mini-section" id="ms9FacebookLikeSection">
+  <div class="ms9-profile-cover">
+    <div class="ms9-profile-row">
+      <div class="ms9-profile-avatar" id="ms9ProfileAvatar">MS</div>
+      <div>
+        <h2 id="ms9ProfileName">Profilo Empathic</h2>
+        <p id="ms9ProfileSubtitle">Economia Empatica · relazioni, risorse, offerte, ricerche e valore condiviso.</p>
+        <div id="ms9ProfileBadges" style="margin-top:8px;">
+          <span class="ms9-pill">🌍 Stato non impostato</span>
+          <span class="ms9-pill">📍 Localizzazione non attiva</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="ms9-composer">
+    <div class="ms8-title">
+      <h3>Impostazioni profilo e localizzazione</h3>
+      <span class="tag">Facebook-like</span>
+    </div>
+    <div class="ms9-settings-grid">
+      <input id="ms9DisplayName" placeholder="Nome profilo pubblico">
+      <select id="ms9ProfileMode">
+        <option value="public">Profilo pubblico</option>
+        <option value="friends">Profilo solo amici</option>
+        <option value="private">Profilo privato</option>
+      </select>
+      <select id="ms9DefaultVisibility">
+        <option value="public">Post pubblici</option>
+        <option value="friends">Post solo amici</option>
+        <option value="private">Post privati</option>
+      </select>
+      <input id="ms9Country" placeholder="Stato / Paese, es. Italia">
+      <input id="ms9City" placeholder="Città / zona, es. Pinerolo">
+      <select id="ms9SameCountryOnly">
+        <option value="yes">Restringi allo stesso Stato</option>
+        <option value="no">Mostra anche altri Stati</option>
+      </select>
+    </div>
+    <button class="green" onclick="ms9SaveProfileSettings()">Salva impostazioni</button>
+    <button class="purple" onclick="ms9DetectLocation()">📍 Usa posizione attuale</button>
+    <div id="ms9SettingsStatus" class="ms9-location-note"></div>
+  </div>
+
+  <div class="ms9-composer">
+    <div class="social-composer-head">
+      <div class="social-avatar-mini">EE</div>
+      <div>
+        <b>Pubblica su Economia Empatica</b><br>
+        <span class="small">Un post dopo l'altro: ricerca, offerta, risorsa, bisogno, esperienza o gratitudine.</span>
+      </div>
+    </div>
+    <textarea id="ms9PostText" placeholder="Scrivi un post: cosa cerchi, cosa offri, quale risorsa hai, quale bisogno vuoi condividere?"></textarea>
+    <div class="ms9-composer-row">
+      <select id="ms9PostKind">
+        <option value="economia_empatica">Economia Empatica</option>
+        <option value="cerco">Cerco</option>
+        <option value="offro">Offro</option>
+        <option value="risorsa">Risorsa</option>
+        <option value="bisogno">Bisogno</option>
+        <option value="gratitudine">Gratitudine</option>
+      </select>
+      <input id="ms9PostCategory" placeholder="Categoria: lavoro, tecnico, emotivo...">
+      <select id="ms9PostVisibility">
+        <option value="default">Visibilità predefinita</option>
+        <option value="public">Pubblico</option>
+        <option value="friends">Solo amici</option>
+        <option value="private">Privato</option>
+      </select>
+    </div>
+    <input id="ms9PostTags" placeholder="Parole chiave separate da virgola: es. architettura, bambini, aiuto, lavoro">
+    <button class="green" onclick="ms9CreatePost()">Pubblica</button>
+  </div>
+
+  <div class="ms9-composer">
+    <div class="ms8-title">
+      <h3>Feed Economia Empatica</h3>
+      <span class="tag">post sequenziali</span>
+    </div>
+    <div class="ms9-filterbar" id="ms9FeedFilters">
+      <button id="ms9FilterAll" class="active" onclick="ms9SetFeedFilter('all')">🌍 Tutti</button>
+      <button id="ms9FilterEconomy" onclick="ms9SetFeedFilter('economia_empatica')">💚 Economia Empatica</button>
+      <button id="ms9FilterCerco" onclick="ms9SetFeedFilter('cerco')">🔎 Ricerche</button>
+      <button id="ms9FilterOffro" onclick="ms9SetFeedFilter('offro')">🤝 Offerte</button>
+      <button id="ms9FilterNear" onclick="ms9SetFeedFilter('near')">📍 Vicini</button>
+    </div>
+    <div class="ms9-location-note" id="ms9FeedLocationNote">Ordine: prima i post più vicini, poi quelli più lontani. Filtro Stato attivo se impostato.</div>
   </div>
 </div>
 
@@ -5085,6 +5233,339 @@ document.addEventListener("DOMContentLoaded", function() {
 });
 
 })();
+
+/* ==========================================================
+   STEP 9 - FACEBOOK-LIKE EMPATHIC ECONOMY FEED
+   Conservativo: non rimuove funzioni precedenti; sovrascrive il
+   rendering dei post per ottenere feed sequenziale con chat,
+   matching automatico risorse/offerte/ricerche, utilità e doni.
+   ========================================================== */
+(function(){
+let ms9FeedFilter = "all";
+let ms9Profile = { country:"", city:"", lat:null, lng:null, sameCountryOnly:true, profileMode:"public", defaultVisibility:"public" };
+let ms9PostChats = [];
+let ms9UtilityVotes = [];
+let ms9ListeningChats = false;
+let ms9ListeningUtility = false;
+
+function ms9SafeId(value){ return String(value || "").replace(/[^a-zA-Z0-9_\-]/g,"_"); }
+function ms9Norm(value){ return String(value || "").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,""); }
+function ms9Words(value){ return ms9Norm(value).split(/[^a-z0-9]+/).filter(w => w.length > 2); }
+function ms9Initials(value){ return escapeHtml(String(value || "MS").slice(0,2).toUpperCase()); }
+function ms9Km(aLat,aLng,bLat,bLng){
+  if ([aLat,aLng,bLat,bLng].some(v => v === null || v === undefined || v === "" || Number.isNaN(Number(v)))) return null;
+  const R=6371;
+  const dLat=(Number(bLat)-Number(aLat))*Math.PI/180;
+  const dLng=(Number(bLng)-Number(aLng))*Math.PI/180;
+  const s1=Math.sin(dLat/2), s2=Math.sin(dLng/2);
+  const q=s1*s1 + Math.cos(Number(aLat)*Math.PI/180)*Math.cos(Number(bLat)*Math.PI/180)*s2*s2;
+  return Math.round(R*2*Math.atan2(Math.sqrt(q),Math.sqrt(1-q))*10)/10;
+}
+function ms9CurrentCountry(){ return ms9Norm(ms9Profile.country || document.getElementById("ms9Country")?.value || ""); }
+function ms9CurrentUserLat(){ return Number(ms9Profile.lat); }
+function ms9CurrentUserLng(){ return Number(ms9Profile.lng); }
+function ms9PostDistance(p){ return ms9Km(ms9CurrentUserLat(), ms9CurrentUserLng(), p.lat, p.lng); }
+function ms9KindLabel(kind){
+  return ({economia_empatica:"Economia Empatica", cerco:"Cerco", offro:"Offro", risorsa:"Risorsa", bisogno:"Bisogno", gratitudine:"Gratitudine", aiuto:"Aiuto offerto", pensiero:"Pensiero"})[kind] || kind || "Post";
+}
+function ms9CanSeePost(p){
+  if (!currentUser) return (p.visibility || "public") === "public";
+  if (p.author === currentUser.email) return true;
+  const visibility = p.visibility || "public";
+  if (visibility === "private") return false;
+  if (ms9Profile.sameCountryOnly && ms9CurrentCountry() && p.country && ms9Norm(p.country) !== ms9CurrentCountry()) return false;
+  if (visibility === "friends" && typeof ms8Friends !== "undefined") return ms8Friends.some(f => f.friend === p.author || f.from === p.author || f.to === p.author);
+  return true;
+}
+function ms9PostMatchesFilter(p){
+  const kind = p.kind || p.type || "economia_empatica";
+  if (ms9FeedFilter === "all") return true;
+  if (ms9FeedFilter === "near") return true;
+  if (ms9FeedFilter === "economia_empatica") return kind === "economia_empatica" || String(p.category || "").toLowerCase().includes("economia");
+  if (ms9FeedFilter === "offro") return ["offro","risorsa","aiuto"].includes(kind);
+  if (ms9FeedFilter === "cerco") return ["cerco","bisogno"].includes(kind);
+  return kind === ms9FeedFilter;
+}
+function ms9SortPosts(list){
+  const withDistance = list.map(p => ({...p, _distance: ms9PostDistance(p)}));
+  if (ms9FeedFilter === "near" || ms9Profile.lat) {
+    withDistance.sort((a,b) => {
+      const da = a._distance === null ? 999999 : a._distance;
+      const db = b._distance === null ? 999999 : b._distance;
+      if (da !== db) return da - db;
+      return (b.timestamp || 0) - (a.timestamp || 0);
+    });
+  } else {
+    withDistance.sort((a,b) => (b.timestamp || 0) - (a.timestamp || 0));
+  }
+  return withDistance;
+}
+function ms9Compatibility(a,b){
+  if (!a || !b || a.id === b.id || a.author === b.author) return 0;
+  const ak = a.kind || a.type || "";
+  const bk = b.kind || b.type || "";
+  const complementary = (["cerco","bisogno"].includes(ak) && ["offro","risorsa","aiuto"].includes(bk)) || (["offro","risorsa","aiuto"].includes(ak) && ["cerco","bisogno"].includes(bk));
+  let score = complementary ? 35 : 0;
+  const aw = new Set([...ms9Words(a.text), ...ms9Words(a.category), ...(Array.isArray(a.tags) ? a.tags.map(ms9Norm) : [])]);
+  const bw = new Set([...ms9Words(b.text), ...ms9Words(b.category), ...(Array.isArray(b.tags) ? b.tags.map(ms9Norm) : [])]);
+  aw.forEach(w => { if (bw.has(w)) score += 12; });
+  if (a.category && b.category && ms9Norm(a.category) === ms9Norm(b.category)) score += 18;
+  const d = ms9Km(a.lat,a.lng,b.lat,b.lng);
+  if (d !== null) score += Math.max(0, 20 - Math.min(20, d / 5));
+  if (a.country && b.country && ms9Norm(a.country) === ms9Norm(b.country)) score += 8;
+  return Math.round(score);
+}
+function ms9FindMatchesForPost(post){
+  return (socialPosts || [])
+    .filter(p => ms9CanSeePost(p))
+    .map(p => ({ post:p, score:ms9Compatibility(post,p), distance:ms9Km(post.lat,post.lng,p.lat,p.lng) }))
+    .filter(x => x.score >= 25)
+    .sort((a,b) => b.score - a.score || ((a.distance ?? 999999) - (b.distance ?? 999999)))
+    .slice(0,4);
+}
+function ms9UpdateProfileHeader(){
+  const name = currentUser?.displayName || document.getElementById("ms9DisplayName")?.value || currentUser?.email || "Profilo Empathic";
+  const avatar = document.getElementById("ms9ProfileAvatar");
+  const title = document.getElementById("ms9ProfileName");
+  const badges = document.getElementById("ms9ProfileBadges");
+  if (avatar) avatar.innerText = String(name).slice(0,2).toUpperCase();
+  if (title) title.innerText = name;
+  if (badges) {
+    badges.innerHTML = `
+      <span class="ms9-pill">🌍 ${escapeHtml(ms9Profile.country || "Stato non impostato")}</span>
+      <span class="ms9-pill">🏙️ ${escapeHtml(ms9Profile.city || "Città non impostata")}</span>
+      <span class="ms9-pill">${ms9Profile.lat ? "📍 Localizzazione attiva" : "📍 Localizzazione non attiva"}</span>
+      <span class="ms9-pill">${ms9Profile.sameCountryOnly ? "🔒 stesso Stato" : "🌐 internazionale"}</span>
+    `;
+  }
+}
+async function ms9LoadProfileSettings(){
+  if (!currentUser) return;
+  try {
+    const snap = await getDoc(doc(db,"users",currentUser.email));
+    const data = snap.exists() ? snap.data() : {};
+    const social = data.ms9 || data.socialSettings || {};
+    ms9Profile = {
+      country: social.country || data.country || "Italia",
+      city: social.city || data.city || "",
+      lat: social.lat ?? data.lat ?? null,
+      lng: social.lng ?? data.lng ?? null,
+      sameCountryOnly: social.sameCountryOnly !== false,
+      profileMode: social.profileMode || data.profileMode || "public",
+      defaultVisibility: social.defaultVisibility || data.defaultVisibility || "public"
+    };
+    const nameEl=document.getElementById("ms9DisplayName"); if(nameEl) nameEl.value = data.displayName || data.nickname || currentUser.displayName || "";
+    const countryEl=document.getElementById("ms9Country"); if(countryEl) countryEl.value = ms9Profile.country || "";
+    const cityEl=document.getElementById("ms9City"); if(cityEl) cityEl.value = ms9Profile.city || "";
+    const pm=document.getElementById("ms9ProfileMode"); if(pm) pm.value = ms9Profile.profileMode;
+    const dv=document.getElementById("ms9DefaultVisibility"); if(dv) dv.value = ms9Profile.defaultVisibility;
+    const sc=document.getElementById("ms9SameCountryOnly"); if(sc) sc.value = ms9Profile.sameCountryOnly ? "yes" : "no";
+    ms9UpdateProfileHeader();
+    renderSocialPosts();
+  } catch(e){ console.warn("ms9LoadProfileSettings", e); }
+}
+window.ms9SaveProfileSettings = async function(){
+  if (!currentUser) return alert("Login prima");
+  const displayName = (document.getElementById("ms9DisplayName")?.value || currentUser.displayName || currentUser.email).trim();
+  ms9Profile.country = (document.getElementById("ms9Country")?.value || "Italia").trim();
+  ms9Profile.city = (document.getElementById("ms9City")?.value || "").trim();
+  ms9Profile.profileMode = document.getElementById("ms9ProfileMode")?.value || "public";
+  ms9Profile.defaultVisibility = document.getElementById("ms9DefaultVisibility")?.value || "public";
+  ms9Profile.sameCountryOnly = (document.getElementById("ms9SameCountryOnly")?.value || "yes") === "yes";
+  await setDoc(doc(db,"users",currentUser.email), {
+    displayName, nickname: displayName,
+    country: ms9Profile.country, city: ms9Profile.city, lat: ms9Profile.lat, lng: ms9Profile.lng,
+    profileMode: ms9Profile.profileMode, defaultVisibility: ms9Profile.defaultVisibility,
+    ms9: {...ms9Profile, updatedAt: Date.now()}
+  }, { merge:true });
+  const box=document.getElementById("ms9SettingsStatus"); if(box) box.innerText="Impostazioni salvate. Il feed ora viene ordinato per vicinanza e filtrato per Stato.";
+  ms9UpdateProfileHeader(); renderSocialPosts(); miniToast("Profilo aggiornato ⚙️");
+};
+window.ms9DetectLocation = function(){
+  if (!navigator.geolocation) return alert("Geolocalizzazione non disponibile su questo dispositivo/browser.");
+  navigator.geolocation.getCurrentPosition(async pos => {
+    ms9Profile.lat = pos.coords.latitude;
+    ms9Profile.lng = pos.coords.longitude;
+    const box=document.getElementById("ms9SettingsStatus"); if(box) box.innerText = "Posizione rilevata. Ora salva le impostazioni per usarla nei match.";
+    if (currentUser) await ms9SaveProfileSettings();
+  }, err => alert("Non riesco a leggere la posizione: " + err.message), { enableHighAccuracy:true, timeout:10000 });
+};
+window.ms9SetFeedFilter = function(filter){
+  ms9FeedFilter = filter;
+  document.querySelectorAll("#ms9FeedFilters button").forEach(b => b.classList.remove("active"));
+  const map={all:"ms9FilterAll", economia_empatica:"ms9FilterEconomy", cerco:"ms9FilterCerco", offro:"ms9FilterOffro", near:"ms9FilterNear"};
+  const el=document.getElementById(map[filter]); if(el) el.classList.add("active");
+  renderSocialPosts();
+};
+window.ms9CreatePost = async function(){
+  if (!currentUser) return alert("Login prima");
+  const text=(document.getElementById("ms9PostText")?.value || "").trim();
+  const kind=document.getElementById("ms9PostKind")?.value || "economia_empatica";
+  const category=(document.getElementById("ms9PostCategory")?.value || "").trim();
+  const visibilityRaw=document.getElementById("ms9PostVisibility")?.value || "default";
+  const visibility=visibilityRaw === "default" ? (ms9Profile.defaultVisibility || "public") : visibilityRaw;
+  const tags=(document.getElementById("ms9PostTags")?.value || "").split(",").map(t => t.trim()).filter(Boolean);
+  if (text.length < 3) return alert("Scrivi un post più completo");
+  await addDoc(collection(db,"socialPosts"), {
+    author: currentUser.email,
+    authorName: document.getElementById("ms9DisplayName")?.value || currentUser.displayName || currentUser.email,
+    authorPhoto: currentUser.photoURL || "",
+    text, kind, type: kind, category, tags, visibility,
+    country: ms9Profile.country || document.getElementById("ms9Country")?.value || "Italia",
+    city: ms9Profile.city || document.getElementById("ms9City")?.value || "",
+    lat: ms9Profile.lat ?? null, lng: ms9Profile.lng ?? null,
+    utilityScore:0, utilityVotes:0, donationCount:0, likes:0, comments:0,
+    timestamp: Date.now()
+  });
+  await updateUser(currentUser.email, 2, 0, 0, 0, 0, 0);
+  ["ms9PostText","ms9PostCategory","ms9PostTags"].forEach(id => { const el=document.getElementById(id); if(el) el.value=""; });
+  miniToast("Post pubblicato su Economia Empatica 🌱");
+  showWow("Post pubblicato: il sistema cercherà connessioni automatiche");
+};
+window.ms9TogglePanel = function(id){ const el=document.getElementById(id); if(el) el.classList.toggle("open"); };
+window.ms9SendPostChat = async function(postId, to){
+  if (!currentUser) return alert("Login prima");
+  const input=document.getElementById("ms9ChatInput_"+ms9SafeId(postId));
+  const text=(input?.value || "").trim();
+  if(!text) return;
+  await addDoc(collection(db,"socialPostChats"), { postId, from:currentUser.email, to:to || "", text, timestamp:Date.now() });
+  await updateDoc(doc(db,"socialPosts",postId), { comments: increment(1) });
+  if(input) input.value="";
+};
+window.ms9VoteUtility = async function(postId, author, value){
+  if (!currentUser) return alert("Login prima");
+  const voteId = postId + "__" + currentUser.email.replace(/[^a-zA-Z0-9]/g,"_");
+  const ref = doc(db,"socialPostUtilityVotes",voteId);
+  const snap = await getDoc(ref);
+  if (snap.exists()) return miniToast("Hai già votato l'utilità di questo post");
+  await setDoc(ref,{ postId, from:currentUser.email, to:author || "", value:Number(value), timestamp:Date.now() });
+  await updateDoc(doc(db,"socialPosts",postId), { utilityScore: increment(Number(value)), utilityVotes: increment(1) });
+  if(author && author !== currentUser.email) await addDoc(collection(db,"socialNotifications"), { to:author, from:currentUser.email, type:"utility", text:"ha votato l'utilità del tuo post", postId, read:false, timestamp:Date.now() });
+  miniToast("Utilità registrata ✅");
+};
+window.ms9DonateFromPost = async function(postId, author){
+  if (!currentUser) return alert("Login prima");
+  if (!author || author === currentUser.email) return alert("Puoi donare a un altro utente, non a te stesso.");
+  pendingDonation = { connectionId: "post_" + postId, helperUser: author };
+  const box=document.getElementById("donationText");
+  if(box) box.innerHTML = `Vuoi riconoscere valore a <b>${escapeHtml(maskEmail(author))}</b> per questo post?<br><br><b>90%</b> va alla persona, <b>10%</b> sostiene la piattaforma.`;
+  const modal=document.getElementById("donationModal"); if(modal) modal.classList.remove("hidden");
+  const val=document.getElementById("customDonation"); if(val) val.value=10;
+  try { await updateDoc(doc(db,"socialPosts",postId), { donationCount: increment(1) }); } catch(e) {}
+  window.scrollTo(0,0);
+};
+window.ms9CreateConnectionFromPost = async function(postId, author){
+  if (!currentUser) return alert("Login prima");
+  if (!author || author === currentUser.email) return alert("Scegli un post di un altro utente.");
+  await addDoc(collection(db,"connections"), {
+    from: currentUser.email, to: author, participants:[currentUser.email, author],
+    status:"active", source:"socialPost", sourcePostId:postId,
+    reason:"Connessione avviata da post Economia Empatica", score:60, timestamp:Date.now()
+  });
+  await addDoc(collection(db,"socialNotifications"), { to:author, from:currentUser.email, type:"connection", text:"ha avviato una connessione dal tuo post", postId, read:false, timestamp:Date.now() });
+  miniToast("Connessione avviata 🤝");
+};
+function ms9ListenPostChats(){
+  if(ms9ListeningChats) return; ms9ListeningChats=true;
+  onSnapshot(collection(db,"socialPostChats"), snap => { ms9PostChats=[]; snap.forEach(d => ms9PostChats.push({id:d.id,...d.data()})); ms9PostChats.sort((a,b)=>(a.timestamp||0)-(b.timestamp||0)); renderSocialPosts(); });
+}
+function ms9ListenUtilityVotes(){
+  if(ms9ListeningUtility) return; ms9ListeningUtility=true;
+  onSnapshot(collection(db,"socialPostUtilityVotes"), snap => { ms9UtilityVotes=[]; snap.forEach(d => ms9UtilityVotes.push({id:d.id,...d.data()})); });
+}
+const ms9OldCreateSocialPost = window.createSocialPost;
+window.createSocialPost = async function(){
+  const textEl=document.getElementById("socialPostText");
+  if (!document.getElementById("ms9PostText") || !textEl || !textEl.value.trim()) return ms9OldCreateSocialPost ? ms9OldCreateSocialPost() : null;
+  document.getElementById("ms9PostText").value = textEl.value;
+  document.getElementById("ms9PostKind").value = document.getElementById("socialPostType")?.value || "economia_empatica";
+  document.getElementById("ms9PostCategory").value = document.getElementById("socialPostCategory")?.value || "";
+  await window.ms9CreatePost();
+  textEl.value="";
+};
+const ms9OldRenderSocialPosts = renderSocialPosts;
+renderSocialPosts = function(){
+  const box=document.getElementById("socialPostsFeed");
+  if(!box) return;
+  const posts = ms9SortPosts((socialPosts || []).filter(p => ms9CanSeePost(p)).filter(ms9PostMatchesFilter));
+  const note=document.getElementById("ms9FeedLocationNote");
+  if(note) note.innerText = `Ordine attivo: ${ms9Profile.lat ? "dal più vicino al più lontano" : "cronologico finché non attivi la posizione"}. ${ms9Profile.sameCountryOnly ? "Filtro stesso Stato attivo" : "Filtro internazionale attivo"}.`;
+  if(!posts.length){ box.innerHTML = `<div class="ms9-feed-empty">Nessun post visibile. Pubblica il primo contenuto su Economia Empatica oppure cambia filtro/Stato.</div>`; return; }
+  let html="";
+  posts.slice(0,60).forEach(p => {
+    const safeId=ms9SafeId(p.id); const author=p.author || ""; const authorLabel=p.authorName || maskEmail(author); const kind=p.kind || p.type || "economia_empatica";
+    const distance=p._distance ?? ms9PostDistance(p); const distanceText = distance === null ? "distanza non disponibile" : `${distance} km`;
+    const chats=ms9PostChats.filter(c => c.postId === p.id).slice(-8);
+    const comments=(socialComments || []).filter(c => c.postId === p.id).slice(-3);
+    const matches=ms9FindMatchesForPost(p);
+    const utilVotes=Number(p.utilityVotes || 0); const utilScore=Number(p.utilityScore || 0); const utilAvg=utilVotes ? (utilScore/utilVotes).toFixed(1) : "0.0";
+    html += `
+      <div class="ms9-post-card">
+        <div class="ms9-post-head">
+          <div class="ms9-avatar-mini">${ms9Initials(authorLabel)}</div>
+          <div>
+            <div class="ms9-author">${escapeHtml(authorLabel)}</div>
+            <div class="ms9-time">${p.timestamp ? new Date(p.timestamp).toLocaleString() : ""} · 📍 ${escapeHtml(p.city || "zona non indicata")} · ${escapeHtml(p.country || "")} · ${distanceText}</div>
+          </div>
+        </div>
+        <div class="ms9-meta">
+          <span class="ms9-pill">${escapeHtml(ms9KindLabel(kind))}</span>
+          ${p.category ? `<span class="ms9-pill">#${escapeHtml(p.category)}</span>` : ""}
+          <span class="ms9-pill">${escapeHtml(p.visibility || "public")}</span>
+          ${Array.isArray(p.tags) ? p.tags.slice(0,4).map(t => `<span class="ms9-pill">${escapeHtml(t)}</span>`).join("") : ""}
+        </div>
+        <div class="ms9-body">${escapeHtml(p.text || "")}</div>
+        <div class="ms9-utility"><span>❤️ ${Number(p.likes || 0)} · 💬 ${(chats.length + comments.length)} · 🎁 ${Number(p.donationCount || 0)} · ✅ utilità ${utilAvg}/5 (${utilVotes})</span><span>${matches.length ? "🤖 match trovati" : ""}</span></div>
+        <div class="ms9-actions">
+          <button onclick="likeSocialPost('${p.id}','${String(author).replace(/'/g,"\\'")}')">❤️ Valore</button>
+          <button onclick="ms9TogglePanel('ms9Chat_${safeId}')">💬 Chat</button>
+          <button onclick="ms9TogglePanel('ms9Matches_${safeId}')">🤖 Match</button>
+          <button onclick="ms9VoteUtility('${p.id}','${String(author).replace(/'/g,"\\'")}',5)">✅ Utile</button>
+          <button onclick="ms9DonateFromPost('${p.id}','${String(author).replace(/'/g,"\\'")}')">🎁 Dona</button>
+        </div>
+        <div id="ms9Chat_${safeId}" class="ms9-inline-panel">
+          <b>Chat incorporata nel post</b>
+          ${comments.map(c => `<div class="ms9-chat-message"><b>${escapeHtml(maskEmail(c.from))}</b><br>${escapeHtml(c.text || "")}</div>`).join("")}
+          ${chats.map(c => `<div class="ms9-chat-message"><b>${escapeHtml(maskEmail(c.from))}</b><br>${escapeHtml(c.text || "")}</div>`).join("")}
+          <div class="social-comment-box">
+            <input id="ms9ChatInput_${safeId}" placeholder="Scrivi nella chat del post..." onkeydown="if(event.key==='Enter'){ms9SendPostChat('${p.id}','${String(author).replace(/'/g,"\\'")}')}">
+            <button onclick="ms9SendPostChat('${p.id}','${String(author).replace(/'/g,"\\'")}')">Invia</button>
+          </div>
+        </div>
+        <div id="ms9Matches_${safeId}" class="ms9-inline-panel">
+          <b>Connessioni automatiche su risorse/offerte/ricerche</b>
+          ${matches.length ? matches.map(m => `<div class="ms9-match-item"><span class="ms9-match-score">${m.score}%</span> · <b>${escapeHtml(m.post.authorName || maskEmail(m.post.author))}</b> · ${escapeHtml(ms9KindLabel(m.post.kind || m.post.type))}<br><span class="small">${escapeHtml((m.post.text || "").slice(0,140))}${(m.post.text || "").length>140 ? "..." : ""}</span><br><button class="green" onclick="ms9CreateConnectionFromPost('${m.post.id}','${String(m.post.author || "").replace(/'/g,"\\'")}')">Connetti</button></div>`).join("") : `<div class="small">Nessun match automatico ancora. Servono post complementari: chi cerca con chi offre, risorse con bisogni.</div>`}
+        </div>
+      </div>`;
+  });
+  box.innerHTML=html;
+};
+function ms9AddNav(){
+  const nav=document.querySelector(".social-nav");
+  if(nav && !document.getElementById("ms9NavBtn")){
+    const btn=document.createElement("button"); btn.id="ms9NavBtn"; btn.innerHTML="📘 Social Feed"; btn.onclick=()=>showMiniSection("socialfeed"); nav.insertBefore(btn, nav.children[1] || null);
+  }
+}
+function ms9PatchRouter(){
+  if(window.__ms9RouterPatched) return; window.__ms9RouterPatched=true;
+  const old=window.showMiniSection;
+  window.showMiniSection=function(name){
+    if(name === "socialfeed" || name === "feed"){
+      document.body.classList.add("social-focus");
+      document.querySelectorAll(".mini-section").forEach(el => el.classList.remove("active-section"));
+      ["socialHero","ms9FacebookLikeSection","socialPostComposer","socialPostsFeed"].forEach(id => { const el=document.getElementById(id); if(el) el.classList.add("active-section"); });
+      const target=document.getElementById("ms9FacebookLikeSection") || document.getElementById("socialPostsFeed"); if(target) target.scrollIntoView({behavior:"smooth",block:"start"});
+      return;
+    }
+    if(typeof old === "function") return old(name);
+  };
+}
+function ms9Init(){ ms9AddNav(); ms9PatchRouter(); ms9LoadProfileSettings(); ms9ListenPostChats(); ms9ListenUtilityVotes(); ms9UpdateProfileHeader(); renderSocialPosts(); }
+const ms9PrevCompleteLogin = completeLogin;
+completeLogin = async function(user){ await ms9PrevCompleteLogin(user); ms9Init(); };
+document.addEventListener("DOMContentLoaded", function(){ ms9AddNav(); ms9PatchRouter(); ms9UpdateProfileHeader(); ms9ListenPostChats(); ms9ListenUtilityVotes(); });
+})();
+
 </script>
 
 </body>
