@@ -1014,6 +1014,242 @@ body.dark-mode .ms9-author { color:#e5e7eb; }
 body.dark-mode .ms9-filterbar button, body.dark-mode .ms9-actions button { background:#1f2937; color:#e5e7eb; border-color:#334155; }
 @media (max-width:860px) { .ms9-settings-grid, .ms9-composer-row, .ms9-actions { grid-template-columns:1fr; } .ms9-profile-row { align-items:flex-start; } }
 
+
+/* ==========================================================
+   STEP 10 - UX CLEAN / NAVIGAZIONE IMMEDIATA / MOBILE FIRST
+   Correzione conservativa: riduce caos visivo, evita pagina chilometrica,
+   rende feed e chat immediati, compatta match e connessioni.
+   ========================================================== */
+:root{
+  --ms10-safe-bottom: env(safe-area-inset-bottom, 0px);
+}
+.ms10-quick-tabs{
+  position:sticky;
+  top:72px;
+  z-index:99990;
+  background:rgba(240,242,245,.96);
+  backdrop-filter:blur(10px);
+  display:flex;
+  gap:8px;
+  overflow-x:auto;
+  padding:8px 2px 10px;
+  margin:0 0 8px;
+}
+.ms10-quick-tabs button{
+  margin:0;
+  white-space:nowrap;
+  border-radius:999px;
+  background:#fff;
+  color:#111827;
+  border:1px solid #d9dee8;
+  font-weight:900;
+  box-shadow:0 1px 5px rgba(15,23,42,.08);
+}
+.ms10-quick-tabs button.active{
+  background:#2563eb;
+  color:#fff;
+}
+.ms10-section-title{
+  font-size:14px;
+  font-weight:900;
+  color:#64748b;
+  margin:8px 0 6px;
+  text-transform:uppercase;
+  letter-spacing:.04em;
+}
+.ms10-compact-match{
+  background:#fff;
+  border:1px solid #d9dee8;
+  border-radius:18px;
+  padding:12px;
+  margin:10px 0;
+  box-shadow:0 1px 8px rgba(15,23,42,.07);
+}
+.ms10-compact-match h4{
+  margin:0 0 4px;
+  font-size:15px;
+}
+.ms10-compact-match .reason{
+  color:#475569;
+  font-size:13px;
+  line-height:1.35;
+  display:-webkit-box;
+  -webkit-line-clamp:3;
+  -webkit-box-orient:vertical;
+  overflow:hidden;
+}
+.ms10-compact-match .score{
+  display:inline-flex;
+  padding:4px 8px;
+  border-radius:999px;
+  background:#ecfdf5;
+  color:#166534;
+  font-weight:900;
+  font-size:12px;
+  margin:4px 0;
+}
+.ms10-mini-post-text{
+  font-size:15px;
+  line-height:1.45;
+  margin:10px 0;
+  display:-webkit-box;
+  -webkit-line-clamp:5;
+  -webkit-box-orient:vertical;
+  overflow:hidden;
+}
+.ms10-post-open .ms10-mini-post-text{
+  display:block;
+}
+.ms10-post-actions{
+  display:flex;
+  gap:6px;
+  overflow-x:auto;
+  border-top:1px solid #eef2f7;
+  padding-top:10px;
+  margin-top:10px;
+}
+.ms10-post-actions button{
+  min-width:max-content;
+  margin:0;
+  border-radius:999px;
+  font-size:13px;
+  padding:8px 10px;
+  background:#f8fafc;
+  color:#111827;
+  border:1px solid #e5e7eb;
+  font-weight:900;
+}
+.ms10-post-chat{
+  display:none;
+  background:#f8fafc;
+  border:1px solid #e5e7eb;
+  border-radius:16px;
+  padding:10px;
+  margin-top:10px;
+}
+.ms10-post-chat.open{
+  display:block;
+}
+.ms10-post-chat input{
+  border-radius:999px;
+  margin:6px 0 0;
+}
+.ms10-chat-line{
+  background:#fff;
+  border:1px solid #e5e7eb;
+  border-radius:14px;
+  padding:8px 10px;
+  margin:6px 0;
+  font-size:13px;
+}
+.ms10-actions-row{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+  margin-top:8px;
+}
+.ms10-actions-row button{
+  margin:0;
+}
+.ms10-home-only body.social-focus .mini-section:not(.active-section){display:none!important;}
+body.ms10-mode .social-hero,
+body.ms10-mode #socialTrustCenter,
+body.ms10-mode #msxStoriesSection,
+body.ms10-mode #msxAdvancedFeedSection,
+body.ms10-mode #ms8SocialPrivacySection{
+  display:none!important;
+}
+body.ms10-mode .social-main .container > h2{
+  display:none;
+}
+body.ms10-mode .wow{
+  display:none;
+}
+body.ms10-mode #matches .card,
+body.ms10-mode #connections .card{
+  max-height:unset;
+}
+body.ms10-mode .ms9-profile-cover{
+  padding:14px;
+  border-radius:18px;
+  margin:8px 0 10px;
+}
+body.ms10-mode .ms9-profile-avatar{
+  width:54px;
+  height:54px;
+  font-size:20px;
+}
+body.ms10-mode .ms9-profile-cover h2{
+  font-size:20px;
+}
+body.ms10-mode .ms9-composer{
+  border-radius:18px;
+  padding:12px;
+  margin:10px 0;
+}
+body.ms10-mode .ms9-settings-grid,
+body.ms10-mode .ms9-composer-row{
+  grid-template-columns:1fr;
+}
+body.ms10-mode .ms9-post-card{
+  border-radius:18px;
+  padding:12px;
+  margin:10px 0;
+}
+body.ms10-mode .ms9-actions{
+  display:flex;
+  overflow-x:auto;
+  grid-template-columns:none;
+}
+body.ms10-mode .ms9-actions button{
+  white-space:nowrap;
+}
+body.ms10-mode .social-floating-create{
+  bottom:76px;
+}
+@media (max-width:1180px){
+  .social-layout{display:block!important; max-width:780px!important; padding:0 10px;}
+  .social-left,.social-right{display:none!important;}
+  .social-topbar{height:58px; padding:0 10px;}
+  .social-brand span{font-size:14px;}
+  .social-logo{width:32px;height:32px;}
+  .social-search{flex:1; width:auto; display:block; margin:0 6px;}
+  .social-search input{font-size:12px; padding:9px 12px;}
+  .social-top-actions button{display:none;}
+  body{padding:66px 0 calc(76px + var(--ms10-safe-bottom))!important;}
+  .container{max-width:100%!important;}
+  .social-mobile-nav{
+    display:flex!important;
+    height:58px;
+    padding-bottom:var(--ms10-safe-bottom);
+  }
+  .social-mobile-nav button{
+    font-size:11px!important;
+    font-weight:800;
+  }
+  .ms10-quick-tabs{top:58px;}
+}
+@media (min-width:1181px){
+  body.ms10-mode .social-layout{
+    grid-template-columns:230px minmax(0,780px)!important;
+  }
+  body.ms10-mode .social-right{display:none!important;}
+}
+body.dark-mode .ms10-quick-tabs{background:rgba(15,23,42,.94);}
+body.dark-mode .ms10-quick-tabs button,
+body.dark-mode .ms10-compact-match,
+body.dark-mode .ms10-post-chat,
+body.dark-mode .ms10-chat-line{
+  background:#111827;
+  color:#e5e7eb;
+  border-color:#334155;
+}
+body.dark-mode .ms10-post-actions button{
+  background:#1f2937;
+  color:#e5e7eb;
+  border-color:#334155;
+}
+
 </style>
 </head>
 
@@ -5564,6 +5800,259 @@ function ms9Init(){ ms9AddNav(); ms9PatchRouter(); ms9LoadProfileSettings(); ms9
 const ms9PrevCompleteLogin = completeLogin;
 completeLogin = async function(user){ await ms9PrevCompleteLogin(user); ms9Init(); };
 document.addEventListener("DOMContentLoaded", function(){ ms9AddNav(); ms9PatchRouter(); ms9UpdateProfileHeader(); ms9ListenPostChats(); ms9ListenUtilityVotes(); });
+})();
+
+
+/* ==========================================================
+   STEP 10 - PATCH CONSERVATIVA NAV/FEED/CHAT
+   ========================================================== */
+(function(){
+  function ms10Escape(value){
+    if (typeof escapeHtml === "function") return escapeHtml(value || "");
+    return String(value || "").replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]));
+  }
+  function ms10Mask(email){
+    if (typeof maskEmail === "function") return maskEmail(email || "");
+    const s=String(email||"");
+    return s.replace(/^(.{2}).*(@.*)$/,"$1***$2");
+  }
+  function ms10Safe(id){
+    return String(id || "").replace(/[^a-zA-Z0-9_\-]/g,"_");
+  }
+  function ms10Kind(kind){
+    if (typeof ms9KindLabel === "function") return ms9KindLabel(kind || "");
+    const map={cerco:"Cerco",offro:"Offro",risorsa:"Risorsa",bisogno:"Bisogno",economia_empatica:"Economia Empatica"};
+    return map[kind] || kind || "Post";
+  }
+  function ms10Initials(label){
+    if (typeof ms9Initials === "function") return ms9Initials(label || "MS");
+    return String(label || "MS").slice(0,2).toUpperCase();
+  }
+
+  window.ms10Show = function(name){
+    document.body.classList.add("social-focus","ms10-mode");
+    document.querySelectorAll(".mini-section").forEach(el => el.classList.remove("active-section"));
+    document.querySelectorAll(".ms10-quick-tabs button").forEach(b=>b.classList.remove("active"));
+
+    const activate = ids => ids.forEach(id => {
+      const el=document.getElementById(id);
+      if(el) el.classList.add("active-section");
+    });
+
+    if(name === "feed" || name === "home" || name === "socialfeed"){
+      activate(["ms9FacebookLikeSection","socialPostsFeed"]);
+      document.getElementById("ms10TabFeed")?.classList.add("active");
+    } else if(name === "post"){
+      activate(["ms9FacebookLikeSection"]);
+      document.getElementById("ms10TabPost")?.classList.add("active");
+    } else if(name === "chat"){
+      activate(["socialMessengerShell"]);
+      const chatBox=document.getElementById("chatBox");
+      const input=document.getElementById("chatMessage");
+      if(chatBox){ chatBox.classList.add("active-section"); chatBox.style.display="block"; }
+      if(input?.parentElement){ input.parentElement.classList.add("active-section"); input.parentElement.style.display="block"; }
+      document.getElementById("ms10TabChat")?.classList.add("active");
+    } else if(name === "matches"){
+      const m=document.getElementById("matches"); if(m){ m.classList.add("mini-section","active-section"); }
+      const c=document.getElementById("connections"); if(c){ c.classList.add("mini-section","active-section"); }
+      document.getElementById("ms10TabMatch")?.classList.add("active");
+    } else if(name === "profile"){
+      activate(["socialProfilePlus","ms9FacebookLikeSection"]);
+      const pb=document.getElementById("profileBox"); if(pb){ pb.classList.add("mini-section","active-section"); }
+      const pp=document.getElementById("publicProfileBox"); if(pp){ pp.classList.add("mini-section","active-section"); }
+      document.getElementById("ms10TabProfile")?.classList.add("active");
+    } else if(name === "wallet"){
+      const w=document.getElementById("walletBox"); if(w){ w.classList.add("mini-section","active-section"); }
+      const d=document.getElementById("donationsBox"); if(d){ d.classList.add("mini-section","active-section"); }
+      document.getElementById("ms10TabWallet")?.classList.add("active");
+    }
+
+    const target = document.querySelector(".active-section");
+    if(target) target.scrollIntoView({behavior:"smooth", block:"start"});
+  };
+
+  function ms10InstallTabs(){
+    const container=document.querySelector(".social-main .container");
+    if(!container || document.getElementById("ms10QuickTabs")) return;
+    const tabs=document.createElement("div");
+    tabs.id="ms10QuickTabs";
+    tabs.className="ms10-quick-tabs mini-section active-section";
+    tabs.innerHTML=`
+      <button id="ms10TabFeed" class="active" onclick="ms10Show('feed')">🏠 Feed</button>
+      <button id="ms10TabPost" onclick="ms10Show('post')">✍️ Pubblica</button>
+      <button id="ms10TabMatch" onclick="ms10Show('matches')">🤝 Match</button>
+      <button id="ms10TabChat" onclick="ms10Show('chat')">💬 Chat</button>
+      <button id="ms10TabProfile" onclick="ms10Show('profile')">👤 Profilo</button>
+      <button id="ms10TabWallet" onclick="ms10Show('wallet')">💰 Wallet</button>
+    `;
+    const anchor=document.getElementById("socialHero") || container.firstElementChild;
+    container.insertBefore(tabs, anchor);
+  }
+
+  const oldRouter = window.showMiniSection;
+  window.showMiniSection = function(name){
+    if(["feed","home","socialfeed","chat","matches","profile","wallet","post"].includes(name)){
+      return window.ms10Show(name === "home" ? "feed" : name);
+    }
+    if(typeof oldRouter === "function") return oldRouter(name);
+  };
+
+  window.ms10OpenPostChat = function(postId){
+    const safe=ms10Safe(postId);
+    const card=document.getElementById("ms10Post_"+safe);
+    const panel=document.getElementById("ms10Chat_"+safe) || document.getElementById("ms9Chat_"+safe);
+    if(card) card.classList.add("ms10-post-open");
+    if(panel){
+      panel.classList.add("open");
+      panel.style.display="block";
+      panel.scrollIntoView({behavior:"smooth", block:"center"});
+      setTimeout(()=>document.getElementById("ms9ChatInput_"+safe)?.focus(),150);
+    }
+  };
+
+  window.ms10OpenPostMatches = function(postId){
+    const safe=ms10Safe(postId);
+    const panel=document.getElementById("ms10Matches_"+safe) || document.getElementById("ms9Matches_"+safe);
+    if(panel){
+      panel.classList.toggle("open");
+      panel.style.display=panel.classList.contains("open") ? "block" : "none";
+      if(panel.classList.contains("open")) panel.scrollIntoView({behavior:"smooth", block:"center"});
+    }
+  };
+
+  const oldRenderMatches = (typeof renderMatches === "function") ? renderMatches : null;
+  renderMatches = function(nodesArg){
+    const box=document.getElementById("matches");
+    if(!box) return oldRenderMatches ? oldRenderMatches(nodesArg) : null;
+    const list = Array.isArray(nodesArg) ? nodesArg : (typeof nodes !== "undefined" ? nodes : []);
+    const cards=[];
+    for(let i=0;i<list.length && cards.length<18;i++){
+      for(let j=i+1;j<list.length && cards.length<18;j++){
+        const a=list[i], b=list[j];
+        if(!a || !b || a.user === b.user) continue;
+        const sameCat = a.category && b.category && a.category === b.category;
+        const aNeed=String(a.need||"").toLowerCase(), bRes=String(b.resource||"").toLowerCase();
+        const bNeed=String(b.need||"").toLowerCase(), aRes=String(a.resource||"").toLowerCase();
+        const direct = (aNeed && bRes && (aNeed.includes(bRes) || bRes.includes(aNeed))) || (bNeed && aRes && (bNeed.includes(aRes) || aRes.includes(bNeed)));
+        if(!sameCat && !direct) continue;
+        const score = Math.min(95, 45 + (sameCat?25:0) + (direct?25:0));
+        cards.push({a,b,score});
+      }
+    }
+    if(!cards.length){
+      box.innerHTML=`<div class="ms10-compact-match"><h4>🤝 Nessun match sintetico pronto</h4><div class="reason">Pubblica un bisogno o una risorsa: il sistema mostrerà solo connessioni chiare, non liste infinite.</div></div>`;
+      return;
+    }
+    box.innerHTML = `<div class="ms10-section-title">Match sintetici</div>` + cards.map(m => `
+      <div class="ms10-compact-match">
+        <h4>${ms10Mask(m.a.user)} ↔ ${ms10Mask(m.b.user)}</h4>
+        <span class="score">Score ${m.score}%</span>
+        <div class="reason">
+          ${m.a.category ? "Categoria: "+ms10Escape(m.a.category)+". " : ""}
+          ${ms10Escape(m.a.need || "Bisogno non indicato")} ↔ ${ms10Escape(m.b.resource || m.b.need || "Risorsa non indicata")}
+        </div>
+        <div class="ms10-actions-row">
+          <button class="green" onclick="activateConnection && activateConnection('${m.a.id || ""}','${m.b.id || ""}',${m.score})">Attiva</button>
+          <button class="purple" onclick="ms10Show('chat')">Apri chat</button>
+        </div>
+      </div>
+    `).join("");
+  };
+
+  const oldRenderSocialPosts = (typeof renderSocialPosts === "function") ? renderSocialPosts : null;
+  renderSocialPosts = function(){
+    const box=document.getElementById("socialPostsFeed");
+    if(!box) return;
+    let posts = [];
+    try{
+      posts = (socialPosts || []);
+      if(typeof ms9CanSeePost === "function") posts = posts.filter(p => ms9CanSeePost(p));
+      if(typeof ms9PostMatchesFilter === "function") posts = posts.filter(ms9PostMatchesFilter);
+      if(typeof ms9SortPosts === "function") posts = ms9SortPosts(posts);
+      else posts = posts.slice().sort((a,b)=>(b.timestamp||0)-(a.timestamp||0));
+    }catch(e){
+      posts = (socialPosts || []).slice().sort((a,b)=>(b.timestamp||0)-(a.timestamp||0));
+    }
+
+    const note=document.getElementById("ms9FeedLocationNote");
+    if(note) note.innerText = "Feed compatto attivo: un post alla volta, match e chat dentro la card.";
+
+    if(!posts.length){
+      box.innerHTML=`<div class="ms9-feed-empty">Nessun post visibile. Pubblica il primo contenuto su Economia Empatica.</div>`;
+      return;
+    }
+
+    box.innerHTML = `<div class="ms10-section-title">Feed Economia Empatica</div>` + posts.slice(0,30).map(p=>{
+      const safe=ms10Safe(p.id);
+      const author=p.author || "";
+      const authorLabel=p.authorName || ms10Mask(author);
+      const kind=p.kind || p.type || "economia_empatica";
+      const distance = (typeof ms9PostDistance === "function") ? ms9PostDistance(p) : null;
+      const distanceText = distance === null ? "" : ` · ${distance} km`;
+      let chats=[];
+      try{ chats = (ms9PostChats || []).filter(c=>c.postId===p.id).slice(-6); }catch(e){}
+      let comments=[];
+      try{ comments = (socialComments || []).filter(c=>c.postId===p.id).slice(-3); }catch(e){}
+      let matches=[];
+      try{ matches = (typeof ms9FindMatchesForPost === "function") ? ms9FindMatchesForPost(p).slice(0,4) : []; }catch(e){}
+      const utilVotes=Number(p.utilityVotes||0), utilScore=Number(p.utilityScore||0);
+      const utilAvg=utilVotes ? (utilScore/utilVotes).toFixed(1) : "0.0";
+      return `
+        <div id="ms10Post_${safe}" class="ms9-post-card">
+          <div class="ms9-post-head">
+            <div class="ms9-avatar-mini">${ms10Initials(authorLabel)}</div>
+            <div>
+              <div class="ms9-author">${ms10Escape(authorLabel)}</div>
+              <div class="ms9-time">${p.timestamp ? new Date(p.timestamp).toLocaleString() : ""} · ${ms10Escape(ms10Kind(kind))}${p.city ? " · 📍 "+ms10Escape(p.city) : ""}${distanceText}</div>
+            </div>
+          </div>
+          <div class="ms9-meta">
+            <span class="ms9-pill">${ms10Escape(ms10Kind(kind))}</span>
+            ${p.category ? `<span class="ms9-pill">#${ms10Escape(p.category)}</span>` : ""}
+            ${matches.length ? `<span class="ms9-pill">🤖 ${matches.length} match</span>` : ""}
+          </div>
+          <div class="ms10-mini-post-text">${ms10Escape(p.text || "")}</div>
+          <div class="ms9-utility"><span>❤️ ${Number(p.likes||0)} · 💬 ${chats.length+comments.length} · 🎁 ${Number(p.donationCount||0)} · ✅ ${utilAvg}/5</span></div>
+          <div class="ms10-post-actions">
+            <button onclick="likeSocialPost('${p.id}','${String(author).replace(/'/g,"\\'")}')">❤️</button>
+            <button onclick="ms10OpenPostChat('${p.id}')">💬 Chat</button>
+            <button onclick="ms10OpenPostMatches('${p.id}')">🤝 Match</button>
+            <button onclick="ms9VoteUtility('${p.id}','${String(author).replace(/'/g,"\\'")}',5)">✅ Utile</button>
+            <button onclick="ms9DonateFromPost('${p.id}','${String(author).replace(/'/g,"\\'")}')">🎁 Dona</button>
+            <button onclick="document.getElementById('ms10Post_${safe}')?.classList.toggle('ms10-post-open')">Leggi</button>
+          </div>
+          <div id="ms10Chat_${safe}" class="ms10-post-chat">
+            <b>Chat del post</b>
+            ${comments.map(c=>`<div class="ms10-chat-line"><b>${ms10Escape(ms10Mask(c.from))}</b><br>${ms10Escape(c.text||"")}</div>`).join("")}
+            ${chats.map(c=>`<div class="ms10-chat-line"><b>${ms10Escape(ms10Mask(c.from))}</b><br>${ms10Escape(c.text||"")}</div>`).join("")}
+            <input id="ms9ChatInput_${safe}" placeholder="Scrivi una risposta..." onkeydown="if(event.key==='Enter'){ms9SendPostChat('${p.id}','${String(author).replace(/'/g,"\\'")}')}">
+            <button class="green" onclick="ms9SendPostChat('${p.id}','${String(author).replace(/'/g,"\\'")}')">Invia</button>
+          </div>
+          <div id="ms10Matches_${safe}" class="ms10-post-chat">
+            <b>Match automatici</b>
+            ${matches.length ? matches.map(m=>`<div class="ms10-chat-line"><b>${Math.round(m.score||0)}%</b> · ${ms10Escape(m.post?.authorName || ms10Mask(m.post?.author))}<br>${ms10Escape((m.post?.text || "").slice(0,110))}${(m.post?.text || "").length>110 ? "..." : ""}<br><button class="green" onclick="ms9CreateConnectionFromPost('${m.post?.id || ""}','${String(m.post?.author || "").replace(/'/g,"\\'")}')">Connetti</button></div>`).join("") : `<div class="small">Nessun match chiaro per questo post.</div>`}
+          </div>
+        </div>
+      `;
+    }).join("");
+  };
+
+  function ms10Boot(){
+    document.body.classList.add("ms10-mode");
+    ms10InstallTabs();
+    try{ renderSocialPosts(); }catch(e){}
+    setTimeout(()=>window.ms10Show("feed"), 250);
+  }
+
+  const oldCompleteLogin = (typeof completeLogin !== "undefined") ? completeLogin : null;
+  if(oldCompleteLogin && !window.__ms10CompletePatched){
+    window.__ms10CompletePatched=true;
+    completeLogin = async function(user){
+      await oldCompleteLogin(user);
+      ms10Boot();
+    };
+  }
+  document.addEventListener("DOMContentLoaded", ms10Boot);
 })();
 
 </script>
