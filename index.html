@@ -756,6 +756,92 @@ body.dark-mode .social-trust-item {
   .msx-story { min-height:90px; }
 }
 
+
+/* ==========================================================
+   AUTH EMAIL/PASSWORD - REGISTRAZIONE TIPO FACEBOOK
+   Innesto conservativo: aggiunge email/password senza rimuovere
+   Google Login, Firebase, chat, wallet, feed e funzioni esistenti.
+   ========================================================== */
+.auth-social-card {
+  background:#fff;
+  border:1px solid var(--ms-border, #d9dee8);
+  border-radius:22px;
+  padding:18px;
+  margin:14px 0;
+  box-shadow:0 8px 24px rgba(15,23,42,.08);
+}
+.auth-social-card h2 {
+  margin:0 0 8px;
+  font-size:24px;
+}
+.auth-social-tabs {
+  display:flex;
+  gap:8px;
+  margin:12px 0;
+  flex-wrap:wrap;
+}
+.auth-social-tabs button {
+  background:#f1f5f9;
+  color:#111827;
+  font-weight:800;
+}
+.auth-social-tabs button.active {
+  background:#2563eb;
+  color:white;
+}
+.auth-panel {
+  display:none;
+}
+.auth-panel.active {
+  display:block;
+}
+.auth-grid {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:10px;
+}
+.auth-note {
+  background:#f8fafc;
+  border:1px solid #e5e7eb;
+  border-radius:14px;
+  padding:10px;
+  font-size:13px;
+  color:#475569;
+  line-height:1.45;
+}
+.auth-status {
+  margin-top:10px;
+  padding:10px;
+  border-radius:14px;
+  background:#ecfdf5;
+  border:1px solid #bbf7d0;
+  color:#166534;
+  display:none;
+  font-size:13px;
+}
+.auth-status.error {
+  display:block;
+  background:#fef2f2;
+  border-color:#fecaca;
+  color:#991b1b;
+}
+.auth-status.show {
+  display:block;
+}
+body.dark-mode .auth-social-card,
+body.dark-mode .auth-note {
+  background:#111827;
+  color:#e5e7eb;
+  border-color:#334155;
+}
+body.dark-mode .auth-social-tabs button {
+  background:#1f2937;
+  color:#e5e7eb;
+}
+@media (max-width:860px) {
+  .auth-grid { grid-template-columns:1fr; }
+}
+
   </style>
 </head>
 
@@ -841,6 +927,52 @@ body.dark-mode .social-trust-item {
 
 <button onclick="login()">Login Google</button>
 <p id="user"></p>
+
+<div id="authSocialCard" class="auth-social-card">
+  <h2>Accedi a Mini Sentient</h2>
+  <p class="small">Puoi entrare con Google oppure registrarti con email e password come nei social network tradizionali.</p>
+
+  <div class="auth-social-tabs">
+    <button id="authTabGoogle" class="active" onclick="showAuthPanel('google')">Google</button>
+    <button id="authTabRegister" onclick="showAuthPanel('register')">Registrati</button>
+    <button id="authTabEmail" onclick="showAuthPanel('email')">Email login</button>
+    <button id="authTabReset" onclick="showAuthPanel('reset')">Password dimenticata</button>
+  </div>
+
+  <div id="authPanelGoogle" class="auth-panel active">
+    <div class="auth-note">
+      Accesso rapido con account Google. Se il popup viene bloccato, il sistema prova il redirect.
+    </div>
+    <button class="green" onclick="login()">Continua con Google</button>
+  </div>
+
+  <div id="authPanelRegister" class="auth-panel">
+    <div class="auth-grid">
+      <input id="registerName" placeholder="Nome pubblico / username">
+      <input id="registerEmail" type="email" placeholder="Email">
+    </div>
+    <input id="registerPassword" type="password" placeholder="Password min. 6 caratteri">
+    <input id="registerPassword2" type="password" placeholder="Ripeti password">
+    <button class="green" onclick="registerWithEmail()">Crea account</button>
+    <div class="auth-note">
+      Dopo la registrazione Firebase invia una email di verifica. L'utente potrà poi accedere con email e password.
+    </div>
+  </div>
+
+  <div id="authPanelEmail" class="auth-panel">
+    <input id="loginEmail" type="email" placeholder="Email">
+    <input id="loginPassword" type="password" placeholder="Password">
+    <button class="green" onclick="loginWithEmail()">Accedi con email</button>
+  </div>
+
+  <div id="authPanelReset" class="auth-panel">
+    <input id="resetEmail" type="email" placeholder="La tua email">
+    <button class="orange" onclick="resetPassword()">Invia link reset password</button>
+  </div>
+
+  <div id="authStatus" class="auth-status"></div>
+</div>
+
 <div id="loginHelp" class="card" style="font-size:13px; display:none;"></div>
 
 <h2>Il mio profilo</h2>
@@ -1282,7 +1414,14 @@ import {
   signInWithRedirect,
   getRedirectResult,
   onAuthStateChanged,
-  GoogleAuthProvider
+  GoogleAuthProvider,
+  EmailAuthProvider,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  sendEmailVerification,
+  sendPasswordResetEmail,
+  updateProfile,
+  signOut
 } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
 
 import {
@@ -1346,7 +1485,13 @@ async function completeLogin(user) {
 
   const userBox = document.getElementById("user");
   if (userBox) {
-    userBox.innerText = "Connesso come: " + currentUser.email;
+    const verifiedText = currentUser.emailVerified ? " · email verificata" : " · email non ancora verificata";
+    userBox.innerText = "Connesso come: " + currentUser.email + verifiedText;
+  }
+
+  const authCard = document.getElementById("authSocialCard");
+  if (authCard) {
+    authCard.style.display = "none";
   }
 
   await ensureUser(currentUser.email);
@@ -1388,6 +1533,189 @@ async function completeLogin(user) {
     miniToast("Login Google completato ✅");
   }
 }
+
+
+function setAuthStatus(message, isError = false) {
+  const box = document.getElementById("authStatus");
+  if (!box) {
+    if (isError) alert(message);
+    return;
+  }
+  box.innerText = message;
+  box.classList.toggle("error", !!isError);
+  box.classList.add("show");
+}
+
+window.showAuthPanel = function (panel) {
+  ["Google", "Register", "Email", "Reset"].forEach(name => {
+    const tab = document.getElementById("authTab" + name);
+    const pane = document.getElementById("authPanel" + name);
+    if (tab) tab.classList.remove("active");
+    if (pane) pane.classList.remove("active");
+  });
+
+  const normalized =
+    panel === "google" ? "Google" :
+    panel === "register" ? "Register" :
+    panel === "email" ? "Email" :
+    "Reset";
+
+  const activeTab = document.getElementById("authTab" + normalized);
+  const activePane = document.getElementById("authPanel" + normalized);
+
+  if (activeTab) activeTab.classList.add("active");
+  if (activePane) activePane.classList.add("active");
+};
+
+function firebaseAuthErrorMessage(error) {
+  const code = error?.code || "";
+  const raw = error?.message || String(error);
+
+  const messages = {
+    "auth/email-already-in-use": "Questa email è già registrata. Vai su Email login oppure usa recupero password.",
+    "auth/invalid-email": "Email non valida.",
+    "auth/weak-password": "Password troppo debole: usa almeno 6 caratteri.",
+    "auth/missing-password": "Inserisci la password.",
+    "auth/user-not-found": "Utente non trovato.",
+    "auth/wrong-password": "Password errata.",
+    "auth/invalid-credential": "Credenziali non valide. Controlla email e password.",
+    "auth/too-many-requests": "Troppi tentativi. Attendi qualche minuto e riprova.",
+    "auth/network-request-failed": "Errore di rete. Controlla la connessione.",
+    "auth/operation-not-allowed": "Accesso email/password non abilitato in Firebase Console."
+  };
+
+  return messages[code] || (code ? code + " — " + raw : raw);
+}
+
+window.registerWithEmail = async function () {
+  if (window.location.protocol === "file:") {
+    alert("La registrazione Firebase non funziona aprendo il file direttamente. Usa localhost o Firebase Hosting.");
+    return;
+  }
+
+  const name = document.getElementById("registerName")?.value.trim() || "";
+  const email = document.getElementById("registerEmail")?.value.trim() || "";
+  const password = document.getElementById("registerPassword")?.value || "";
+  const password2 = document.getElementById("registerPassword2")?.value || "";
+
+  if (!name || name.length < 2) {
+    setAuthStatus("Inserisci un nome pubblico valido.", true);
+    return;
+  }
+
+  if (!email) {
+    setAuthStatus("Inserisci una email.", true);
+    return;
+  }
+
+  if (password.length < 6) {
+    setAuthStatus("La password deve avere almeno 6 caratteri.", true);
+    return;
+  }
+
+  if (password !== password2) {
+    setAuthStatus("Le due password non coincidono.", true);
+    return;
+  }
+
+  try {
+    const result = await createUserWithEmailAndPassword(auth, email, password);
+    await updateProfile(result.user, { displayName: name });
+    await sendEmailVerification(result.user);
+
+    await ensureUser(result.user.email);
+    await updateDoc(doc(db, "users", result.user.email), {
+      nickname: name,
+      displayName: name,
+      authProvider: "password",
+      emailVerified: result.user.emailVerified,
+      createdWithEmailPassword: true,
+      verificationEmailSentAt: Date.now()
+    });
+
+    setAuthStatus("Account creato ✅ Ti abbiamo inviato una email di verifica. Controlla la posta e poi accedi.", false);
+    await completeLogin(result.user);
+  } catch (error) {
+    console.error("ERRORE REGISTRAZIONE EMAIL:", error);
+    setAuthStatus(firebaseAuthErrorMessage(error), true);
+  }
+};
+
+window.loginWithEmail = async function () {
+  if (window.location.protocol === "file:") {
+    alert("Il login Firebase non funziona aprendo il file direttamente. Usa localhost o Firebase Hosting.");
+    return;
+  }
+
+  const email = document.getElementById("loginEmail")?.value.trim() || "";
+  const password = document.getElementById("loginPassword")?.value || "";
+
+  if (!email || !password) {
+    setAuthStatus("Inserisci email e password.", true);
+    return;
+  }
+
+  try {
+    const result = await signInWithEmailAndPassword(auth, email, password);
+    await completeLogin(result.user);
+
+    await updateDoc(doc(db, "users", result.user.email), {
+      authProvider: result.user.providerData?.[0]?.providerId || "password",
+      emailVerified: result.user.emailVerified,
+      lastEmailLoginAt: Date.now()
+    });
+
+    if (!result.user.emailVerified) {
+      setAuthStatus("Accesso effettuato. Attenzione: email non ancora verificata. Controlla la posta.", false);
+    }
+  } catch (error) {
+    console.error("ERRORE LOGIN EMAIL:", error);
+    setAuthStatus(firebaseAuthErrorMessage(error), true);
+  }
+};
+
+window.resetPassword = async function () {
+  const email = document.getElementById("resetEmail")?.value.trim() || "";
+
+  if (!email) {
+    setAuthStatus("Inserisci la email per ricevere il link di reset.", true);
+    return;
+  }
+
+  try {
+    await sendPasswordResetEmail(auth, email);
+    setAuthStatus("Email reset password inviata ✅ Controlla la tua casella.", false);
+  } catch (error) {
+    console.error("ERRORE RESET PASSWORD:", error);
+    setAuthStatus(firebaseAuthErrorMessage(error), true);
+  }
+};
+
+window.resendVerificationEmail = async function () {
+  if (!auth.currentUser) {
+    setAuthStatus("Devi prima accedere.", true);
+    return;
+  }
+
+  try {
+    await sendEmailVerification(auth.currentUser);
+    setAuthStatus("Email di verifica reinviata ✅", false);
+  } catch (error) {
+    console.error("ERRORE VERIFICA EMAIL:", error);
+    setAuthStatus(firebaseAuthErrorMessage(error), true);
+  }
+};
+
+window.logout = async function () {
+  await signOut(auth);
+  currentUser = null;
+  const userBox = document.getElementById("user");
+  if (userBox) userBox.innerText = "";
+  const authCard = document.getElementById("authSocialCard");
+  if (authCard) authCard.style.display = "block";
+  setAuthStatus("Logout effettuato.", false);
+};
+
 
 window.login = async function () {
   if (window.location.protocol === "file:") {
@@ -1481,6 +1809,9 @@ async function ensureUser(email) {
   if (!snap.exists()) {
     await setDoc(ref, {
       email,
+      displayName: auth.currentUser?.displayName || "",
+      authProvider: auth.currentUser?.providerData?.[0]?.providerId || "password",
+      emailVerified: !!auth.currentUser?.emailVerified,
       reputation: 0,
       created: 0,
       accepted: 0,
