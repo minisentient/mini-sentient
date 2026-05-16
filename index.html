@@ -552,6 +552,210 @@ body.social-focus .mini-section.active-section {
   .social-floating-create { right:16px; bottom:76px; }
 }
 
+
+/* ==========================================================
+   STEP 8-18 - MINI SENTIENT STARTUP SOCIAL LAYER
+   Innesto conservativo: feed avanzato, notifiche, PWA, follow,
+   media, AI assistant, marketplace, moderazione, analytics,
+   impostazioni e dark mode. Non rimuove il codice esistente.
+   ========================================================== */
+
+body.dark-mode {
+  --ms-bg:#0f172a;
+  --ms-card:#111827;
+  --ms-border:#334155;
+  --ms-muted:#94a3b8;
+  background:#0f172a;
+  color:#e5e7eb;
+}
+body.dark-mode .card,
+body.dark-mode .social-panel,
+body.dark-mode .social-dashboard-card,
+body.dark-mode .social-composer,
+body.dark-mode .social-post-card,
+body.dark-mode .social-thread-list,
+body.dark-mode .msx-card,
+body.dark-mode .social-topbar {
+  background:#111827;
+  color:#e5e7eb;
+  border-color:#334155;
+}
+body.dark-mode input,
+body.dark-mode textarea,
+body.dark-mode select,
+body.dark-mode .social-search input {
+  background:#0f172a;
+  color:#e5e7eb;
+  border-color:#334155;
+}
+body.dark-mode .social-nav button,
+body.dark-mode .social-mobile-nav button,
+body.dark-mode .social-post-actions button {
+  color:#e5e7eb;
+}
+body.dark-mode .tag,
+body.dark-mode .social-comment,
+body.dark-mode .social-trust-item {
+  background:#1f2937;
+  color:#e5e7eb;
+}
+
+.msx-card {
+  background:#fff;
+  border:1px solid var(--ms-border);
+  border-radius:20px;
+  padding:16px;
+  margin:14px 0;
+  box-shadow:0 2px 10px rgba(15,23,42,.06);
+}
+.msx-title {
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  margin-bottom:12px;
+}
+.msx-title h3 { margin:0; }
+.msx-grid-2 {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:14px;
+}
+.msx-grid-3 {
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+}
+.msx-tabs {
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin:10px 0 14px;
+}
+.msx-tabs button {
+  background:#f1f5f9;
+  color:#111827;
+  font-weight:800;
+}
+.msx-tabs button.active {
+  background:#2563eb;
+  color:#fff;
+}
+.msx-kpi {
+  padding:14px;
+  border-radius:18px;
+  background:linear-gradient(135deg,#f8fafc,#eef2ff);
+  border:1px solid #e5e7eb;
+}
+.msx-kpi b { display:block; font-size:24px; color:#111827; }
+.msx-kpi span { color:#64748b; font-size:13px; }
+.msx-input-row {
+  display:grid;
+  grid-template-columns:1fr auto;
+  gap:8px;
+  align-items:end;
+}
+.msx-market-item,
+.msx-follow-item,
+.msx-admin-item,
+.msx-ai-message,
+.msx-notification-item {
+  border:1px solid #eef2f7;
+  background:#f8fafc;
+  border-radius:16px;
+  padding:12px;
+  margin:8px 0;
+}
+.msx-market-item b,
+.msx-follow-item b,
+.msx-admin-item b { color:#111827; }
+.msx-media-preview {
+  max-width:100%;
+  border-radius:16px;
+  margin-top:10px;
+  border:1px solid #e5e7eb;
+  display:block;
+}
+.msx-pillbar { display:flex; flex-wrap:wrap; gap:8px; margin-top:8px; }
+.msx-pill {
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  padding:6px 10px;
+  border-radius:999px;
+  background:#e8f0ff;
+  color:#1d4ed8;
+  font-size:12px;
+  font-weight:800;
+}
+.msx-story-row {
+  display:grid;
+  grid-template-columns:repeat(5,1fr);
+  gap:10px;
+  margin:12px 0;
+}
+.msx-story {
+  min-height:120px;
+  border-radius:18px;
+  padding:10px;
+  color:#fff;
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-end;
+  background:linear-gradient(135deg,#2563eb,#7c3aed);
+  box-shadow:0 8px 22px rgba(37,99,235,.18);
+  overflow:hidden;
+}
+.msx-story:nth-child(2) { background:linear-gradient(135deg,#16a34a,#2563eb); }
+.msx-story:nth-child(3) { background:linear-gradient(135deg,#f59e0b,#ef4444); }
+.msx-story:nth-child(4) { background:linear-gradient(135deg,#111827,#64748b); }
+.msx-story:nth-child(5) { background:linear-gradient(135deg,#7c3aed,#ec4899); }
+.msx-story b { font-size:13px; }
+.msx-story span { font-size:11px; opacity:.86; }
+.msx-ai-box {
+  background:linear-gradient(135deg,#111827,#1d4ed8);
+  color:#fff;
+  border-radius:20px;
+  padding:16px;
+}
+.msx-ai-box textarea,
+.msx-ai-box input,
+.msx-ai-box select {
+  background:rgba(255,255,255,.12);
+  color:#fff;
+  border:1px solid rgba(255,255,255,.22);
+}
+.msx-ai-box textarea::placeholder,
+.msx-ai-box input::placeholder { color:rgba(255,255,255,.72); }
+.msx-admin-alert { border-left:5px solid #ef4444; }
+.msx-safe { border-left:5px solid #16a34a; }
+.msx-warning { border-left:5px solid #f59e0b; }
+.msx-fixed-notify {
+  position:fixed;
+  top:80px;
+  left:50%;
+  transform:translateX(-50%);
+  z-index:999999;
+  background:#111827;
+  color:#fff;
+  padding:12px 16px;
+  border-radius:999px;
+  box-shadow:0 12px 28px rgba(0,0,0,.25);
+  display:none;
+}
+.msx-fixed-notify.show { display:block; }
+.msx-footer-actions {
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+}
+.msx-footer-actions button { margin-top:0; }
+
+@media (max-width:860px) {
+  .msx-grid-2,.msx-grid-3,.msx-story-row,.msx-input-row { grid-template-columns:1fr; }
+  .msx-story { min-height:90px; }
+}
+
   </style>
 </head>
 
@@ -579,6 +783,12 @@ body.social-focus .mini-section.active-section {
       <button onclick="showMiniSection('learning')">🧠 Learning</button>
       <button onclick="showMiniSection('wallet')">💰 Wallet</button>
       <button onclick="showMiniSection('ranking')">🏆 Ranking</button>
+      <button onclick="showMiniSection('notifications')">🔔 Notifiche</button>
+      <button onclick="showMiniSection('follow')">👥 Follow</button>
+      <button onclick="showMiniSection('marketplace')">💼 Marketplace</button>
+      <button onclick="showMiniSection('ai')">🤖 AI Assistant</button>
+      <button onclick="showMiniSection('admin')">🛡️ Admin</button>
+      <button onclick="showMiniSection('settings')">⚙️ Settings</button>
       <button onclick="showMiniSection('legal')">⚖️ Privacy & Termini</button>
       <button onclick="showMiniSection('all')">📜 Tutto</button>
     </div>
@@ -772,6 +982,168 @@ body.social-focus .mini-section.active-section {
     <div id="socialNotificationBox"><div class="small">Nessuna notifica ancora.</div></div>
   </div>
 </div>
+
+
+
+<!-- ==========================================================
+     STEP 8-18 - LAYER PRODOTTO / STARTUP
+     Tutto questo blocco è aggiuntivo: non sostituisce il codice
+     Mini Sentient già presente. Usa nuovi ID e nuove collezioni.
+     ========================================================== -->
+
+<div id="msxGlobalNotify" class="msx-fixed-notify"></div>
+
+<div class="msx-card mini-section" id="msxStoriesSection">
+  <div class="msx-title">
+    <h3>Stories del campo</h3>
+    <span class="tag">Step 8</span>
+  </div>
+  <div class="msx-story-row" id="msxStoriesRow">
+    <div class="msx-story"><b>Bisogni urgenti</b><span>Dal campo realtime</span></div>
+    <div class="msx-story"><b>Helper attivi</b><span>Persone disponibili</span></div>
+    <div class="msx-story"><b>Valore generato</b><span>Donazioni e reputazione</span></div>
+    <div class="msx-story"><b>Learning</b><span>Match riusciti</span></div>
+    <div class="msx-story"><b>AI insight</b><span>Priorità empatiche</span></div>
+  </div>
+</div>
+
+<div class="msx-card mini-section" id="msxAdvancedFeedSection">
+  <div class="msx-title">
+    <h3>Feed intelligente</h3>
+    <span class="tag">Step 8 + 11</span>
+  </div>
+  <div class="msx-tabs">
+    <button onclick="msxSetFeedMode('smart')" id="msxFeedSmartBtn" class="active">🧠 Smart</button>
+    <button onclick="msxSetFeedMode('recent')" id="msxFeedRecentBtn">🕒 Recenti</button>
+    <button onclick="msxSetFeedMode('urgent')" id="msxFeedUrgentBtn">🔥 Urgenti</button>
+    <button onclick="msxSetFeedMode('value')" id="msxFeedValueBtn">💰 Valore</button>
+  </div>
+  <div id="msxSmartFeedBox"><div class="small">Il feed intelligente si popola dopo login e attività nel campo.</div></div>
+</div>
+
+<div class="msx-card mini-section" id="msxMediaSection">
+  <div class="msx-title">
+    <h3>Media upload</h3>
+    <span class="tag">Step 14</span>
+  </div>
+  <p class="small">Carica un'immagine nel tuo Storage Firebase e collegala al campo sociale.</p>
+  <input type="file" id="msxMediaFile" accept="image/*,video/*,audio/*">
+  <input id="msxMediaCaption" placeholder="Descrizione del media">
+  <button class="green" onclick="msxUploadMedia()">Carica media</button>
+  <div id="msxMediaGallery"></div>
+</div>
+
+<div class="msx-card mini-section" id="msxNotificationsSection">
+  <div class="msx-title">
+    <h3>Centro notifiche realtime</h3>
+    <span class="tag">Step 9</span>
+  </div>
+  <div class="msx-grid-3">
+    <div class="msx-kpi"><b id="msxUnreadCount">0</b><span>Non lette</span></div>
+    <div class="msx-kpi"><b id="msxTotalNotifyCount">0</b><span>Totali</span></div>
+    <div class="msx-kpi"><b id="msxTodayNotifyCount">0</b><span>Oggi</span></div>
+  </div>
+  <button class="dark" onclick="msxMarkNotificationsRead()">Segna tutte come lette</button>
+  <div id="msxNotificationsList"></div>
+</div>
+
+<div class="msx-card mini-section" id="msxPwaSection">
+  <div class="msx-title">
+    <h3>Mobile / PWA</h3>
+    <span class="tag">Step 10</span>
+  </div>
+  <p class="small">Mini Sentient può comportarsi come app installabile: manifest, service worker e modalità app-like.</p>
+  <div class="msx-pillbar">
+    <span class="msx-pill">📱 Mobile first</span>
+    <span class="msx-pill">⚡ Cache ready</span>
+    <span class="msx-pill">🧭 App shell</span>
+  </div>
+  <button class="purple" onclick="msxInstallGuide()">Mostra guida installazione</button>
+</div>
+
+<div class="msx-card mini-section" id="msxFollowSection">
+  <div class="msx-title">
+    <h3>Follow system</h3>
+    <span class="tag">Step 12</span>
+  </div>
+  <p class="small">Segui helper, utenti compatibili e persone ad alto valore reputazionale.</p>
+  <div id="msxSuggestedFollows"></div>
+  <h4>Persone che segui</h4>
+  <div id="msxFollowingList"><div class="small">Nessun follow ancora.</div></div>
+</div>
+
+<div class="msx-card mini-section" id="msxAiSection">
+  <div class="msx-title">
+    <h3>AI Empathic Assistant</h3>
+    <span class="tag">Step 15</span>
+  </div>
+  <div class="msx-ai-box">
+    <p class="small" style="color:rgba(255,255,255,.82)">Assistente locale prototipale: analizza bisogni, tono e suggerisce azioni. Non chiama API esterne.</p>
+    <textarea id="msxAiPrompt" placeholder="Descrivi una situazione, un bisogno o un conflitto..."></textarea>
+    <button class="green" onclick="msxRunAiAssistant()">Analizza empaticamente</button>
+    <div id="msxAiOutput" style="margin-top:12px;"></div>
+  </div>
+</div>
+
+<div class="msx-card mini-section" id="msxMarketplaceSection">
+  <div class="msx-title">
+    <h3>Marketplace Empathic</h3>
+    <span class="tag">Step 16</span>
+  </div>
+  <div class="msx-grid-2">
+    <div>
+      <select id="msxMarketType">
+        <option value="offro">Offro aiuto</option>
+        <option value="cerco">Cerco aiuto</option>
+      </select>
+      <input id="msxMarketTitle" placeholder="Titolo richiesta/offerta">
+      <textarea id="msxMarketDescription" placeholder="Descrizione chiara e concreta"></textarea>
+      <input id="msxMarketSkill" placeholder="Skill o categoria">
+      <input id="msxMarketBudget" type="number" placeholder="Valore indicativo €">
+      <button class="green" onclick="msxCreateMarketItem()">Pubblica nel marketplace</button>
+    </div>
+    <div id="msxMarketplaceList"><div class="small">Nessun elemento marketplace ancora.</div></div>
+  </div>
+</div>
+
+<div class="msx-card mini-section" id="msxModerationSection">
+  <div class="msx-title">
+    <h3>Sicurezza e moderazione</h3>
+    <span class="tag">Step 17</span>
+  </div>
+  <p class="small">Sistema base per segnalazioni, audit e moderazione manuale.</p>
+  <input id="msxReportTarget" placeholder="Email utente o ID contenuto da segnalare">
+  <textarea id="msxReportReason" placeholder="Motivo della segnalazione"></textarea>
+  <button class="red" onclick="msxCreateReport()">Invia segnalazione</button>
+  <div id="msxReportsList"></div>
+</div>
+
+<div class="msx-card mini-section" id="msxAdminSection">
+  <div class="msx-title">
+    <h3>Admin analytics</h3>
+    <span class="tag">Step 18</span>
+  </div>
+  <div class="msx-grid-3">
+    <div class="msx-kpi"><b id="msxAdminUsers">0</b><span>Utenti</span></div>
+    <div class="msx-kpi"><b id="msxAdminPosts">0</b><span>Post</span></div>
+    <div class="msx-kpi"><b id="msxAdminReports">0</b><span>Report</span></div>
+  </div>
+  <div id="msxAdminInsights"></div>
+</div>
+
+<div class="msx-card mini-section" id="msxSettingsSection">
+  <div class="msx-title">
+    <h3>Impostazioni evolute</h3>
+    <span class="tag">Step 13</span>
+  </div>
+  <div class="msx-footer-actions">
+    <button class="dark" onclick="msxToggleDarkMode()">🌙 Dark mode</button>
+    <button class="purple" onclick="msxExportLocalState()">⬇️ Esporta stato locale</button>
+    <button class="orange" onclick="msxResetOnboarding()">🔁 Rivedi onboarding</button>
+  </div>
+  <div id="msxSettingsInfo" class="small" style="margin-top:10px;">Impostazioni salvate localmente sul browser.</div>
+</div>
+
 
 <h2>Wallet Empathic</h2>
 <div id="walletBox"></div>
@@ -998,6 +1370,7 @@ if (currentUser.photoURL) {
   listenSocialNotifications();
   enhanceSocialProfileBadge();
   renderSocialQuickStats();
+  msxInitAdvancedLayer();
 };
 
 async function updateLastActive() {
@@ -2899,6 +3272,411 @@ function renderSocialQuickStats() {
     if (repText) repText.innerText = "Reputazione attuale: " + rep + " / prossimo livello a 100";
   }
 }
+
+
+
+/* ==========================================================
+   STEP 8-18 - FUNZIONI PRODOTTO AVANZATE
+   Nuove funzioni aggiuntive: notifiche, PWA, follow, media,
+   AI locale, marketplace, moderazione, analytics e settings.
+   ========================================================== */
+
+let msxFeedMode = "smart";
+let msxFollows = [];
+let msxMediaItems = [];
+let msxMarketItems = [];
+let msxReports = [];
+let msxListeningFollows = false;
+let msxListeningMedia = false;
+let msxListeningMarket = false;
+let msxListeningReports = false;
+
+function msxNotify(text) {
+  const box = document.getElementById("msxGlobalNotify");
+  if (!box) return miniToast(text);
+  box.innerText = text;
+  box.classList.add("show");
+  setTimeout(() => box.classList.remove("show"), 3500);
+}
+
+function msxSafeEmailId(email) {
+  return String(email || "").replace(/[^a-zA-Z0-9]/g, "_");
+}
+
+function msxInitAdvancedLayer() {
+  msxApplySavedSettings();
+  listenMsxFollows();
+  listenMsxMedia();
+  listenMsxMarketplace();
+  listenMsxReports();
+  msxRenderSmartFeed();
+  msxRenderSuggestedFollows();
+  msxRenderAdminInsights();
+}
+
+window.msxSetFeedMode = function(mode) {
+  msxFeedMode = mode || "smart";
+  ["smart","recent","urgent","value"].forEach(m => {
+    const btn = document.getElementById("msxFeed" + m.charAt(0).toUpperCase() + m.slice(1) + "Btn");
+    if (btn) btn.classList.toggle("active", m === msxFeedMode);
+  });
+  msxRenderSmartFeed();
+};
+
+function msxRenderSmartFeed() {
+  const box = document.getElementById("msxSmartFeedBox");
+  if (!box) return;
+
+  let items = [];
+
+  socialPosts.forEach(p => {
+    let score = 0;
+    score += Number(p.likes || 0) * 5;
+    score += Number(p.comments || 0) * 8;
+    if (p.type === "bisogno") score += 18;
+    if (p.type === "aiuto") score += 14;
+    if ((Date.now() - Number(p.timestamp || 0)) < 86400000) score += 10;
+    items.push({kind:"post", score, timestamp:p.timestamp || 0, data:p});
+  });
+
+  nodes.forEach(n => {
+    let score = 0;
+    const emotion = Number(n.emotionValue || 0);
+    if (emotion <= -3) score += 30;
+    if (emotion < 0) score += 14;
+    score += 8;
+    items.push({kind:"node", score, timestamp:n.timestamp || 0, data:n});
+  });
+
+  msxMarketItems.forEach(m => {
+    let score = Number(m.budget || 0) > 0 ? 14 : 8;
+    if (m.type === "cerco") score += 10;
+    items.push({kind:"market", score, timestamp:m.timestamp || 0, data:m});
+  });
+
+  if (msxFeedMode === "recent") items.sort((a,b)=>(b.timestamp||0)-(a.timestamp||0));
+  else if (msxFeedMode === "urgent") items.sort((a,b)=>((b.data.emotionValue ? -Number(b.data.emotionValue) : 0) + b.score) - ((a.data.emotionValue ? -Number(a.data.emotionValue) : 0) + a.score));
+  else if (msxFeedMode === "value") items.sort((a,b)=>(Number(b.data.budget||b.data.likes||0))-(Number(a.data.budget||a.data.likes||0)));
+  else items.sort((a,b)=>b.score-a.score);
+
+  if (!items.length) {
+    box.innerHTML = `<div class="small">Ancora nessun contenuto sufficiente per generare il feed intelligente.</div>`;
+    return;
+  }
+
+  box.innerHTML = items.slice(0,10).map(item => {
+    if (item.kind === "post") {
+      const p = item.data;
+      return `<div class="msx-notification-item msx-safe"><b>Post · ${escapeHtml(p.type || "pensiero")}</b><br>${escapeHtml((p.text || "").slice(0,180))}<div class="small">Score smart: ${item.score.toFixed(0)}</div></div>`;
+    }
+    if (item.kind === "node") {
+      const n = item.data;
+      return `<div class="msx-notification-item ${Number(n.emotionValue)<0 ? "msx-warning" : "msx-safe"}"><b>Nodo · ${escapeHtml(n.category || "campo")}</b><br>Bisogno: ${escapeHtml(n.need || "")}<br>Risorsa: ${escapeHtml(n.resource || "")}<div class="small">Emozione: ${n.emotionValue}</div></div>`;
+    }
+    const m = item.data;
+    return `<div class="msx-notification-item"><b>Marketplace · ${escapeHtml(m.type || "")}</b><br>${escapeHtml(m.title || "")}<div class="small">${escapeHtml(m.skill || "")} · ${Number(m.budget || 0)}€</div></div>`;
+  }).join("");
+}
+
+window.msxUploadMedia = async function() {
+  if (!currentUser) return alert("Login prima");
+  const file = document.getElementById("msxMediaFile")?.files?.[0];
+  const caption = (document.getElementById("msxMediaCaption")?.value || "").trim();
+  if (!file) return alert("Seleziona un file");
+
+  const storageRef = ref(storage, "socialMedia/" + msxSafeEmailId(currentUser.email) + "/" + Date.now() + "_" + file.name);
+  await uploadBytes(storageRef, file);
+  const url = await getDownloadURL(storageRef);
+
+  await addDoc(collection(db, "socialMedia"), {
+    author: currentUser.email,
+    caption,
+    url,
+    fileName: file.name,
+    mimeType: file.type,
+    timestamp: Date.now()
+  });
+
+  document.getElementById("msxMediaFile").value = "";
+  document.getElementById("msxMediaCaption").value = "";
+  await updateUser(currentUser.email, 3, 0, 0, 0, 0, 0);
+  msxNotify("Media caricato nel campo 📸");
+};
+
+function listenMsxMedia() {
+  if (msxListeningMedia) return;
+  msxListeningMedia = true;
+  onSnapshot(collection(db, "socialMedia"), snap => {
+    msxMediaItems = [];
+    snap.forEach(d => msxMediaItems.push({id:d.id, ...d.data()}));
+    msxMediaItems.sort((a,b)=>(b.timestamp||0)-(a.timestamp||0));
+    msxRenderMediaGallery();
+    msxRenderAdminInsights();
+  });
+}
+
+function msxRenderMediaGallery() {
+  const box = document.getElementById("msxMediaGallery");
+  if (!box) return;
+  if (!msxMediaItems.length) {
+    box.innerHTML = `<div class="small" style="margin-top:10px;">Nessun media ancora.</div>`;
+    return;
+  }
+  box.innerHTML = msxMediaItems.slice(0,8).map(m => {
+    const isImage = String(m.mimeType || "").startsWith("image/");
+    return `<div class="msx-market-item"><b>${maskEmail(m.author)}</b><br>${escapeHtml(m.caption || m.fileName || "Media")} ${isImage ? `<img src="${m.url}" class="msx-media-preview">` : `<a href="${m.url}" target="_blank">Apri media</a>`}</div>`;
+  }).join("");
+}
+
+window.msxMarkNotificationsRead = async function() {
+  if (!currentUser) return alert("Login prima");
+  const mine = socialNotifications.filter(n => n.to === currentUser.email && !n.read);
+  for (const n of mine) {
+    await updateDoc(doc(db, "socialNotifications", n.id), { read:true, readAt:Date.now() });
+  }
+  msxNotify("Notifiche segnate come lette");
+};
+
+function msxRenderAdvancedNotifications() {
+  const list = document.getElementById("msxNotificationsList");
+  const unreadBox = document.getElementById("msxUnreadCount");
+  const totalBox = document.getElementById("msxTotalNotifyCount");
+  const todayBox = document.getElementById("msxTodayNotifyCount");
+  if (!currentUser || !list) return;
+  const dayStart = new Date(); dayStart.setHours(0,0,0,0);
+  const mine = socialNotifications.filter(n => n.to === currentUser.email);
+  const unread = mine.filter(n => !n.read);
+  const today = mine.filter(n => Number(n.timestamp || 0) >= dayStart.getTime());
+  if (unreadBox) unreadBox.innerText = unread.length;
+  if (totalBox) totalBox.innerText = mine.length;
+  if (todayBox) todayBox.innerText = today.length;
+  list.innerHTML = mine.slice(0,20).map(n => `<div class="msx-notification-item ${n.read ? "" : "msx-warning"}"><b>${escapeHtml(n.type || "notifica")}</b> · ${maskEmail(n.from)} ${escapeHtml(n.text || "")}<div class="small">${n.timestamp ? new Date(n.timestamp).toLocaleString() : ""}</div></div>`).join("") || `<div class="small">Nessuna notifica.</div>`;
+}
+
+window.msxInstallGuide = function() {
+  alert("Per installare Mini Sentient come app:
+
+1. Apri il sito da Chrome o Safari
+2. Menu del browser
+3. Aggiungi a schermata Home
+4. Usa Mini Sentient come app.
+
+Nel prossimo step tecnico si potrà aggiungere manifest.json e service worker reale.");
+};
+
+window.msxFollowUser = async function(email) {
+  if (!currentUser) return alert("Login prima");
+  if (!email || email === currentUser.email) return;
+  const id = msxSafeEmailId(currentUser.email + "__" + email);
+  await setDoc(doc(db, "socialFollows", id), {
+    follower: currentUser.email,
+    following: email,
+    timestamp: Date.now()
+  });
+  await addDoc(collection(db, "socialNotifications"), {
+    to: email,
+    from: currentUser.email,
+    type: "follow",
+    text: "ha iniziato a seguirti",
+    read:false,
+    timestamp: Date.now()
+  });
+  await updateUser(currentUser.email, 2, 0, 0, 0, 0, 0);
+  msxNotify("Ora segui " + maskEmail(email));
+};
+
+function listenMsxFollows() {
+  if (msxListeningFollows) return;
+  msxListeningFollows = true;
+  onSnapshot(collection(db, "socialFollows"), snap => {
+    msxFollows = [];
+    snap.forEach(d => msxFollows.push({id:d.id, ...d.data()}));
+    msxRenderSuggestedFollows();
+    msxRenderFollowingList();
+    msxRenderAdminInsights();
+  });
+}
+
+function msxRenderSuggestedFollows() {
+  const box = document.getElementById("msxSuggestedFollows");
+  if (!box) return;
+  const already = new Set(msxFollows.filter(f => currentUser && f.follower === currentUser.email).map(f => f.following));
+  const suggestions = usersData.filter(u => currentUser && u.email !== currentUser.email && !already.has(u.email)).sort((a,b)=>Number(b.reputation||0)-Number(a.reputation||0)).slice(0,8);
+  box.innerHTML = suggestions.map(u => `<div class="msx-follow-item"><b>${u.nickname || maskEmail(u.email)}</b><br><span class="small">Rep ${Number(u.reputation||0)} · rating ${Number(u.avgRating||0).toFixed(1)}</span><br><button class="green" onclick="msxFollowUser('${String(u.email).replace(/'/g,"\'")}')">Segui</button></div>`).join("") || `<div class="small">Nessun suggerimento follow disponibile.</div>`;
+}
+
+function msxRenderFollowingList() {
+  const box = document.getElementById("msxFollowingList");
+  if (!box || !currentUser) return;
+  const mine = msxFollows.filter(f => f.follower === currentUser.email);
+  box.innerHTML = mine.map(f => `<div class="msx-follow-item"><b>${maskEmail(f.following)}</b><br><span class="small">Seguito dal ${f.timestamp ? new Date(f.timestamp).toLocaleDateString() : ""}</span></div>`).join("") || `<div class="small">Nessun follow ancora.</div>`;
+}
+
+window.msxRunAiAssistant = function() {
+  const prompt = (document.getElementById("msxAiPrompt")?.value || "").trim();
+  const box = document.getElementById("msxAiOutput");
+  if (!box) return;
+  if (!prompt) return alert("Scrivi una situazione da analizzare");
+
+  const words = normalize(prompt);
+  const negative = ["ansia","paura","stress","soldi","debito","solo","problema","urgenza","triste","conflitto","rabbia"];
+  const practical = ["lavoro","casa","tempo","tecnico","organizzare","soldi","pagamento","documento"];
+  let urgency = 0;
+  words.forEach(w => { if (negative.includes(w)) urgency += 2; if (practical.includes(w)) urgency += 1; });
+  const tone = urgency >= 6 ? "fragile / urgente" : urgency >= 3 ? "attenzione media" : "stabile";
+  const action = urgency >= 6 ? "proporre subito una connessione con helper affidabile e messaggio breve" : "trasformare il bisogno in un nodo chiaro con risorsa scambiabile";
+
+  box.innerHTML = `<div class="msx-ai-message"><b>Analisi:</b> tono ${tone}.<br><b>Azione consigliata:</b> ${action}.<br><b>Messaggio suggerito:</b><br>"Ciao, ho capito il punto principale. Possiamo partire da un primo passo concreto e verificabile?"</div>`;
+};
+
+window.msxCreateMarketItem = async function() {
+  if (!currentUser) return alert("Login prima");
+  const type = document.getElementById("msxMarketType")?.value || "offro";
+  const title = (document.getElementById("msxMarketTitle")?.value || "").trim();
+  const description = (document.getElementById("msxMarketDescription")?.value || "").trim();
+  const skill = (document.getElementById("msxMarketSkill")?.value || "").trim();
+  const budget = Number(document.getElementById("msxMarketBudget")?.value || 0);
+  if (!title || !description) return alert("Inserisci titolo e descrizione");
+  await addDoc(collection(db, "marketplaceItems"), {
+    author: currentUser.email,
+    type,title,description,skill,budget,
+    status:"open",
+    timestamp:Date.now()
+  });
+  await updateUser(currentUser.email, 3, 0, 0, 0, 0, 0);
+  ["msxMarketTitle","msxMarketDescription","msxMarketSkill","msxMarketBudget"].forEach(id => { const el=document.getElementById(id); if(el) el.value=""; });
+  msxNotify("Elemento pubblicato nel marketplace 💼");
+};
+
+function listenMsxMarketplace() {
+  if (msxListeningMarket) return;
+  msxListeningMarket = true;
+  onSnapshot(collection(db, "marketplaceItems"), snap => {
+    msxMarketItems = [];
+    snap.forEach(d => msxMarketItems.push({id:d.id, ...d.data()}));
+    msxMarketItems.sort((a,b)=>(b.timestamp||0)-(a.timestamp||0));
+    msxRenderMarketplace();
+    msxRenderSmartFeed();
+    msxRenderAdminInsights();
+  });
+}
+
+function msxRenderMarketplace() {
+  const box = document.getElementById("msxMarketplaceList");
+  if (!box) return;
+  box.innerHTML = msxMarketItems.slice(0,12).map(m => `<div class="msx-market-item"><b>${escapeHtml(m.title || "")}</b><br><span class="tag">${escapeHtml(m.type || "")}</span> <span class="tag">${escapeHtml(m.skill || "generico")}</span><p>${escapeHtml(m.description || "")}</p><div class="small">Autore: ${maskEmail(m.author)} · valore: ${Number(m.budget||0)}€</div><button class="purple" onclick="showMiniSection('matches')">Trova connessione</button></div>`).join("") || `<div class="small">Nessun elemento marketplace ancora.</div>`;
+}
+
+window.msxCreateReport = async function() {
+  if (!currentUser) return alert("Login prima");
+  const target = (document.getElementById("msxReportTarget")?.value || "").trim();
+  const reason = (document.getElementById("msxReportReason")?.value || "").trim();
+  if (!target || !reason) return alert("Indica target e motivo");
+  await addDoc(collection(db, "moderationReports"), {
+    reporter: currentUser.email,
+    target,
+    reason,
+    status:"open",
+    timestamp:Date.now()
+  });
+  document.getElementById("msxReportTarget").value = "";
+  document.getElementById("msxReportReason").value = "";
+  msxNotify("Segnalazione registrata 🛡️");
+};
+
+function listenMsxReports() {
+  if (msxListeningReports) return;
+  msxListeningReports = true;
+  onSnapshot(collection(db, "moderationReports"), snap => {
+    msxReports = [];
+    snap.forEach(d => msxReports.push({id:d.id, ...d.data()}));
+    msxReports.sort((a,b)=>(b.timestamp||0)-(a.timestamp||0));
+    msxRenderReports();
+    msxRenderAdminInsights();
+  });
+}
+
+function msxRenderReports() {
+  const box = document.getElementById("msxReportsList");
+  if (!box) return;
+  const visible = msxReports.filter(r => currentUser && (r.reporter === currentUser.email || currentUser.email.includes("andrea"))).slice(0,10);
+  box.innerHTML = visible.map(r => `<div class="msx-admin-item msx-admin-alert"><b>${escapeHtml(r.target || "")}</b><br>${escapeHtml(r.reason || "")}<div class="small">${maskEmail(r.reporter)} · ${r.status}</div></div>`).join("") || `<div class="small">Nessuna segnalazione visibile.</div>`;
+}
+
+function msxRenderAdminInsights() {
+  const set = (id,v)=>{ const el=document.getElementById(id); if(el) el.innerText=v; };
+  set("msxAdminUsers", usersData.length || 0);
+  set("msxAdminPosts", socialPosts.length || 0);
+  set("msxAdminReports", msxReports.length || 0);
+  const box = document.getElementById("msxAdminInsights");
+  if (!box) return;
+  const totalRep = usersData.reduce((s,u)=>s+Number(u.reputation||0),0);
+  const openReports = msxReports.filter(r => r.status === "open").length;
+  box.innerHTML = `
+    <div class="msx-admin-item ${openReports ? "msx-warning" : "msx-safe"}"><b>Salute piattaforma</b><br>Reputazione totale: ${totalRep}<br>Report aperti: ${openReports}</div>
+    <div class="msx-admin-item"><b>Contenuti</b><br>Post: ${socialPosts.length} · Media: ${msxMediaItems.length} · Marketplace: ${msxMarketItems.length}</div>
+  `;
+}
+
+window.msxToggleDarkMode = function() {
+  document.body.classList.toggle("dark-mode");
+  localStorage.setItem("miniSentientDarkMode", document.body.classList.contains("dark-mode") ? "true" : "false");
+};
+
+function msxApplySavedSettings() {
+  if (localStorage.getItem("miniSentientDarkMode") === "true") {
+    document.body.classList.add("dark-mode");
+  }
+}
+
+window.msxExportLocalState = function() {
+  const data = {
+    exportedAt: new Date().toISOString(),
+    currentUser: currentUser ? currentUser.email : null,
+    nodes: nodes.length,
+    users: usersData.length,
+    socialPosts: socialPosts.length,
+    marketItems: msxMarketItems.length,
+    reports: msxReports.length
+  };
+  const blob = new Blob([JSON.stringify(data,null,2)], {type:"application/json"});
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = "mini-sentient-state.json";
+  a.click();
+  URL.revokeObjectURL(a.href);
+};
+
+window.msxResetOnboarding = function() {
+  localStorage.removeItem("miniSentientOnboardingSeen");
+  const box = document.getElementById("onboarding");
+  if (box) box.classList.remove("hidden");
+  showMiniSection("all");
+  msxNotify("Onboarding riattivato");
+};
+
+/* Aggancia render avanzati alle funzioni social già esistenti senza sostituirle. */
+const _msxOldRenderSocialNotifications = renderSocialNotifications;
+renderSocialNotifications = function() {
+  _msxOldRenderSocialNotifications();
+  msxRenderAdvancedNotifications();
+};
+
+const _msxOldRenderSocialPosts = renderSocialPosts;
+renderSocialPosts = function() {
+  _msxOldRenderSocialPosts();
+  msxRenderSmartFeed();
+  msxRenderAdminInsights();
+};
+
+const _msxOldRenderSocialQuickStats = renderSocialQuickStats;
+renderSocialQuickStats = function() {
+  _msxOldRenderSocialQuickStats();
+  msxRenderSuggestedFollows();
+  msxRenderFollowingList();
+  msxRenderSmartFeed();
+  msxRenderAdminInsights();
+};
 
 
 window.openPrivacy = function () {
